@@ -64,10 +64,10 @@ public class EditServiceImpl implements EditService {
     }
 
     @Override
-    public void addRoomType(String roomTypeTitle, Double roomTypeCost, Integer roomsAmount) {
+    public void addRoomType(String roomTypeTitle, Double roomTypeCost) {
         Hotel hotel = findHotel();
 
-        RoomType roomType = new RoomType(roomTypeTitle, roomTypeCost, roomsAmount);
+        RoomType roomType = new RoomType(roomTypeTitle, roomTypeCost);
         hotel.addRoomType(roomType);
         hotelRepository.save(hotel);
     }
@@ -77,21 +77,23 @@ public class EditServiceImpl implements EditService {
         Hotel hotel = findHotel();
         RoomType roomTypeToChange = hotel.popRoomTypeToUpdate(roomType);
 
-        roomType.setAdditions(roomTypeToChange.getAdditions());
+        roomType.setBonuses(roomTypeToChange.getBonuses());
         hotel.addRoomType(roomType);
 
         hotelRepository.save(hotel);
     }
 
     @Override
-    public void addImageToHotelSlider(MultipartFile image) {
+    public boolean addImageToHotelSlider(MultipartFile image) {
         Hotel hotelToSave = findHotel();
         String imgPath = ImageUtil.getNewPath(image, uploadPath);
 
-        if (StringUtils.isNotEmpty(imgPath)) {
-            hotelToSave.addImage(imgPath);
+        if (StringUtils.isEmpty(imgPath)) {
+            return false;
         }
+        hotelToSave.addImage(imgPath);
         hotelRepository.save(hotelToSave);
+        return true;
     }
 
 }

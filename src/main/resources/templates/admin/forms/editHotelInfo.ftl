@@ -3,8 +3,7 @@
         <h5>Редактирование информации об отеле</h5>
     </div>
 
-<form method="post" action="/admin/edit/hotel" id="editHotel" enctype="multipart/form-data">
-
+<form method="post" action="/admin/hotel/edit" id="editHotel" enctype="multipart/form-data">
     <input type="hidden" name="id" value="${hotel.id!}">
     <input type="hidden" name="_csrf" value="${_csrf.token}">
 
@@ -67,7 +66,9 @@
 <div class="text-center mt-3">
     <h4>Картинки слайдера</h4>
 </div>
-<form action="/admin/add/image">
+<form action="/admin/hotel/add/image" method="post" enctype="multipart/form-data">
+    <input type="hidden" name="_csrf" value="${_csrf.token}">
+
     <div class="row">
         <div class="col-md-2 mt-3 text-right">
             Добавить картинку:
@@ -78,6 +79,9 @@
                 <label class="custom-file-label" for="customFile">Выберете файл</label>
             </div>
         </div>
+        <div class="col-md-2 mt-2">
+            <button type="submit" class="btn btn-info">Добавить</button>
+        </div>
     </div>
 </form>
 
@@ -85,10 +89,10 @@
     <#if hotel.images??>
         <#list hotel.images as image>
             <div class="card text-center bg-light">
-                <img class="card-img-top" src="/img/${image}">
+                <img class="card-img-top" src="/static/img/${image}">
                 <div class="m-2 card-body">
                 <#--<a href="#" class="btn btn-primary">Go somewhere</a>-->
-                    <form action="/admin/delete/img" method="post">
+                    <form action="/admin/hotel/delete/img" method="post">
                         <input type="hidden" name="image" value="${image}">
                         <input type="hidden" name="id" value="${hotel.id!}">
                         <input type="hidden" name="_csrf" value="${_csrf.token}">
@@ -106,7 +110,7 @@
     Добавить тип номеров
 </h3>
 <div class="mt-5">
-    <form method="post" action="/admin/add/roomType">
+    <form method="post" action="/admin/hotel/add/roomType">
         <input type="hidden" name="_csrf" value="${_csrf.token}">
         <input type="hidden" name="id" value="${hotel.id!}">
 
@@ -126,14 +130,6 @@
             </div>
         </div>
 
-        <div class="form-group row">
-            <label for="roomTypeCost" class="col-sm-2 col-form-label">Колличество номеров данного типа</label>
-            <div class="col-sm-10">
-                <input type="number" class="form-control" id="roomsAmount" name="roomsAmount"
-                       placeholder="Введите количество номеров">
-            </div>
-        </div>
-
         <button type="submit" class="btn btn-info">Добавить</button>
     </form>
 </div>
@@ -142,7 +138,7 @@
     <h1>Типы номеров</h1>
 </div>
 <div class="accordion" id="accordion">
-    <#list hotel.roomTypes as roomType>
+    <#list hotel.roomTypes! as roomType>
         <div class="card">
             <div class="card-header" id="heading${roomType.id}">
                 <h2 class="mb-0">
@@ -157,7 +153,7 @@
                  data-parent="#accordion">
                 <div class="card-body">
 
-                    <form action="/admin/edit/roomType" method="post" id="editRoomType${roomType.id}">
+                    <form action="/admin/hotel/edit/roomType" method="post" id="editRoomType${roomType.id}">
                         <input type="hidden" name="id" value="${roomType.id}">
                         <input type="hidden" name="_csrf" value="${_csrf.token}">
 
@@ -178,16 +174,6 @@
                                 <input type="text" class="form-control" id="roomName${roomType.id!}"
                                        value="${roomType.cost!}"
                                        name="cost" placeholder="Цена за номер">
-                            </div>
-                        </div>
-
-                        <div class="form-group row">
-                            <label for="roomsAmount${roomType.id!}" class="col-sm-2 col-form-label">Колличество номеров
-                                такого типа</label>
-                            <div class="col-sm-10">
-                                <input type="text" class="form-control" id="roomName${roomType.id!}"
-                                       value="${roomType.roomsAmount!}"
-                                       name="roomsAmount" placeholder="Введите колличество номеров данного типа">
                             </div>
                         </div>
 
@@ -216,13 +202,13 @@
                         <h4>Дополнительные услуги</h4>
                     </form>
 
-                    <#list roomType.additions as addition>
+                    <#list roomType.bonuses as bonus>
                         <div>
                             <ul>
                                 <li>
                                     <div class="row">
-                                        <div class="col-sm-9">${addition.title}</div>
-                                        <div class="col-sm-3">${addition.additionCost}</div>
+                                        <div class="col-sm-9">${bonus.title}</div>
+                                        <div class="col-sm-3">${bonus.additionCost}</div>
                                     </div>
                                 </li>
                             </ul>

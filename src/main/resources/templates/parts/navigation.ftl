@@ -18,7 +18,7 @@
                     <a class="nav-link" href="/main">UserList</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/admin/roomSettings">Room Settings</a>
+                    <a class="nav-link" href="/admin/hotel/editor">Room Settings</a>
                 </li>
                 <li class="nav-item">
                     <a class="nav-link" href="/main">News</a>

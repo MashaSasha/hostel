@@ -196,7 +196,7 @@ your rights to work written entirely by you; rather, the intent is to
 exercise the right to control the distribution of derivative or
 collective works based on the Program.
 
-In addition, mere aggregation of another work not based on the Program
+In bonus, mere aggregation of another work not based on the Program
 with the Program (or with a work based on the Program) on a volume of
 a storage or distribution medium does not bring the other work under
 the scope of this License.
@@ -559,7 +559,7 @@ your rights to work written entirely by you; rather, the intent is to
 exercise the right to control the distribution of derivative or
 collective works based on the Library.
 
-In addition, mere aggregation of another work not based on the Library
+In bonus, mere aggregation of another work not based on the Library
 with the Library (or with a work based on the Library) on a volume of
 a storage or distribution medium does not bring the other work under
 the scope of this License.
@@ -857,11 +857,11 @@ Version 1.1
      extent possible, whether at the time of the initial grant or
      subsequently acquired, any and all of the rights conveyed herein.
 
-     1.9. "Modifications" means any addition to or deletion from the
+     1.9. "Modifications" means any bonus to or deletion from the
      substance or structure of either the Original Code or any previous
      Modifications. When Covered Code is released as a series of files, a
      Modification is:
-          A. Any addition to or deletion from the contents of a file
+          A. Any bonus to or deletion from the contents of a file
           containing Original Code or previous Modifications.
 
           B. Any new file that contains any part of the Original Code or

@@ -1,16 +1,20 @@
 package com.bsuir.masasha.hostel.domain;
 
+
 import javax.persistence.*;
-import java.time.LocalDateTime;
 
-
+@Entity
 public class Room {
 
+    @Id
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
+    @ManyToOne
+    @JoinColumn(name = "fk_roomType")
     private RoomType roomType;
 
     private Long roomNumber;
-    private LocalDateTime checkInDateTime;
-    private LocalDateTime evictionDateTime;
+
+
 }

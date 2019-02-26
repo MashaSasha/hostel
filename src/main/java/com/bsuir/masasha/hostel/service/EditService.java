@@ -13,9 +13,9 @@ public interface EditService {
 
     Hotel findHotel();
 
-    void addRoomType(String newRoomType, Double roomTypeCost, Integer roomsAmount);
+    void addRoomType(String newRoomType, Double roomTypeCost);
 
     void editRoomType(RoomType roomType);
 
-    void addImageToHotelSlider(MultipartFile image);
+    boolean addImageToHotelSlider(MultipartFile image);
 }

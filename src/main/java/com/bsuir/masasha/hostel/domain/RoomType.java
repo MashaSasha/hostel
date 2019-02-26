@@ -17,28 +17,24 @@ public class RoomType {
     private String description;
     private Integer sleepPlacesAmount;
 
-    private Integer roomsAmount;
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "roomType")
+    private List<Room> rooms;
 
-    @OneToMany(
-            fetch = FetchType.EAGER,
-            cascade = CascadeType.ALL,
-            orphanRemoval = true
-    )
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "roomType_id")
-    private List<Addition> additions;
+    private List<Bonus> bonuses;
 
-    public RoomType(String roomTypeTitle, Double roomTypeCost, Integer roomsAmount) {
+    public RoomType(String roomTypeTitle, Double roomTypeCost) {
         this.title = roomTypeTitle;
         this.cost = roomTypeCost;
-        this.roomsAmount = roomsAmount;
     }
 
-    public void addAddition(Addition addition) {
-        additions.add(addition);
+    public void addAddition(Bonus bonus) {
+        bonuses.add(bonus);
     }
 
-    public void popAddition(Addition addition) {
-        additions.remove(addition);
+    public void popAddition(Bonus bonus) {
+        bonuses.remove(bonus);
     }
 
     public RoomType() {
@@ -105,19 +101,12 @@ public class RoomType {
         this.sleepPlacesAmount = sleepPlacesAmount;
     }
 
-    public List<Addition> getAdditions() {
-        return additions;
+    public List<Bonus> getBonuses() {
+        return bonuses;
     }
 
-    public void setAdditions(List<Addition> additions) {
-        this.additions = additions;
+    public void setBonuses(List<Bonus> bonuses) {
+        this.bonuses = bonuses;
     }
 
-    public Integer getRoomsAmount() {
-        return roomsAmount;
-    }
-
-    public void setRoomsAmount(Integer roomsAmount) {
-        this.roomsAmount = roomsAmount;
-    }
 }

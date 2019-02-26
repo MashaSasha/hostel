@@ -4,6 +4,7 @@
 <@c.page>
 <script src="/static/ckeditor/ckeditor.js"></script>
 <div class="container-fluid mt-5">
+    ${message!"DEFAULT"}
     <div class="row">
         <div class="col-1"></div>
         <div class="col-2">

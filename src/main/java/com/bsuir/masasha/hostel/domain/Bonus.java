@@ -6,7 +6,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
 @Entity
-public class Addition {
+public class Bonus {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
