@@ -169,7 +169,7 @@
 
                         <div class="form-group row">
                             <label for="roomCost${roomType.id!}" class="col-sm-2 col-form-label">Цена за
-                                номер</label>  
+                                номер</label>
                             <div class="col-sm-10">
                                 <input type="text" class="form-control" id="roomName${roomType.id!}"
                                        value="${roomType.cost!}"
