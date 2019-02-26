@@ -172,7 +172,7 @@
                                 номер</label>
                             <div class="col-sm-10">
                                 <input type="text" class="form-control" id="roomName${roomType.id!}"
-                                       value="${roomType.cost!}"  
+                                       value="${roomType.cost!}"
                                        name="cost" placeholder="Цена за номер">
                             </div>
                         </div>
