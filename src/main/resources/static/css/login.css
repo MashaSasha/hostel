@@ -1,0 +1,89 @@
+.panel-login input[type="text"],.panel-login input[type="email"],.panel-login input[type="password"] {
+    height: 45px;
+    border: 1px solid #ddd;
+    font-size: 16px;
+    -webkit-transition: all 0.1s linear;
+    -moz-transition: all 0.1s linear;
+    transition: all 0.1s linear;
+}
+.panel-login>.panel-heading {
+    text-align:center;
+}
+.panel-login>.panel-heading a{
+    text-decoration: none;
+    color: #666;
+    font-weight: bold;
+    font-size: 16px;
+    -webkit-transition: all 0.1s linear;
+    -moz-transition: all 0.1s linear;
+    transition: all 0.1s linear;
+}
+.panel-login>.panel-heading a.active{
+    color: #A60000;
+    font-size: 20px;
+}
+.dis-active{
+    padding-top: 5px;
+}
+.panel-login>.panel-heading hr{
+    clear: both;
+    border: 0;
+    height: 1px;
+    background-image: -webkit-linear-gradient(left,rgba(0, 0, 0, 0),rgba(0, 0, 0, 0.15),rgba(0, 0, 0, 0));
+    background-image: -moz-linear-gradient(left,rgba(0,0,0,0),rgba(0,0,0,0.15),rgba(0,0,0,0));
+    background-image: -ms-linear-gradient(left,rgba(0,0,0,0),rgba(0,0,0,0.15),rgba(0,0,0,0));
+    background-image: -o-linear-gradient(left,rgba(0,0,0,0),rgba(0,0,0,0.15),rgba(0,0,0,0));
+}
+@media (max-width: 767.98px) {
+    .my-login-container {
+        margin-top: 8rem;
+    }
+}
+@media (min-width: 768px) {
+    .my-login-container {
+        margin-top: 15rem;
+    }
+    .my-hr {
+        margin-left: -120px;
+    }
+}
+.my-hr {
+    border: 0;
+    height: 2px;
+    background: #A40000;
+    background-image: -webkit-linear-gradient(left, #fff, #A40000, #fff);
+    background-image: -moz-linear-gradient(left, #fff, #A40000, #fff);
+    background-image: -ms-linear-gradient(left, #fff, #A40000, #fff);
+    background-image: -o-linear-gradient(left, #fff, #A40000, #fff);
+}
+.btn-login, .btn-register {
+    width: 100%;
+}
+.forgot-password {
+    color: #A40000;
+}
+.forgot-password:hover {
+    color: #A40000;
+}
+.form-control:focus {
+    box-shadow: 0 0 0 0.2rem rgba(255, 0, 0, 0.17);
+}
+.invalid {
+    border: 1px solid #F00000 !important;
+}
+.invalid-my-feedback {
+    width: 100%;
+    font-size: 80%;
+    color: #dc3545;
+    margin-top: 0.25rem;
+    margin-bottom: 10px;
+    margin-left: 12px;
+}
+.btn-outline-danger {
+    border: 0;
+    color: #495057;
+}
+.btn-outline-danger:hover {
+    background: #A40000;
+    transition: .5s !important;
+}
