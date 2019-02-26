@@ -34,7 +34,7 @@
                 <div class="tab-pane fade" id="v-pills-messages" role="tabpanel" aria-labelledby="v-pills-messages-tab">
                     <@editor.editRoomTypes hotel/>
                 </div>
-                
+
             </div>
         </div>
     </div>
