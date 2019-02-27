@@ -43,7 +43,7 @@ public class User implements UserDetails {
     }
 
     public boolean isAdmin() {
-        return roles.contains(Role.SERVER_ADMIN);
+        return roles.contains(Role.ADMIN);
     }
 
     @Override
