@@ -9,7 +9,17 @@ import javax.persistence.*;
 @Entity // This tells Hibernate to make a table out of this class
 @Getter
 @Setter
-public class Message {
+public class Message
+
+
+
+
+
+
+
+
+
+{
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
@@ -30,5 +40,4 @@ public class Message {
         this.author = author;
         this.tag = tag;
     }
-
 }
