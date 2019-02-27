@@ -1,12 +1,12 @@
 package com.bsuir.masasha.hostel.core.service.impl;
 
-import com.bsuir.masasha.hostel.core.util.ImageUtil;
 import com.bsuir.masasha.hostel.core.domain.Bonus;
 import com.bsuir.masasha.hostel.core.domain.Hotel;
 import com.bsuir.masasha.hostel.core.domain.RoomType;
 import com.bsuir.masasha.hostel.core.repo.HotelRepository;
 import com.bsuir.masasha.hostel.core.repo.RoomTypeRepository;
 import com.bsuir.masasha.hostel.core.service.HotelEditService;
+import com.bsuir.masasha.hostel.core.util.ImageUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -91,7 +91,7 @@ public class HotelHotelEditServiceImpl implements HotelEditService {
     @Override
     public boolean addImageToHotelSlider(MultipartFile image) {
         Hotel hotelToSave = findHotel();
-        String imgPath = ImageUtil.getNewPath(image, uploadPath);
+        String imgPath = ImageUtil.upload(image, uploadPath);
 
         if (StringUtils.isEmpty(imgPath)) {
             return false;
