@@ -253,8 +253,43 @@
 </#macro>
 
 <#macro addRooms hotel>
-    <h4>
-        Добавление Комнат
-    </h4>
+<h4>
+    Добавление Комнат
+</h4>
+<div class="row">
+    <div class="col-md-6">
+        <div class="list-group" id="list-tab" role="tablist">
+            <#list hotel.roomTypes! as roomType>
+                <a class="list-group-item list-group-item-action<#if roomType?index!=1> active</#if>" id="list-home-list" data-toggle="list" href="#addRoom${roomType.id}" role="tab" aria-controls="home">
+                    ${roomType.title}
+                </a>
+            </#list>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="tab-content" id="nav-tabContent">
+            <#list hotel.roomTypes! as roomType>
+                <div class="tab-pane fade <#if roomType?index!=1> show active</#if>" id="addRoom${roomType.id}" role="tabpanel" aria-labelledby="list-home-list">
+                    <form action="/admin/hotel/add/room" method="post">
+                        <input type="hidden" name="_csrf" value="${_csrf.token}">
+                        <input type="hidden" name="roomTypeId" value="${roomType.id}">
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <input type="number" class="form-control" name="roomNumber" placeholder="Номер новой комнаты"/>
+                            </div>
+                            <div class="form-group col-md-3">
+                                <button class="btn btn-info" type="submit">Добавить</button>
+                            </div>
+                        </div>
+                    </form>
+                    <br>
+                    <#list roomType.rooms! as room>
+                        ${room.roomNumber}
+                    </#list>
+                </div>
+            </#list>
+        </div>
+    </div>
+</div>
 
 </#macro>

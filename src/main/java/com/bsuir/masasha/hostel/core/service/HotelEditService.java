@@ -21,4 +21,6 @@ public interface HotelEditService {
     boolean addImageToHotelSlider(MultipartFile image);
 
     boolean addBonus(Bonus bonus, Long roomTypeId);
+
+    boolean addRoomToRoomType(Integer roomNumber, Long roomTypeId);
 }

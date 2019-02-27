@@ -87,4 +87,15 @@ public class AdminHotelEditController {
 
         return REDIRECT + HOTEL_EDITOR_MAPPING;
     }
+
+    @PostMapping("/add/room")
+    public String addRoom(@RequestParam Integer roomNumber, @RequestParam Long roomTypeId, HttpServletRequest request) {
+        boolean isSuccess = hotelEditService.addRoomToRoomType(roomNumber, roomTypeId);
+        if (!isSuccess) {
+            String message = "Такой номер комнаты уже занят";
+            request.getSession(true).setAttribute("message", message);
+        }
+
+        return REDIRECT + HOTEL_EDITOR_MAPPING;
+    }
 }

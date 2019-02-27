@@ -22,7 +22,8 @@ public class RoomType {
     private String description;
     private Integer sleepPlacesAmount;
 
-    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, mappedBy = "roomType")
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JoinColumn(name = "roomType_id")
     private List<Room> rooms;
 
     @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
@@ -34,13 +35,14 @@ public class RoomType {
         this.cost = roomTypeCost;
     }
 
-    public void addAddition(Bonus bonus) {
+    public void addBonus(Bonus bonus) {
         bonuses.add(bonus);
     }
 
-    public void popAddition(Bonus bonus) {
-        bonuses.remove(bonus);
+    public void addRoom(Room room) {
+        rooms.add(room);
     }
+
 
     public RoomType() {
     }

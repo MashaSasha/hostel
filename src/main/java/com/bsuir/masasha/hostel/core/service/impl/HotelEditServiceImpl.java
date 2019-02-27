@@ -1,5 +1,7 @@
 package com.bsuir.masasha.hostel.core.service.impl;
 
+import com.bsuir.masasha.hostel.core.domain.Room;
+import com.bsuir.masasha.hostel.core.repo.RoomRepository;
 import com.bsuir.masasha.hostel.core.util.ImageUtil;
 import com.bsuir.masasha.hostel.core.domain.Bonus;
 import com.bsuir.masasha.hostel.core.domain.Hotel;
@@ -15,13 +17,16 @@ import org.springframework.web.multipart.MultipartFile;
 import java.util.Iterator;
 import java.util.Optional;
 
-public class HotelHotelEditServiceImpl implements HotelEditService {
+public class HotelEditServiceImpl implements HotelEditService {
 
     @Autowired
     private HotelRepository hotelRepository;
 
     @Autowired
     private RoomTypeRepository roomTypeRepository;
+
+    @Autowired
+    RoomRepository roomRepository;
 
     @Value("${upload.path}")
     private String uploadPath;
@@ -105,9 +110,21 @@ public class HotelHotelEditServiceImpl implements HotelEditService {
     public boolean addBonus(Bonus bonus, Long roomTypeId) {
         return roomTypeRepository.findById(roomTypeId)
                 .map(roomType -> {
-                    roomType.addAddition(bonus);
+                    roomType.addBonus(bonus);
                     roomTypeRepository.save(roomType);
                     return true;
                 }).orElse(false);
+    }
+
+    @Override
+    public boolean addRoomToRoomType(Integer roomNumber, Long roomTypeId) {
+        Room room = roomRepository.findByRoomNumber(roomNumber);
+        if (room == null) {
+            RoomType rt = roomTypeRepository.findById(roomTypeId).get();
+            rt.addRoom(new Room(roomNumber, roomTypeId));
+            roomTypeRepository.save(rt);
+            return true;
+        }
+        return false;
     }
 }

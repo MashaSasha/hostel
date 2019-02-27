@@ -1128,287 +1128,259 @@
     <table id="284" parent="3" name="message">
       <Engine>MyISAM</Engine>
     </table>
-    <table id="285" parent="3" name="room">
+    <table id="285" parent="3" name="room_type">
       <Engine>MyISAM</Engine>
     </table>
-    <table id="286" parent="3" name="room_type">
+    <table id="286" parent="3" name="user_role">
       <Engine>MyISAM</Engine>
     </table>
-    <table id="287" parent="3" name="user_role">
+    <table id="287" parent="3" name="usr">
       <Engine>MyISAM</Engine>
     </table>
-    <table id="288" parent="3" name="usr">
-      <Engine>MyISAM</Engine>
-    </table>
-    <column id="289" parent="280" name="id">
+    <column id="288" parent="280" name="id">
       <Position>1</Position>
       <DataType>bigint(20)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="290" parent="280" name="addition_cost">
+    <column id="289" parent="280" name="addition_cost">
       <Position>2</Position>
       <DataType>double|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="291" parent="280" name="title">
+    <column id="290" parent="280" name="title">
       <Position>3</Position>
       <DataType>varchar(255)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="292" parent="280" name="room_type_id">
+    <column id="291" parent="280" name="room_type_id">
       <Position>4</Position>
       <DataType>bigint(20)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="293" parent="280" name="cost">
+    <column id="292" parent="280" name="cost">
       <Position>5</Position>
       <DataType>double|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <index id="294" parent="280" name="FK9a0fo66nu2j7ky8m89e3oe1ko">
+    <index id="293" parent="280" name="FK9a0fo66nu2j7ky8m89e3oe1ko">
       <ColNames>room_type_id</ColNames>
       <Type>btree</Type>
     </index>
-    <key id="295" parent="280" name="PRIMARY">
+    <key id="294" parent="280" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="296" parent="281" name="next_val">
+    <column id="295" parent="281" name="next_val">
       <Position>1</Position>
       <DataType>bigint(20)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="297" parent="282" name="id">
+    <column id="296" parent="282" name="id">
       <Position>1</Position>
       <DataType>bigint(20)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="298" parent="282" name="address">
+    <column id="297" parent="282" name="address">
       <Position>2</Position>
       <DataType>varchar(255)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="299" parent="282" name="hotel_name">
+    <column id="298" parent="282" name="hotel_name">
       <Position>3</Position>
       <DataType>varchar(255)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="300" parent="282" name="description">
+    <column id="299" parent="282" name="description">
       <Position>4</Position>
       <DataType>varchar(255)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="301" parent="282" name="days_count_to_discount">
+    <column id="300" parent="282" name="days_count_to_discount">
       <Position>5</Position>
       <DataType>int(11)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="302" parent="282" name="discount_on_days">
+    <column id="301" parent="282" name="discount_on_days">
       <Position>6</Position>
       <DataType>double|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="303" parent="282" name="discount_on_room_count">
+    <column id="302" parent="282" name="discount_on_room_count">
       <Position>7</Position>
       <DataType>double|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="304" parent="282" name="room_count_to_discount">
+    <column id="303" parent="282" name="room_count_to_discount">
       <Position>8</Position>
       <DataType>int(11)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <key id="305" parent="282" name="PRIMARY">
+    <key id="304" parent="282" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="306" parent="283" name="img_id">
+    <column id="305" parent="283" name="img_id">
       <Position>1</Position>
       <DataType>bigint(20)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="307" parent="283" name="images">
+    <column id="306" parent="283" name="images">
       <Position>2</Position>
       <DataType>varchar(255)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <index id="308" parent="283" name="FK3iqa55gb05849nbj86t6h8ehw">
+    <index id="307" parent="283" name="FK3iqa55gb05849nbj86t6h8ehw">
       <ColNames>img_id</ColNames>
       <Type>btree</Type>
     </index>
-    <column id="309" parent="284" name="id">
+    <column id="308" parent="284" name="id">
       <Position>1</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="310" parent="284" name="filename">
+    <column id="309" parent="284" name="filename">
       <Position>2</Position>
       <DataType>varchar(255)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="311" parent="284" name="tag">
+    <column id="310" parent="284" name="tag">
       <Position>3</Position>
       <DataType>varchar(255)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="312" parent="284" name="text">
+    <column id="311" parent="284" name="text">
       <Position>4</Position>
       <DataType>varchar(255)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="313" parent="284" name="user_id">
+    <column id="312" parent="284" name="user_id">
       <Position>5</Position>
       <DataType>bigint(20)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <index id="314" parent="284" name="FK70bv6o4exfe3fbrho7nuotopf">
+    <index id="313" parent="284" name="FK70bv6o4exfe3fbrho7nuotopf">
       <ColNames>user_id</ColNames>
       <Type>btree</Type>
     </index>
-    <key id="315" parent="284" name="PRIMARY">
+    <key id="314" parent="284" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="316" parent="285" name="id">
+    <column id="315" parent="285" name="id">
       <Position>1</Position>
       <DataType>bigint(20)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="317" parent="285" name="room_number">
-      <Position>2</Position>
-      <DataType>bigint(20)|0s</DataType>
-      <ColumnKind>normal</ColumnKind>
-    </column>
-    <column id="318" parent="285" name="fk_room_type">
-      <Position>3</Position>
-      <DataType>bigint(20)|0s</DataType>
-      <ColumnKind>normal</ColumnKind>
-    </column>
-    <index id="319" parent="285" name="FKo570wtc4j87o50gok70jtnpwg">
-      <ColNames>fk_room_type</ColNames>
-      <Type>btree</Type>
-    </index>
-    <key id="320" parent="285" name="PRIMARY">
-      <NameSurrogate>1</NameSurrogate>
-      <ColNames>id</ColNames>
-      <Primary>1</Primary>
-    </key>
-    <column id="321" parent="286" name="id">
-      <Position>1</Position>
-      <DataType>bigint(20)|0s</DataType>
-      <NotNull>1</NotNull>
-      <ColumnKind>normal</ColumnKind>
-    </column>
-    <column id="322" parent="286" name="cost">
+    <column id="316" parent="285" name="cost">
       <Position>2</Position>
       <DataType>double|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="323" parent="286" name="description">
+    <column id="317" parent="285" name="description">
       <Position>3</Position>
       <DataType>varchar(255)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="324" parent="286" name="preview_image">
+    <column id="318" parent="285" name="preview_image">
       <Position>4</Position>
       <DataType>varchar(255)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="325" parent="286" name="sleep_places_amount">
+    <column id="319" parent="285" name="sleep_places_amount">
       <Position>5</Position>
       <DataType>int(11)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="326" parent="286" name="title">
+    <column id="320" parent="285" name="title">
       <Position>6</Position>
       <DataType>varchar(255)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="327" parent="286" name="hotel_id">
+    <column id="321" parent="285" name="hotel_id">
       <Position>7</Position>
       <DataType>bigint(20)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="328" parent="286" name="rooms_amount">
+    <column id="322" parent="285" name="rooms_amount">
       <Position>8</Position>
       <DataType>int(11)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <index id="329" parent="286" name="FK8sgnny12n0v74j6u7u94w7mxp">
+    <index id="323" parent="285" name="FK8sgnny12n0v74j6u7u94w7mxp">
       <ColNames>hotel_id</ColNames>
       <Type>btree</Type>
     </index>
-    <key id="330" parent="286" name="PRIMARY">
+    <key id="324" parent="285" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="331" parent="287" name="user_id">
+    <column id="325" parent="286" name="user_id">
       <Position>1</Position>
       <DataType>bigint(20)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="332" parent="287" name="roles">
+    <column id="326" parent="286" name="roles">
       <Position>2</Position>
       <DataType>varchar(255)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <index id="333" parent="287" name="FKfpm8swft53ulq2hl11yplpr5">
+    <index id="327" parent="286" name="FKfpm8swft53ulq2hl11yplpr5">
       <ColNames>user_id</ColNames>
       <Type>btree</Type>
     </index>
-    <column id="334" parent="288" name="id">
+    <column id="328" parent="287" name="id">
       <Position>1</Position>
       <DataType>bigint(20)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="335" parent="288" name="activation_code">
+    <column id="329" parent="287" name="activation_code">
       <Position>2</Position>
       <DataType>varchar(255)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="336" parent="288" name="active">
+    <column id="330" parent="287" name="active">
       <Position>3</Position>
       <DataType>bit(1)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="337" parent="288" name="email">
+    <column id="331" parent="287" name="email">
       <Position>4</Position>
       <DataType>varchar(255)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="338" parent="288" name="name">
+    <column id="332" parent="287" name="name">
       <Position>5</Position>
       <DataType>varchar(255)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="339" parent="288" name="passport">
+    <column id="333" parent="287" name="passport">
       <Position>6</Position>
       <DataType>varchar(255)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="340" parent="288" name="password">
+    <column id="334" parent="287" name="password">
       <Position>7</Position>
       <DataType>varchar(255)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="341" parent="288" name="second_name">
+    <column id="335" parent="287" name="second_name">
       <Position>8</Position>
       <DataType>varchar(255)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <key id="342" parent="288" name="PRIMARY">
+    <key id="336" parent="287" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
