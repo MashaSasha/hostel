@@ -22,17 +22,16 @@ public final class ImageUtil {
     }
 
     public static String upload(MultipartFile imageFile, String uploadPath) {
-        String resultFilename = DEFAULT_NAME;
         if (imageFile == null) {
-            return resultFilename;
+            return DEFAULT_NAME;
         }
         URL urlResource = ImageUtil.class.getClassLoader().getResource(uploadPath);
         String absoluteUploadPath = Optional.ofNullable(urlResource)
                 .map(url -> new File(url.getPath()).getAbsolutePath())
                 .orElse(DEFAULT_NAME);
 
-        String uuidFile = UUID.randomUUID().toString();
-        resultFilename = uuidFile + "." + imageFile.getOriginalFilename();
+        String id = UUID.randomUUID().toString();
+        String resultFilename = id + "." + imageFile.getOriginalFilename();
         try {
             String fullPath = absoluteUploadPath + SLASH_SEPARATOR + resultFilename;
             imageFile.transferTo(new File(fullPath));
