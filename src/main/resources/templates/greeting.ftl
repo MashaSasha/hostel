@@ -1,4 +1,4 @@
-<#import "parts/common.ftl" as c>
+<#import "general_blocks/common.ftl" as c>
 <@c.page>
 
 <pre>
