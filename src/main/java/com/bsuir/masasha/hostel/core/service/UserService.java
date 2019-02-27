@@ -6,7 +6,6 @@ import com.bsuir.masasha.hostel.core.repo.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
-import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.stereotype.Service;
 
 import java.util.Collections;
@@ -14,24 +13,38 @@ import java.util.Collections;
 @Service
 public class UserService implements UserDetailsService {
 
-    @Autowired
     private UserRepository userRepository;
 
+    @Autowired
+    public UserService(UserRepository userRepository) {
+        this.userRepository = userRepository;
+    }
+
     @Override
-    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
+    public UserDetails loadUserByUsername(String username) {
         return userRepository.findByEmail(username);
     }
 
     public boolean addUser(User user) {
-        User userFromDb = userRepository.findByEmail(user.getUsername());
-
-        if (userFromDb != null) {
+        if (isUserExist(user.getUsername())) {
             return false;
         }
         user.setActive(true);
         user.setRoles(Collections.singleton(Role.USER));
         userRepository.save(user);
-
         return true;
+    }
+
+    public boolean banUser(User user) {
+        if (!isUserExist(user.getUsername())) {
+            return false;
+        }
+        user.setActive(false);
+        userRepository.save(user);
+        return true;
+    }
+
+    private boolean isUserExist(String userName) {
+        return userRepository.findByEmail(userName) != null;
     }
 }
