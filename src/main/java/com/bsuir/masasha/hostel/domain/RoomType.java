@@ -1,10 +1,15 @@
 package com.bsuir.masasha.hostel.domain;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import javax.persistence.*;
 import java.util.List;
 import java.util.Objects;
 
 @Entity
+@Getter
+@Setter
 public class RoomType {
 
     @Id
@@ -51,62 +56,6 @@ public class RoomType {
     @Override
     public int hashCode() {
         return Objects.hash(id);
-    }
-
-    public Long getId() {
-        return id;
-    }
-
-    public void setId(Long id) {
-        this.id = id;
-    }
-
-    public String getPreviewImage() {
-        return previewImage;
-    }
-
-    public void setPreviewImage(String previewImage) {
-        this.previewImage = previewImage;
-    }
-
-    public String getTitle() {
-        return title;
-    }
-
-    public void setTitle(String title) {
-        this.title = title;
-    }
-
-    public Double getCost() {
-        return cost;
-    }
-
-    public void setCost(Double cost) {
-        this.cost = cost;
-    }
-
-    public String getDescription() {
-        return description;
-    }
-
-    public void setDescription(String description) {
-        this.description = description;
-    }
-
-    public Integer getSleepPlacesAmount() {
-        return sleepPlacesAmount;
-    }
-
-    public void setSleepPlacesAmount(Integer sleepPlacesAmount) {
-        this.sleepPlacesAmount = sleepPlacesAmount;
-    }
-
-    public List<Bonus> getBonuses() {
-        return bonuses;
-    }
-
-    public void setBonuses(List<Bonus> bonuses) {
-        this.bonuses = bonuses;
     }
 
 }

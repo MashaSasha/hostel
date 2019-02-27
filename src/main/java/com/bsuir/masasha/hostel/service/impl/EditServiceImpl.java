@@ -1,9 +1,11 @@
 package com.bsuir.masasha.hostel.service.impl;
 
 import com.bsuir.masasha.hostel.ImageUtil;
+import com.bsuir.masasha.hostel.domain.Bonus;
 import com.bsuir.masasha.hostel.domain.Hotel;
 import com.bsuir.masasha.hostel.domain.RoomType;
 import com.bsuir.masasha.hostel.repo.HotelRepository;
+import com.bsuir.masasha.hostel.repo.RoomTypeRepository;
 import com.bsuir.masasha.hostel.service.EditService;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,6 +19,9 @@ public class EditServiceImpl implements EditService {
 
     @Autowired
     private HotelRepository hotelRepository;
+
+    @Autowired
+    private RoomTypeRepository roomTypeRepository;
 
     @Value("${upload.path}")
     private String uploadPath;
@@ -96,4 +101,13 @@ public class EditServiceImpl implements EditService {
         return true;
     }
 
+    @Override
+    public boolean addBonus(Bonus bonus, Long roomTypeId) {
+        return roomTypeRepository.findById(roomTypeId)
+                .map(roomType -> {
+                    roomType.addAddition(bonus);
+                    roomTypeRepository.save(roomType);
+                    return true;
+                }).orElse(false);
+    }
 }

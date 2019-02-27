@@ -1,5 +1,6 @@
 package com.bsuir.masasha.hostel.controller.admin;
 
+import com.bsuir.masasha.hostel.domain.Bonus;
 import com.bsuir.masasha.hostel.domain.Hotel;
 import com.bsuir.masasha.hostel.domain.RoomType;
 import com.bsuir.masasha.hostel.service.EditService;
@@ -65,9 +66,6 @@ public class AdminHotelEditController {
         if (!editService.addImageToHotelSlider(image)) {
             String message = "Ошибка при попытке сохранить картинку";
             request.getSession(true).setAttribute("message", message);
-        } else {
-            String message = "Ошибка при попытке сохранить картинку";
-            request.getSession(true).setAttribute("message", message);
         }
 
         return REDIRECT + HOTEL_EDITOR_MAPPING;
@@ -76,6 +74,16 @@ public class AdminHotelEditController {
     @PostMapping("/edit/roomType")
     public String editRoomType(RoomType roomType) {
         editService.editRoomType(roomType);
+
+        return REDIRECT + HOTEL_EDITOR_MAPPING;
+    }
+
+    @PostMapping("/add/bonus")
+    public String addBonus(@RequestParam Long roomTypeId, Bonus bonus, HttpServletRequest request) {
+        if (!editService.addBonus(bonus, roomTypeId)) {
+            String message = "Ошибка при попытке добавить бонус";
+            request.getSession(true).setAttribute("message", message);
+        }
 
         return REDIRECT + HOTEL_EDITOR_MAPPING;
     }

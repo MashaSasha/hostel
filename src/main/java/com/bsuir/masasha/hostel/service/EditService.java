@@ -1,5 +1,6 @@
 package com.bsuir.masasha.hostel.service;
 
+import com.bsuir.masasha.hostel.domain.Bonus;
 import com.bsuir.masasha.hostel.domain.Hotel;
 import com.bsuir.masasha.hostel.domain.RoomType;
 import org.springframework.stereotype.Service;
@@ -18,4 +19,6 @@ public interface EditService {
     void editRoomType(RoomType roomType);
 
     boolean addImageToHotelSlider(MultipartFile image);
+
+    boolean addBonus(Bonus bonus, Long roomTypeId);
 }
