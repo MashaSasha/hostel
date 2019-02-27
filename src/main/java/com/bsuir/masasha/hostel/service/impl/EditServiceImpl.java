@@ -1,12 +1,12 @@
 package com.bsuir.masasha.hostel.service.impl;
 
-import com.bsuir.masasha.hostel.ImageUtil;
 import com.bsuir.masasha.hostel.domain.Bonus;
 import com.bsuir.masasha.hostel.domain.Hotel;
 import com.bsuir.masasha.hostel.domain.RoomType;
 import com.bsuir.masasha.hostel.repo.HotelRepository;
 import com.bsuir.masasha.hostel.repo.RoomTypeRepository;
 import com.bsuir.masasha.hostel.service.EditService;
+import com.bsuir.masasha.hostel.util.ImageUtil;
 import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -47,12 +47,12 @@ public class EditServiceImpl implements EditService {
 
     @Override
     public void deleteHotelImg(String image, Long id) {
-        Hotel hotelToSave = hotelRepository.findById(id)
-                .map(hotel -> {
-                    hotel.popImage(image);
-                    return hotel;
-                }).orElse(new Hotel());
-        hotelRepository.save(hotelToSave);
+        Hotel hotel = hotelRepository.findById(id).get();
+        hotel.remove(image);
+
+
+
+        hotelRepository.save(hotel);
     }
 
     @Override
@@ -80,9 +80,11 @@ public class EditServiceImpl implements EditService {
     @Override
     public void editRoomType(RoomType roomType) {
         Hotel hotel = findHotel();
+
         RoomType roomTypeToChange = hotel.popRoomTypeToUpdate(roomType);
 
         roomType.setBonuses(roomTypeToChange.getBonuses());
+
         hotel.addRoomType(roomType);
 
         hotelRepository.save(hotel);
@@ -91,7 +93,7 @@ public class EditServiceImpl implements EditService {
     @Override
     public boolean addImageToHotelSlider(MultipartFile image) {
         Hotel hotelToSave = findHotel();
-        String imgPath = ImageUtil.getNewPath(image, uploadPath);
+        String imgPath = ImageUtil.upload(image, uploadPath);
 
         if (StringUtils.isEmpty(imgPath)) {
             return false;

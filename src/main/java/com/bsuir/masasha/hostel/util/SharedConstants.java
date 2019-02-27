@@ -1,6 +1,10 @@
-package com.bsuir.masasha.hostel;
+package com.bsuir.masasha.hostel.util;
 
 public final class SharedConstants {
+
+    private SharedConstants() {
+        throw new UnsupportedOperationException();
+    }
 
     // mappings
     public static final String HOTEL_EDITOR_MAPPING = "admin/hotel/editor";

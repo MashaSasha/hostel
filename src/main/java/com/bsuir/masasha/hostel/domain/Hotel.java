@@ -37,7 +37,7 @@ public class Hotel {
         images.add(imgPath);
     }
 
-    public void popImage(String image) {
+    public void remove(String image) {
         images.remove(image);
     }
 
