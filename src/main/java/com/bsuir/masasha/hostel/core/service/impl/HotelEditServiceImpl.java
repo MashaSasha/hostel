@@ -96,7 +96,7 @@ public class HotelEditServiceImpl implements HotelEditService {
     @Override
     public boolean addImageToHotelSlider(MultipartFile image) {
         Hotel hotelToSave = findHotel();
-        String imgPath = ImageUtil.getNewPath(image, uploadPath);
+        String imgPath = ImageUtil.upload(image, uploadPath);
 
         if (StringUtils.isEmpty(imgPath)) {
             return false;
