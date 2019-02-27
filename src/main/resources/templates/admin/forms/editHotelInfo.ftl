@@ -120,7 +120,6 @@
             <div class="col-sm-10">
                 <input type="text" class="form-control" id="roomTypeTitle" name="roomTypeTitle"
                        placeholder="Название типа комнат">
-
             </div>
         </div>
 
