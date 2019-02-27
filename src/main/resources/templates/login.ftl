@@ -1,5 +1,5 @@
-<#import "parts/common.ftl" as c>
-<#import "parts/login.ftl" as l>
+<#import "general_blocks/common.ftl" as c>
+<#import "general_blocks/login.ftl" as l>
 
 <@c.page>
 <link href="/static/css/login.css" rel="stylesheet"/>

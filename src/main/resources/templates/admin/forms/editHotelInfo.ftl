@@ -199,16 +199,15 @@
                                 </script>
                             </div>
                         </div>
-                        <h4>Дополнительные услуги</h4>
                     </form>
-
+                    <h4>Дополнительные услуги</h4>
                     <#list roomType.bonuses as bonus>
                         <div>
                             <ul>
                                 <li>
                                     <div class="row">
                                         <div class="col-sm-9">${bonus.title}</div>
-                                        <div class="col-sm-3">${bonus.additionCost}</div>
+                                        <div class="col-sm-3">${bonus.cost}</div>
                                     </div>
                                 </li>
                             </ul>
@@ -216,7 +215,21 @@
                     <#else>
                         В данный момент нет дополнительных услуг.
                     </#list>
-
+                    <form action="/admin/hotel/add/bonus" method="post">
+                        <input type="hidden" name="_csrf" value="${_csrf.token}">
+                        <input type="hidden" name="roomTypeId" value="${roomType.id}">
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <input type="text" class="form-control" name="title" placeholder="Название бонуса"/>
+                            </div>
+                            <div class="form-group col-md-3">
+                                <input type="number" class="form-control" name="cost" placeholder="Стоимость услуги"/>
+                            </div>
+                            <div class="form-group col-md-3">
+                                <button class="btn btn-info" type="submit">Добавить</button>
+                            </div>
+                        </div>
+                    </form>
                     <div class="row mt-2">
                         <div class="col-sm-6 text-center">
                             <button class="btn btn-info" style="width: 200px"
@@ -236,4 +249,46 @@
         <h5>Пока нет ни одного Номера</h5>
     </#list>
 </div>
+</#macro>
+
+<#macro addRooms hotel>
+<h4>
+    Добавление Комнат
+</h4>
+<div class="row">
+    <div class="col-md-6">
+        <div class="list-group" id="list-tab" role="tablist">
+            <#list hotel.roomTypes! as roomType>
+                <a class="list-group-item list-group-item-action<#if roomType_index == 0> active</#if>" id="list-home-list" data-toggle="list" href="#addRoom${roomType.id}" role="tab" aria-controls="home">
+                    ${roomType.title}
+                </a>
+            </#list>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <div class="tab-content" id="nav-tabContent">
+            <#list hotel.roomTypes! as roomType>
+                <div class="tab-pane fade <#if roomType_index == 0> show active</#if>" id="addRoom${roomType.id}" role="tabpanel" aria-labelledby="list-home-list">
+                    <form action="/admin/hotel/add/room" method="post">
+                        <input type="hidden" name="_csrf" value="${_csrf.token}">
+                        <input type="hidden" name="roomTypeId" value="${roomType.id}">
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <input type="number" class="form-control" name="roomNumber" placeholder="Номер новой комнаты"/>
+                            </div>
+                            <div class="form-group col-md-3">
+                                <button class="btn btn-info" type="submit">Добавить</button>
+                            </div>
+                        </div>
+                    </form>
+                    <br>
+                    <#list roomType.rooms! as room>
+                        ${room.roomNumber}
+                    </#list>
+                </div>
+            </#list>
+        </div>
+    </div>
+</div>
+
 </#macro>
