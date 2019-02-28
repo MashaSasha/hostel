@@ -72,8 +72,8 @@ public class AdminHotelEditController {
     }
 
     @PostMapping("/edit/roomType")
-    public String editRoomType(RoomType roomType) {
-        hotelEditService.editRoomType(roomType);
+    public String editRoomType(@RequestParam("image") MultipartFile image, RoomType roomType) {
+        hotelEditService.editRoomType(roomType, image);
 
         return REDIRECT + HOTEL_EDITOR_MAPPING;
     }

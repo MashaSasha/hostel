@@ -1,4 +1,4 @@
-package com.bsuir.masasha.hostel.web.controller;
+package com.bsuir.masasha.hostel.web.controller.user;
 
 import com.bsuir.masasha.hostel.core.domain.Role;
 import com.bsuir.masasha.hostel.core.domain.User;

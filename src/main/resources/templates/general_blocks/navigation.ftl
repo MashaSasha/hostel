@@ -2,7 +2,7 @@
 <#import "login.ftl" as l>
 
 <nav class="navbar navbar-expand-lg navbar-light bg-light">
-    <a class="navbar-brand" href="/">Hostel</a>
+    <a class="navbar-brand" href="/">Отель</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent"
             aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -12,16 +12,16 @@
         <ul class="navbar-nav mr-auto">
             <#--<#if isAdmin>-->
                 <li class="nav-item">
-                    <a class="nav-link" href="/">Home</a>
+                    <a class="nav-link" href="/">Домашняя</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/main">UserList</a>
+                    <a class="nav-link" href="/main">Главная</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/admin/hotel/editor">Room Settings</a>
+                    <a class="nav-link" href="/admin/hotel/editor">Редактирование данных</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="/main">News</a>
+                    <a class="nav-link" href="/booking">Бронирование</a>
                 </li>
             <#--</#if>-->
         </ul>

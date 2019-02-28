@@ -1,4 +1,4 @@
-package com.bsuir.masasha.hostel.web.controller;
+package com.bsuir.masasha.hostel.web.controller.user;
 
 import com.bsuir.masasha.hostel.core.domain.Hotel;
 import com.bsuir.masasha.hostel.core.domain.Message;
@@ -21,7 +21,7 @@ import java.util.Map;
 import java.util.UUID;
 
 @Controller
-public class MainController {
+public class UsersMainPagesController {
 
     @Autowired
     HotelEditService hotelEditService;
@@ -39,6 +39,11 @@ public class MainController {
         Hotel hotel = hotelEditService.findHotel();
         model.addAttribute("hotel", hotel);
         return "user/main";
+    }
+
+    @GetMapping("/booking")
+    public String booking(Model model) {
+        return "user/book";
     }
 
 
