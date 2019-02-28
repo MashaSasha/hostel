@@ -149,8 +149,7 @@
                     </button>
                 </h2>
             </div>
-            <div id="roomType${roomType.id}" class="collapse" aria-labelledby="heading${roomType.id}"
-                 data-parent="#accordion">
+            <div id="roomType${roomType.id}" class="collapse" aria-labelledby="heading${roomType.id}" data-parent="#accordion">
                 <div class="card-body">
 
                     <form action="/admin/hotel/edit/roomType" method="post" id="editRoomType${roomType.id}" enctype="multipart/form-data">

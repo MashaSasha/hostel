@@ -11,14 +11,6 @@ import javax.persistence.*;
 @Setter
 public class Message
 
-
-
-
-
-
-
-
-
 {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
