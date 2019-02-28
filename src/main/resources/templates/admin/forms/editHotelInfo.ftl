@@ -153,7 +153,7 @@
                  data-parent="#accordion">
                 <div class="card-body">
 
-                    <form action="/admin/hotel/edit/roomType" method="post" id="editRoomType${roomType.id}">
+                    <form action="/admin/hotel/edit/roomType" method="post" id="editRoomType${roomType.id}" enctype="multipart/form-data">
                         <input type="hidden" name="id" value="${roomType.id}">
                         <input type="hidden" name="_csrf" value="${_csrf.token}">
 
@@ -161,28 +161,27 @@
                             <label for="roomName${roomType.id!}" class="col-sm-2 col-form-label">Название
                                 номеров</label>
                             <div class="col-sm-10">
-                                <input type="text" class="form-control" id="cardName${roomType.id!}"
-                                       value="${roomType.title!}"
+                                <input type="text" class="form-control" id="cardName${roomType.id!}" value="${roomType.title!}"
                                        name="title" placeholder="Название типа комнат">
                             </div>
                         </div>
 
                         <div class="form-group row">
-                            <label for="roomCost${roomType.id!}" class="col-sm-2 col-form-label">Цена за
-                                номер</label>
+                            <label for="roomCost${roomType.id!}" class="col-sm-2 col-form-label">
+                                Цена за номер
+                            </label>
                             <div class="col-sm-10">
-                                <input type="text" class="form-control" id="roomName${roomType.id!}"
-                                       value="${roomType.cost!}"
+                                <input type="text" class="form-control" id="roomName${roomType.id!}" value="${roomType.cost!}"
                                        name="cost" placeholder="Цена за номер">
                             </div>
                         </div>
 
                         <div class="form-group row">
-                            <label for="roomAmount${roomType.id!}" class="col-sm-2 col-form-label">Спальных мест в
-                                номере</label>
+                            <label for="roomAmount${roomType.id!}" class="col-sm-2 col-form-label">
+                                Спальных мест в номере
+                            </label>
                             <div class="col-sm-10">
-                                <input type="text" class="form-control" id="roomAmount${roomType.id!}"
-                                       value="${roomType.sleepPlacesAmount!}"
+                                <input type="text" class="form-control" id="roomAmount${roomType.id!}" value="${roomType.sleepPlacesAmount!}"
                                        name="sleepPlacesAmount" placeholder="Введите колличество спальных мест">
                             </div>
                         </div>
@@ -199,53 +198,70 @@
                                 </script>
                             </div>
                         </div>
-                    </form>
-                    <h4>Дополнительные услуги</h4>
-                    <#list roomType.bonuses as bonus>
-                        <div>
-                            <ul>
-                                <li>
-                                    <div class="row">
-                                        <div class="col-sm-9">${bonus.title}</div>
-                                        <div class="col-sm-3">${bonus.cost}</div>
-                                    </div>
-                                </li>
-                            </ul>
-                        </div>
-                    <#else>
-                        В данный момент нет дополнительных услуг.
-                    </#list>
-                    <form action="/admin/hotel/add/bonus" method="post">
-                        <input type="hidden" name="_csrf" value="${_csrf.token}">
-                        <input type="hidden" name="roomTypeId" value="${roomType.id}">
-                        <div class="form-row">
-                            <div class="form-group col-md-6">
-                                <input type="text" class="form-control" name="title" placeholder="Название бонуса"/>
+
+                        <div class="row">
+                            <div class="col-md-2 mt-3 text-right">
+                                Добавить картинку:
                             </div>
-                            <div class="form-group col-md-3">
-                                <input type="number" class="form-control" name="cost" placeholder="Стоимость услуги"/>
+                            <div class="col-md-4 ml-3">
+                                <div class="custom-file my-2 row">
+                                    <input type="file" class="custom-file-input" id="customFile" name="image">
+                                    <label class="custom-file-label" for="customFile">Выберете файл</label>
+                                </div>
                             </div>
-                            <div class="form-group col-md-3">
-                                <button class="btn btn-info" type="submit">Добавить</button>
+                            <div class="col-md-2"></div>
+                            <div class="col-md-4">
+                                <img src="/static/img/${roomType.previewImage!}" style="height: 200px">
                             </div>
                         </div>
                     </form>
-                    <div class="row mt-2">
-                        <div class="col-sm-6 text-center">
-                            <button class="btn btn-info" style="width: 200px"
-                                    onclick="document.getElementById('editRoomType${roomType.id}').submit()">
-                                Save
-                            </button>
-                        </div>
-                        <div class="col-sm-6 text-center">
-                            <button class="btn btn-danger" style="width: 200px">Canсel</button>
-                        </div>
-                    </div>
                 </div>
 
-            </div>
-        </div>
 
+                <h4>Дополнительные услуги</h4>
+                <#list roomType.bonuses as bonus>
+                    <div>
+                        <ul>
+                            <li>
+                                <div class="row">
+                                    <div class="col-sm-9">${bonus.title}</div>
+                                    <div class="col-sm-3">${bonus.cost}</div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                <#else>
+                    В данный момент нет дополнительных услуг.
+                </#list>
+                <form action="/admin/hotel/add/bonus" method="post">
+                    <input type="hidden" name="_csrf" value="${_csrf.token}">
+                    <input type="hidden" name="roomTypeId" value="${roomType.id}">
+                    <div class="form-row">
+                        <div class="form-group col-md-6">
+                            <input type="text" class="form-control" name="title" placeholder="Название бонуса"/>
+                        </div>
+                        <div class="form-group col-md-3">
+                            <input type="number" class="form-control" name="cost" placeholder="Стоимость услуги"/>
+                        </div>
+                        <div class="form-group col-md-3">
+                            <button class="btn btn-info" type="submit">Добавить</button>
+                        </div>
+                    </div>
+                </form>
+                <div class="row mt-2">
+                    <div class="col-sm-6 text-center">
+                        <button class="btn btn-info" style="width: 200px"
+                                onclick="document.getElementById('editRoomType${roomType.id}').submit()">
+                            Save
+                        </button>
+                    </div>
+                    <div class="col-sm-6 text-center">
+                        <button class="btn btn-danger" style="width: 200px">Canсel</button>
+                    </div>
+                </div>
+            </div>
+
+        </div>
     <#else>
         <h5>Пока нет ни одного Номера</h5>
     </#list>

@@ -83,9 +83,13 @@ public class HotelEditServiceImpl implements HotelEditService {
     }
 
     @Override
-    public void editRoomType(RoomType roomType) {
+    public void editRoomType(RoomType roomType, MultipartFile image) {
         Hotel hotel = findHotel();
         RoomType roomTypeToChange = hotel.popRoomTypeToUpdate(roomType);
+        if (StringUtils.isNotEmpty(image.getOriginalFilename())) {
+            String imgPath = ImageUtil.upload(image, uploadPath);
+            roomType.setPreviewImage(imgPath);
+        }
 
         roomType.setBonuses(roomTypeToChange.getBonuses());
         hotel.addRoomType(roomType);

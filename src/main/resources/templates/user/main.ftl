@@ -9,6 +9,7 @@
         margin: 0 auto;
     }
 </style>
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
 
 <main role="main">
 
@@ -63,10 +64,40 @@
                         <p class="card-text">${roomType.description}</p>
                         <div class="d-flex justify-content-between align-items-center">
                             <div class="btn-group">
-                                <button type="button" class="btn btn-sm btn-outline-secondary">View</button>
-                                <button type="button" class="btn btn-sm btn-outline-secondary">Edit</button>
+                                <button type="button" class="btn btn-sm btn-outline-secondary" data-toggle="modal" data-target="#rtModal${roomType.id}">Подробности</button>
                             </div>
                             <small class="text-muted">${roomType.cost} BYN / ночь</small>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+            <div class="modal fade" id="rtModal${roomType.id}" tabindex="-1" role="dialog" aria-labelledby="centerTitle" aria-hidden="true">
+                <div class="modal-dialog modal-dialog-centered" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="exampleModalLongTitle">${roomType.title}</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <div class="modal-body">
+                            <h5>Дополнительные услуги:</h5>
+                            <div class="row">
+                                <#list roomType.bonuses! as bonus>
+                                <div class="col-sm-8">
+                                    - ${bonus.title}
+                                </div>
+                                <div class="col-sm-4">
+                                    : ${bonus.cost} BYN
+                                </div>
+                                </#list>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                         </div>
                     </div>
                 </div>
@@ -80,6 +111,7 @@
 
         <div class="row featurette">
             <div class="col-md-7">
+
                 <h2 class="featurette-heading">First featurette heading. <span class="text-muted">It'll blow your mind.</span></h2>
                 <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>
             </div>
@@ -126,3 +158,15 @@
     </footer>
 </main>
 </@c.page>
+
+<script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+<script>
+    $(function() {
+        $('input[name="rangeCale"]').daterangepicker({
+            opens: 'left'
+        }, function(start, end, label) {
+            console.log("A new date selection was made: " + start.format('YYYY-MM-DD') + ' to ' + end.format('YYYY-MM-DD'));
+        });
+    });
+</script>
