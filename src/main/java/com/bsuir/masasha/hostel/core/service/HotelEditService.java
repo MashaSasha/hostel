@@ -6,7 +6,6 @@ import com.bsuir.masasha.hostel.core.domain.RoomType;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
-@Service
 public interface HotelEditService {
     void editHotel(Hotel newHotel);
 

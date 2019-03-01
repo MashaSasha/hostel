@@ -13,8 +13,10 @@
 
     <div class="row">
         <div class="col-md-1"></div>
+
+
         <div class="col-md-7">
-            <h4 class="mb-3">Billing address</h4>
+            <h4 class="mb-3">Подбор номера</h4>
             <form class="needs-validation" id="filterForm" novalidate>
                 <input type="hidden" name="_csrf" value="${_csrf.token}">
                 <div class="row">
@@ -34,7 +36,7 @@
                     </div>
                     <div class="col-md-6 mb-3">
                         <label for="cost">Даты бронирования</label>
-                        <input type="text" class="form-control" name="rangeCalendar" id="rangeCalendar" placeholder="" value="" required>
+                        <input type="text" autocomplete="off" class="form-control" name="rangeCalendar" id="rangeCalendar" placeholder="" value="" required>
                         <div class="invalid-feedback">
                             Valid last name is required.
                         </div>
@@ -47,6 +49,8 @@
                 <button class="btn btn-info btn-lg btn-block" type="submit">Подобрать номера</button>
             </form>
         </div>
+
+
         <div class="col-md-3 mb-4">
             <h4 class="d-flex justify-content-between align-items-center mb-3">
                 <span class="text-muted">Корзина</span>
@@ -96,6 +100,8 @@
                 </div>
             </form>
         </div>
+
+
         <div class="col-md-1"></div>
     </div>
 
