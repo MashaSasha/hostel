@@ -1,10 +1,15 @@
 package com.bsuir.masasha.hostel.core.domain;
 
+import lombok.Getter;
+import lombok.Setter;
+
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.List;
 
 @Entity
+@Getter
+@Setter
 public class Reservation {
 
     @Id

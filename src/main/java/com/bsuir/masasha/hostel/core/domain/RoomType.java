@@ -18,7 +18,7 @@ public class RoomType {
 
     private String previewImage;
     private String title;
-    private Double cost;
+    private Integer cost;
     private String description;
     private Integer sleepPlacesAmount;
 
@@ -30,7 +30,7 @@ public class RoomType {
     @JoinColumn(name = "roomType_id")
     private List<Bonus> bonuses;
 
-    public RoomType(String roomTypeTitle, Double roomTypeCost) {
+    public RoomType(String roomTypeTitle, Integer roomTypeCost) {
         this.title = roomTypeTitle;
         this.cost = roomTypeCost;
     }
