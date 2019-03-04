@@ -1,10 +1,9 @@
 package com.bsuir.masasha.hostel.web.controller.user;
 
-import com.bsuir.masasha.hostel.core.domain.Reservation;
 import com.bsuir.masasha.hostel.core.domain.RoomType;
 import com.bsuir.masasha.hostel.core.domain.dto.BookingOpportunitiesDTO;
 import com.bsuir.masasha.hostel.core.domain.dto.ResponseStatus;
-import com.bsuir.masasha.hostel.core.service.BookingPair;
+import com.bsuir.masasha.hostel.core.domain.dto.BookingPair;
 import com.bsuir.masasha.hostel.core.service.BookingService;
 import javafx.util.Pair;
 import org.springframework.beans.factory.annotation.Autowired;

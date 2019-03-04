@@ -13,7 +13,7 @@ public interface HotelEditService {
 
     Hotel findHotel();
 
-    void addRoomType(String newRoomType, Double roomTypeCost);
+    void addRoomType(String newRoomType, Integer roomTypeCost);
 
     void editRoomType(RoomType roomType, MultipartFile image);
 

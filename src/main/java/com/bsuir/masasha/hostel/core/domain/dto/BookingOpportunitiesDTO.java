@@ -1,7 +1,6 @@
 package com.bsuir.masasha.hostel.core.domain.dto;
 
 import com.bsuir.masasha.hostel.core.domain.RoomType;
-import com.bsuir.masasha.hostel.core.service.BookingPair;
 import javafx.util.Pair;
 import lombok.Getter;
 import lombok.Setter;

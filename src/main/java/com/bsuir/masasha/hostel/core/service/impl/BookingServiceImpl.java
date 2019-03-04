@@ -1,32 +1,40 @@
 package com.bsuir.masasha.hostel.core.service.impl;
 
-import com.bsuir.masasha.hostel.core.domain.Reservation;
 import com.bsuir.masasha.hostel.core.domain.RoomType;
 import com.bsuir.masasha.hostel.core.repo.RoomTypeRepository;
-import com.bsuir.masasha.hostel.core.service.BookingPair;
+import com.bsuir.masasha.hostel.core.domain.dto.BookingPair;
 import com.bsuir.masasha.hostel.core.service.BookingService;
 import com.bsuir.masasha.hostel.core.service.cache.ReservationCache;
 import javafx.util.Pair;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDate;
+import java.time.format.DateTimeFormatter;
 import java.util.*;
-import java.util.function.BiFunction;
 import java.util.function.BiPredicate;
 import java.util.stream.Collectors;
 
 @Service
 public class BookingServiceImpl implements BookingService {
 
-    @Autowired
-    private RoomTypeRepository roomTypeRepository;
+    private final RoomTypeRepository roomTypeRepository;
+
+    private final ReservationCache cache;
 
     @Autowired
-    private ReservationCache cache;
+    public BookingServiceImpl(RoomTypeRepository roomTypeRepository, ReservationCache cache) {
+        this.roomTypeRepository = roomTypeRepository;
+        this.cache = cache;
+    }
+
+    private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+
 
     private Map<RoomType, Pair<Long, BookingPair>> findOption(
-            Integer peopleNum, Integer maxCost, String dates,
-            BiFunction<RoomType, BookingPair, Pair<Long, BookingPair>> cacheFun,
+            Integer peopleNum,
+            Integer maxCost,
+            String dates,
             BiPredicate<Integer, Integer> costFilter
     ) {
         Map<RoomType, Pair<Long, BookingPair>> options = new LinkedHashMap<>();
@@ -39,7 +47,7 @@ public class BookingServiceImpl implements BookingService {
                 .collect(Collectors.toList());
 
         matchedRoomTypes.forEach(rt -> {
-            Pair<Long, BookingPair> option = cacheFun.apply(rt, bookingTime);
+            Pair<Long, BookingPair> option = cache.findOption(rt, bookingTime);
             Optional.ofNullable(option)
                     .ifPresent(o -> options.put(rt, o));
         });
@@ -49,12 +57,12 @@ public class BookingServiceImpl implements BookingService {
 
     @Override
     public Map<RoomType, Pair<Long, BookingPair>> pickOptions(Integer peopleNum, Integer maxCost, String dates) {
-        return findOption(peopleNum, maxCost, dates, cache::findOption, this::lessOrEqualsThenMaxCost);
+        return findOption(peopleNum, maxCost, dates, this::lessOrEqualsThenMaxCost);
     }
 
     @Override
     public Map<RoomType, Pair<Long, BookingPair>> sameDateAlternatives(Integer peopleNum, Integer maxCost, String dates) {
-        return findOption(peopleNum, maxCost, dates, cache::findAlternativeDatesOption, this::moreThenMaxCost);
+        return findOption(peopleNum, maxCost, dates, this::moreThenMaxCost);
     }
 
     private boolean lessOrEqualsThenMaxCost(Integer rtCost, Integer maxCost) {
@@ -66,19 +74,12 @@ public class BookingServiceImpl implements BookingService {
     }
 
     private BookingPair splitTime(String dates) {
-
-        return null;
+        String[] splitDates = dates.split(" - ");
+        LocalDate start = LocalDate.parse(splitDates[0]);
+        LocalDate end = LocalDate.parse(splitDates[1]);
+        return new BookingPair(start, end);
     }
 
-    @Override
-    public Map<Reservation, RoomType> otherAlternatives(Integer peopleNum, Integer maxCost, String dates) {
-        return null;
-    }
-
-    @Override
-    public Map<Reservation, RoomType> sameRoomTypeAlternatives(Integer peopleNum, Integer maxCost, String dates) {
-        return null;
-    }
 
     //    @Override
 //    public Map<RoomType, Pair<Long, BookingPair>> otherAlternatives(Integer peopleNum, Integer maxCost, String dates) {

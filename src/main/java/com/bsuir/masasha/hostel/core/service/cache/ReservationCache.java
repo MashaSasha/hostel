@@ -1,7 +1,7 @@
 package com.bsuir.masasha.hostel.core.service.cache;
 
 import com.bsuir.masasha.hostel.core.domain.RoomType;
-import com.bsuir.masasha.hostel.core.service.BookingPair;
+import com.bsuir.masasha.hostel.core.domain.dto.BookingPair;
 import javafx.util.Pair;
 
 public interface ReservationCache {
