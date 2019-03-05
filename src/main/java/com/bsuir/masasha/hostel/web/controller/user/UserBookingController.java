@@ -5,6 +5,7 @@ import com.bsuir.masasha.hostel.core.domain.dto.BookingOpportunitiesDTO;
 import com.bsuir.masasha.hostel.core.domain.dto.ResponseStatus;
 import com.bsuir.masasha.hostel.core.domain.dto.BookingPair;
 import com.bsuir.masasha.hostel.core.service.BookingService;
+import com.bsuir.masasha.hostel.core.service.HotelEditService;
 import javafx.util.Pair;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -12,6 +13,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
+import java.util.HashMap;
 import java.util.Map;
 
 @RestController
@@ -21,13 +23,16 @@ public class UserBookingController {
     @Autowired
     private BookingService bookingService;
 
+    @Autowired
+    private HotelEditService hotelEditService;
+
     @GetMapping("/options")
     public BookingOpportunitiesDTO findOptions(
             @RequestParam Integer peopleNum,
             @RequestParam Integer maxCost,
             @RequestParam String dates) {
 
-        Map<RoomType, Pair<Long, BookingPair>> preReservations = bookingService.pickOptions(peopleNum, maxCost, dates);
+        Map<Long, Pair<Long, BookingPair>> preReservations = bookingService.pickOptions(peopleNum, maxCost, dates);
         BookingOpportunitiesDTO answer = new BookingOpportunitiesDTO();
 
         if (preReservations.isEmpty()) {
@@ -35,9 +40,9 @@ public class UserBookingController {
             answer.setMessage("К сожелению на данный момент нет подходящих вариантов, может вам подойдут эти номера?");
         } else {
             answer.setStatus(ResponseStatus.SUCCESS);
-            answer.setReservations(preReservations);
+            answer.setOptions(preReservations);
         }
-        Map<RoomType, Pair<Long, BookingPair>> sameDateAlternatives = bookingService.sameDateAlternatives(peopleNum, maxCost, dates);
+        Map<Long, Pair<Long, BookingPair>> sameDateAlternatives = bookingService.sameDateAlternatives(peopleNum, maxCost, dates);
         answer.setAlternatives(sameDateAlternatives);
 
         return answer;
@@ -51,7 +56,7 @@ public class UserBookingController {
 
         BookingOpportunitiesDTO answer = new BookingOpportunitiesDTO();
 
-        Map<RoomType, Pair<Long, BookingPair>> sameDateAlternatives = bookingService.sameDateAlternatives(peopleNum, maxCost, dates);
+        Map<Long, Pair<Long, BookingPair>> sameDateAlternatives = bookingService.sameDateAlternatives(peopleNum, maxCost, dates);
         if (sameDateAlternatives.isEmpty()) {
             answer.setStatus(ResponseStatus.WARING);
             answer.setMessage("Нет подходящих вариантов");
@@ -63,7 +68,15 @@ public class UserBookingController {
         return answer;
     }
 
-    @GetMapping("/alternatives/sameRoomType")
+
+    @GetMapping("/roomTypes")
+    public Map<Long, RoomType> getRoomTypes() {
+        Map<Long, RoomType> roomTypes = new HashMap<>();
+        hotelEditService.getAllRoomTypes().forEach(roomType -> roomTypes.put(roomType.getId(), roomType));
+        return roomTypes;
+    }
+
+     @GetMapping("/alternatives/sameRoomType")
     public BookingOpportunitiesDTO sameRoomTypeAlternatives(
             @RequestParam Integer peopleNum,
             @RequestParam Integer maxCost,

@@ -28,16 +28,16 @@ public class BookingServiceImpl implements BookingService {
         this.cache = cache;
     }
 
-    private DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+    private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
 
 
-    private Map<RoomType, Pair<Long, BookingPair>> findOption(
+    private Map<Long, Pair<Long, BookingPair>> findOption(
             Integer peopleNum,
             Integer maxCost,
             String dates,
             BiPredicate<Integer, Integer> costFilter
     ) {
-        Map<RoomType, Pair<Long, BookingPair>> options = new LinkedHashMap<>();
+        Map<Long, Pair<Long, BookingPair>> options = new LinkedHashMap<>();
         BookingPair bookingTime = splitTime(dates);
 
         List<RoomType> matchedRoomTypes = roomTypeRepository.findAll().stream()
@@ -49,19 +49,19 @@ public class BookingServiceImpl implements BookingService {
         matchedRoomTypes.forEach(rt -> {
             Pair<Long, BookingPair> option = cache.findOption(rt, bookingTime);
             Optional.ofNullable(option)
-                    .ifPresent(o -> options.put(rt, o));
+                    .ifPresent(o -> options.put(rt.getId(), o));
         });
 
         return options;
     }
 
     @Override
-    public Map<RoomType, Pair<Long, BookingPair>> pickOptions(Integer peopleNum, Integer maxCost, String dates) {
+    public Map<Long, Pair<Long, BookingPair>> pickOptions(Integer peopleNum, Integer maxCost, String dates) {
         return findOption(peopleNum, maxCost, dates, this::lessOrEqualsThenMaxCost);
     }
 
     @Override
-    public Map<RoomType, Pair<Long, BookingPair>> sameDateAlternatives(Integer peopleNum, Integer maxCost, String dates) {
+    public Map<Long, Pair<Long, BookingPair>> sameDateAlternatives(Integer peopleNum, Integer maxCost, String dates) {
         return findOption(peopleNum, maxCost, dates, this::moreThenMaxCost);
     }
 
@@ -70,13 +70,13 @@ public class BookingServiceImpl implements BookingService {
     }
 
     private boolean moreThenMaxCost(Integer rtCost, Integer maxCost) {
-        return rtCost <= maxCost;
+        return rtCost > maxCost;
     }
 
     private BookingPair splitTime(String dates) {
         String[] splitDates = dates.split(" - ");
-        LocalDate start = LocalDate.parse(splitDates[0]);
-        LocalDate end = LocalDate.parse(splitDates[1]);
+        LocalDate start = LocalDate.parse(splitDates[0], formatter);
+        LocalDate end = LocalDate.parse(splitDates[1], formatter);
         return new BookingPair(start, end);
     }
 

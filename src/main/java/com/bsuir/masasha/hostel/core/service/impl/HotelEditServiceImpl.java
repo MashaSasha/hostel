@@ -16,6 +16,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.Iterator;
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -132,5 +133,10 @@ public class HotelEditServiceImpl implements HotelEditService {
             return true;
         }
         return false;
+    }
+
+    @Override
+    public List<RoomType> getAllRoomTypes() {
+        return roomTypeRepository.findAll();
     }
 }
