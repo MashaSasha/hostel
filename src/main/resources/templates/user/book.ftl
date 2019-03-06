@@ -3,11 +3,17 @@
 <@c.page>
 <body class="bg-light">
 
-<style>
-.row1 {
-   display: flex;
-   flex-wrap: wrap;
-}
+<style type="text/css">
+    .row1 {
+        display: flex;
+        flex-wrap: wrap;
+    }
+    .cursor-pointer {
+        cursor: pointer;
+    }
+    .chosen {
+        background-color: #D5F8CE;
+    }
 </style>
 
 
@@ -56,20 +62,7 @@
 
 
             <div class="row row1" id="options">
-                <div class="col-md-4 mt-5">
-                    <div class="card">
-                        <img src="..." class="card-img-top" alt="...">
-                        <div class="card-body">
-                            <h5 class="card-title">Card title</h5>
-                            <p class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
-                        </div>
-                        <ul class="list-group list-group-flush">
-                            <li class="list-group-item">Cras justo odio</li>
-                            <li class="list-group-item">Dapibus ac facilisis in</li>
-                            <li class="list-group-item">Vestibulum at eros</li>
-                        </ul>
-                    </div>
-                </div>
+
             </div>
 
         </div>
@@ -156,3 +149,25 @@
     });
 </script>
 <script src="/static/js/booking.js"></script>
+
+
+<div class="col-md-4 mt-5" id="roomTypeHiddenDemo" hidden>
+    <div class="card">
+        <img src="" class="card-img-top" id="demo-img">
+        <div class="card-body">
+            <h5 class="card-title" id="demo-title"></h5>
+            <p class="card-text" id="demo-description"></p>
+            <small class="text-muted" id="demo-dates"></small>
+        </div>
+        <ul class="list-group list-group-flush cursor-pointer" id="demo-bonuses">
+        </ul>
+        <div class="card-body">
+            <div class="d-flex justify-content-between align-items-center">
+                <div class="btn-group">
+                    <button type="button" class="btn btn-sm btn-outline-secondary">В корзину</button>
+                </div>
+                <small class="text-muted" id="demo-cost"> BYN / ночь</small>
+            </div>
+        </div>
+    </div>
+</div>

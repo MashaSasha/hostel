@@ -1,15 +1,17 @@
 let roomTypes;
 
-window.onload = function() {
-    let request = $.ajax({
+window.onload = function () {
+
+    // запрос списка roomType при загрузке страницы
+    $.ajax({
         url: '/user/booking/roomTypes',
         type: 'GET',
         dataType: 'json'
-    });
-
-    request.done(function (data) {
+    }).done(function (data) {
         roomTypes = data;
     });
+
+
 };
 
 $('#filterForm').submit(function (event) {
@@ -51,34 +53,43 @@ function getOptionsJSON(form) {
             alert(data.message);
         }
     });
-    
+
     request.fail(function (jqXHR, textStatus) {
-        alert( "Request failed: " + textStatus );
+        alert("Request failed: " + textStatus);
     });
     event.preventDefault();
 }
 
 function displayOptions(options) {
     let roomTypeIds = Object.keys(options);
-    roomTypeIds.map(id => {
-        let roomType = roomTypes[id];
-        let result = `<div class="col-md-4 mt-5">\n` +
-        `                    <div class="card">\n` +
-        `                        <img src="${roomType.previewImage}" class="card-img-top">\n` +
-        `                        <div class="card-body">\n` +
-        `                            <h5 class="card-title">${roomType.title}</h5>\n` +
-        `                            <p class="card-text">${roomType.description}</p>\n` +
-        `                        </div>\n` +
-        `                        <ul class="list-group list-group-flush">\n`;
-        roomType.bonuses.foreach(function (bonus) {
-            result += `<li class="list-group-item">${bonus.title} - ${bonus.cost}</li>\n`
-        });
-        result += `</ul>\n` +
-        `                    </div>\n` +
-        `                </div>`
 
-        return result;
+    roomTypeIds.forEach(id => {
+        let roomType = roomTypes[id];
+        let $roomType = $('#roomTypeHiddenDemo').clone();
+        $roomType.find('#demo-title').html(roomType.title);
+        $roomType.find('#demo-description').html(roomType.description);
+        $roomType.find('#demo-dates').html('с ' + options[id].value.startDate + ' до ' + options[id].value.endDate);
+        $roomType.find('#demo-img').attr('src', '/static/img/' +  roomType.previewImage);
+        roomType.bonuses.forEach(function (bonus) {
+            $roomType.find('#demo-bonuses')
+                .append(
+                    '<li class="list-group-item">' +
+                    bonus.title + ' - <small class="text-muted" id="demo-dates">'+  bonus.cost + ' BYN' +
+                    '</small></li>'
+                )
+        });
+        $roomType.find('#demo-cost').prepend(roomType.cost);
+        $roomType.attr('id', 'option' + roomType.id);
+        $roomType.removeAttr('hidden');
+
+        $roomType.on('click', 'li', function() {
+            $(this).toggleClass( "chosen" );
+        });
+
+
+        $('#options').append($roomType);
     });
+
 }
 
 function displayAlternatives(alternatives) {
