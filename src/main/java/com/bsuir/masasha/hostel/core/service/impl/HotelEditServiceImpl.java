@@ -95,6 +95,7 @@ public class HotelEditServiceImpl implements HotelEditService {
         }
 
         roomType.setBonuses(roomTypeToChange.getBonuses());
+        roomType.setRooms(roomTypeToChange.getRooms());
         hotel.addRoomType(roomType);
 
         hotelRepository.save(hotel);

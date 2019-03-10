@@ -30,6 +30,7 @@ public class AdminHotelEditController {
     public String editSettings(HttpServletRequest request, Model model) {
         Hotel hotel = hotelEditService.findHotel();
 
+        // достать сообщение из сессии и положить в модель
         Optional.of(request.getSession(false))
                 .ifPresent(s -> {
                     model.addAttribute("message", s.getAttribute("message"));

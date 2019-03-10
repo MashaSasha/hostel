@@ -28,7 +28,7 @@ public class BookingServiceImpl implements BookingService {
         this.cache = cache;
     }
 
-    private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("dd/MM/yyyy");
+    private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("MM/dd/yyyy");
 
 
     private Map<Long, Pair<Long, BookingPair>> findOption(
