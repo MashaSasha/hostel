@@ -26,7 +26,7 @@ public class RoomType {
     @JoinColumn(name = "roomType_id")
     private List<Room> rooms;
 
-    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(fetch = FetchType.LAZY, cascade = CascadeType.ALL, orphanRemoval = true)
     @JoinColumn(name = "roomType_id")
     private List<Bonus> bonuses;
 

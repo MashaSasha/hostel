@@ -20,10 +20,20 @@ public class Reservation {
     @JoinColumn(name = "room_id")
     private Room room;
 
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "roomType_id")
+    private RoomType roomType;
+
+    @ManyToMany
+    @JoinTable(
+            joinColumns = @JoinColumn(name = "reservation_id"),
+            inverseJoinColumns = @JoinColumn(name = "bonus_id")
+    )
+    private List<Bonus> bonuses;
+
+
     private LocalDate startDate;
     private LocalDate endDate;
-
-//    private List<Bonus> bonuses;
 
     private Double cost;
 
