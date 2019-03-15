@@ -16,6 +16,7 @@
     }
 </style>
 
+<div hidden id="_csrf" name="${_csrf.token}"></div>
 
 <div class="container-fluid">
     <div class="text-center">
@@ -25,7 +26,6 @@
 
     <div class="row">
         <div class="col-md-1"></div>
-
 
         <div class="col-md-7">
             <h4 class="mb-3">Подбор номера</h4>
@@ -62,7 +62,6 @@
 
             <#--Сюда вставляются найденые варианты при подборе-->
             <div class="row row1" id="options">
-
             </div>
 
         </div>

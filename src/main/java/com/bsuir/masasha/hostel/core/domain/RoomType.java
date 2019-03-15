@@ -45,6 +45,7 @@ public class RoomType {
 
 
     public RoomType() {
+
     }
 
     @Override

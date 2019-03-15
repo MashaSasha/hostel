@@ -1,20 +1,22 @@
 package com.bsuir.masasha.hostel.web.controller.user;
 
 import com.bsuir.masasha.hostel.core.domain.RoomType;
+import com.bsuir.masasha.hostel.core.domain.dto.BasketEntity;
 import com.bsuir.masasha.hostel.core.domain.dto.BookingOpportunitiesDTO;
-import com.bsuir.masasha.hostel.core.domain.dto.ResponseStatus;
 import com.bsuir.masasha.hostel.core.domain.dto.BookingPair;
+import com.bsuir.masasha.hostel.core.domain.dto.ResponseStatus;
 import com.bsuir.masasha.hostel.core.service.BookingService;
 import com.bsuir.masasha.hostel.core.service.HotelEditService;
 import javafx.util.Pair;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.*;
 
-import java.util.HashMap;
-import java.util.Map;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+import java.util.*;
+
+import static com.bsuir.masasha.hostel.web.WebConstants.BASKET_ATR;
 
 @RestController
 @RequestMapping("/user/booking")
@@ -36,7 +38,7 @@ public class UserBookingController {
         BookingOpportunitiesDTO answer = new BookingOpportunitiesDTO();
 
         if (preReservations.isEmpty()) {
-            answer.setStatus(ResponseStatus.WARING);
+            answer.setStatus(ResponseStatus.WARNING);
             answer.setMessage("К сожелению на данный момент нет подходящих вариантов, может вам подойдут эти номера?");
         } else {
             answer.setStatus(ResponseStatus.SUCCESS);
@@ -58,9 +60,9 @@ public class UserBookingController {
 
         Map<Long, Pair<Long, BookingPair>> sameDateAlternatives = bookingService.sameDateAlternatives(peopleNum, maxCost, dates);
         if (sameDateAlternatives.isEmpty()) {
-            answer.setStatus(ResponseStatus.WARING);
+            answer.setStatus(ResponseStatus.WARNING);
             answer.setMessage("Нет подходящих вариантов");
-        } else  {
+        } else {
             answer.setStatus(ResponseStatus.SUCCESS);
             answer.setAlternatives(sameDateAlternatives);
         }
@@ -76,7 +78,31 @@ public class UserBookingController {
         return roomTypes;
     }
 
-     @GetMapping("/alternatives/sameRoomType")
+    @PostMapping(value = "/add/basket", consumes = MediaType.APPLICATION_JSON_VALUE)
+    public @ResponseBody
+    ResponseStatus addToBasket(@RequestBody final BasketEntity basketEntity, HttpServletRequest request) {
+
+        HttpSession session = request.getSession(true);
+        List<BasketEntity> basketEntities = Optional.ofNullable(session.getAttribute(BASKET_ATR))
+                .map(be -> (List<BasketEntity>) be)
+                .orElse(new ArrayList<>());
+
+        basketEntities.add(basketEntity);
+        session.setAttribute(BASKET_ATR, basketEntities);
+
+        return ResponseStatus.SUCCESS;
+    }
+
+    @PostMapping("/clear/basket")
+    public ResponseStatus clearBasket() {
+
+        System.out.println("It's working!!!");
+
+        return ResponseStatus.SUCCESS;
+    }
+
+
+    @GetMapping("/alternatives/sameRoomType")
     public BookingOpportunitiesDTO sameRoomTypeAlternatives(
             @RequestParam Integer peopleNum,
             @RequestParam Integer maxCost,
@@ -86,7 +112,7 @@ public class UserBookingController {
 //
 //        Map<Reservation, RoomType> sameRoomTypeAlternatives = bookingService.sameRoomTypeAlternatives(peopleNum, maxCost, dates);
 //        if (sameRoomTypeAlternatives.isEmpty()) {
-//            answer.setStatus(ResponseStatus.WARING);
+//            answer.setStatus(ResponseStatus.WARNING);
 //            answer.setMessage("Нет подходящих вариантов");
 //        } else  {
 //            answer.setStatus(ResponseStatus.SUCCESS);
@@ -106,7 +132,7 @@ public class UserBookingController {
 //
 //        Map<Reservation, RoomType> otherAlternatives = bookingService.otherAlternatives(peopleNum, maxCost, dates);
 //        if (otherAlternatives.isEmpty()) {
-//            answer.setStatus(ResponseStatus.WARING);
+//            answer.setStatus(ResponseStatus.WARNING);
 //            answer.setMessage("Нет подходящих вариантов");
 //        } else  {
 //            answer.setStatus(ResponseStatus.SUCCESS);

@@ -102,30 +102,31 @@ function addToBasket() {
     let roomType = roomTypes[roomTypeId];
 
     let $roomTypeOption = $('#option-' + roomTypeId);
-    let chosenBonuses = $roomTypeOption.find('.chosen');
+    let $chosenBonuses = $roomTypeOption.find('.chosen');
     let chosenBonusesIds = [];
-    chosenBonuses.each(function (index, value) {
+    $chosenBonuses.each(function (index, value) {
         chosenBonusesIds.push($(value).attr('data-id'));
     });
 
     let $template = $('#basket-example').clone();
     $template.find('#product-name').append(roomType.title);
 
-    let startDate = Date.parse(currentOptions[roomTypeId].value.startDate);
-    let endDate = Date.parse(currentOptions[roomTypeId].value.endDate);
+    let startDateString = currentOptions[roomTypeId].value.startDate;
+    let endDateString = currentOptions[roomTypeId].value.endDate;
+    let roomId = currentOptions[roomTypeId].key;
+
+    let startDate = Date.parse(startDateString);
+    let endDate = Date.parse(endDateString);
     let days = Math.ceil(Math.abs(endDate - startDate) / (1000 * 60 * 60 * 24));
 
     $template.find('#product-name').append(' (' + days + ' ночей)');
     let cost = roomType.cost * days;
-    console.log(chosenBonuses);
+    console.log($chosenBonuses);
+    let chosenBonuses = [];
     chosenBonusesIds.forEach(bonusId => {
         roomType.bonuses.forEach(bonusJSON => {
-
-            let id = bonusJSON.id;
-            let bId = parseInt(bonusId);
-            let res = id === bId;
-
-            if (res) {
+            if (bonusJSON.id === parseInt(bonusId)) {
+                chosenBonuses.push(bonusJSON);
                 cost += bonusJSON.cost;
                 $template.find('#product-body').append('<small class="text-muted">'
                     + bonusJSON.title + ' - ' + bonusJSON.cost + ' BYN </small><br>')
@@ -147,6 +148,32 @@ function addToBasket() {
 
     $template.removeAttr('hidden');
     $template.removeAttr('id');
+    let _csrf = $('#_csrf').attr('name');
+
+    let request = $.ajax({
+        url: '/user/booking/add/basket?_csrf=' + _csrf,
+        type: 'POST',
+        data: JSON.stringify({
+            startDate: startDateString,
+            endDate: endDateString,
+            roomTypeId: parseInt(roomTypeId),
+            bonuses: chosenBonuses,
+            roomId: roomId,
+            cost: cost,
+        }),
+        dataType: 'json',
+        contentType: "application/json"
+    });
+
+    request.fail(function (data) {
+        alert("FAIL");
+    });
+
+    request.done(function (data) {
+        alert(data);
+    });
+
+
     $('#basket-container').prepend($template);
 }
 

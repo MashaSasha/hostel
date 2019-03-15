@@ -8,5 +8,8 @@ public final class WebConstants {
     // templates
     public static final String HOTEL_EDITOR_TEMPLATE = "admin/hotelEditor";
     public static final String REDIRECT = "redirect:/";
+
+    // atr
     public static final String HOTEL_ATR = "hotel";
+    public static final String BASKET_ATR = "basket";
 }
