@@ -78,6 +78,7 @@ public class UserBookingController {
         return roomTypes;
     }
 
+
     @PostMapping(value = "/add/basket", consumes = MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody
     ResponseStatus addToBasket(@RequestBody final BasketEntity basketEntity, HttpServletRequest request) {
@@ -94,10 +95,8 @@ public class UserBookingController {
     }
 
     @PostMapping("/clear/basket")
-    public ResponseStatus clearBasket() {
-
-        System.out.println("It's working!!!");
-
+    public ResponseStatus clearBasket(HttpServletRequest request) {
+        request.getSession(true).setAttribute(BASKET_ATR, null);
         return ResponseStatus.SUCCESS;
     }
 
