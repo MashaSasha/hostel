@@ -20,10 +20,12 @@ public class Hotel {
     private String description;
     private String hotelName;
 
-    private Double discountOnRoomCount;
-    private Integer roomCountToDiscount;
-    private Double discountOnDays;
+    private Long discountOnDays;
     private Integer daysCountToDiscount;
+
+    @OneToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinColumn(name = "hotel_id")
+    Set<PromoCode> promoCodes;
 
     @ElementCollection(targetClass = String.class, fetch = FetchType.EAGER)
     @CollectionTable(name = "images", joinColumns = @JoinColumn(name = "img_id"))

@@ -1,11 +1,8 @@
 package com.bsuir.masasha.hostel.core.service.impl;
 
-import com.bsuir.masasha.hostel.core.domain.Room;
+import com.bsuir.masasha.hostel.core.domain.*;
 import com.bsuir.masasha.hostel.core.repo.RoomRepository;
 import com.bsuir.masasha.hostel.core.util.ImageUtil;
-import com.bsuir.masasha.hostel.core.domain.Bonus;
-import com.bsuir.masasha.hostel.core.domain.Hotel;
-import com.bsuir.masasha.hostel.core.domain.RoomType;
 import com.bsuir.masasha.hostel.core.repo.HotelRepository;
 import com.bsuir.masasha.hostel.core.repo.RoomTypeRepository;
 import com.bsuir.masasha.hostel.core.service.HotelEditService;
@@ -43,9 +40,7 @@ public class HotelEditServiceImpl implements HotelEditService {
                     hotel.setDescription(updatedHotel.getDescription());
                     hotel.setHotelName(updatedHotel.getHotelName());
                     hotel.setDaysCountToDiscount(updatedHotel.getDaysCountToDiscount());
-                    hotel.setRoomCountToDiscount(updatedHotel.getRoomCountToDiscount());
                     hotel.setDiscountOnDays(updatedHotel.getDiscountOnDays());
-                    hotel.setDiscountOnRoomCount(updatedHotel.getDiscountOnRoomCount());
                     return hotel;
                 })
                 .orElse(updatedHotel);
@@ -125,6 +120,11 @@ public class HotelEditServiceImpl implements HotelEditService {
     }
 
     @Override
+    public RoomType getRoomTypeById(Long id) {
+        return roomTypeRepository.findById(id).get();
+    }
+
+    @Override
     public boolean addRoomToRoomType(Integer roomNumber, Long roomTypeId) {
         Room room = roomRepository.findByRoomNumber(roomNumber);
         if (room == null) {
@@ -139,5 +139,14 @@ public class HotelEditServiceImpl implements HotelEditService {
     @Override
     public List<RoomType> getAllRoomTypes() {
         return roomTypeRepository.findAll();
+    }
+
+    @Override
+    public boolean addPromoCode(PromoCode promoCode) {
+        Hotel hotel = findHotel();
+        promoCode.setActive(true);
+        hotel.getPromoCodes().add(promoCode);
+        hotelRepository.save(hotel);
+        return true;
     }
 }

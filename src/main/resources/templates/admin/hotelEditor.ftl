@@ -32,6 +32,10 @@
                        href="#list-settings" role="tab" aria-controls="settings">
                         Добавление комнат
                     </a>
+                    <a class="list-group-item list-group-item-action main-list" id="list-promocodes-list" data-toggle="list"
+                       href="#list-promocodes" role="tab" aria-controls="promocodes">
+                        Добавление Промокодов
+                    </a>
                 </div>
             </div>
 
@@ -49,6 +53,9 @@
                     </div>
                     <div class="tab-pane fade" id="list-settings" role="tabpanel" aria-labelledby="list-settings-list">
                         <@editor.addRooms hotel/>
+                    </div>
+                    <div class="tab-pane fade" id="list-promocodes" role="tabpanel" aria-labelledby="list-promocodes-list">
+                        <@editor.promocodes hotel/>
                     </div>
                 </div>
             </div>

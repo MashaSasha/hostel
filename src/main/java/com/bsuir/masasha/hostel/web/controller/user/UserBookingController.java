@@ -1,9 +1,7 @@
 package com.bsuir.masasha.hostel.web.controller.user;
 
 import com.bsuir.masasha.hostel.core.domain.RoomType;
-import com.bsuir.masasha.hostel.core.domain.dto.BasketEntity;
-import com.bsuir.masasha.hostel.core.domain.dto.BookingOpportunitiesDTO;
-import com.bsuir.masasha.hostel.core.domain.dto.BookingPair;
+import com.bsuir.masasha.hostel.core.domain.dto.*;
 import com.bsuir.masasha.hostel.core.domain.dto.ResponseStatus;
 import com.bsuir.masasha.hostel.core.service.BookingService;
 import com.bsuir.masasha.hostel.core.service.HotelEditService;
@@ -81,15 +79,18 @@ public class UserBookingController {
 
     @PostMapping(value = "/add/basket", consumes = MediaType.APPLICATION_JSON_VALUE)
     public @ResponseBody
-    ResponseStatus addToBasket(@RequestBody final BasketEntity basketEntity, HttpServletRequest request) {
+    ResponseStatus addToBasket(@RequestBody final BasketEntityDTO basketEntityDTO, HttpServletRequest request) {
 
         HttpSession session = request.getSession(true);
-        List<BasketEntity> basketEntities = Optional.ofNullable(session.getAttribute(BASKET_ATR))
-                .map(be -> (List<BasketEntity>) be)
-                .orElse(new ArrayList<>());
+        BasketEntity basketEntity = Optional.ofNullable(session.getAttribute(BASKET_ATR))
+                .map(be -> (BasketEntity) be)
+                .orElse(new BasketEntity());
 
-        basketEntities.add(basketEntity);
-        session.setAttribute(BASKET_ATR, basketEntities);
+        RoomType roomType = hotelEditService.getRoomTypeById(basketEntityDTO.getRoomTypeId());
+        basketEntityDTO.setRoomType(roomType);
+
+        basketEntity.addEntity(basketEntityDTO);
+        session.setAttribute(BASKET_ATR, basketEntity);
 
         return ResponseStatus.SUCCESS;
     }

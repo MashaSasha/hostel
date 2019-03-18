@@ -1,6 +1,7 @@
 package com.bsuir.masasha.hostel.web.controller.user;
 
 import com.bsuir.masasha.hostel.core.domain.Hotel;
+import com.bsuir.masasha.hostel.core.domain.dto.BasketEntity;
 import com.bsuir.masasha.hostel.core.service.HotelEditService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
@@ -36,8 +37,10 @@ public class UsersMainPagesController {
 
     @GetMapping("/booking")
     public String booking(Model model, HttpServletRequest request) {
-
-        model.addAttribute(BASKET_ATR, request.getSession(true).getAttribute(BASKET_ATR));
+        Hotel hotel = hotelEditService.findHotel();
+        model.addAttribute("hotel", hotel);
+        BasketEntity basketEntity = (BasketEntity) request.getSession(true).getAttribute(BASKET_ATR);
+        model.addAttribute(BASKET_ATR, basketEntity);
         return "user/book";
     }
 

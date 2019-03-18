@@ -2,6 +2,7 @@ package com.bsuir.masasha.hostel.web.controller.admin;
 
 import com.bsuir.masasha.hostel.core.domain.Bonus;
 import com.bsuir.masasha.hostel.core.domain.Hotel;
+import com.bsuir.masasha.hostel.core.domain.PromoCode;
 import com.bsuir.masasha.hostel.core.domain.RoomType;
 import com.bsuir.masasha.hostel.core.service.HotelEditService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -68,6 +69,13 @@ public class AdminHotelEditController {
             String message = "Ошибка при попытке сохранить картинку";
             request.getSession(true).setAttribute("message", message);
         }
+
+        return REDIRECT + HOTEL_EDITOR_MAPPING;
+    }
+
+    @PostMapping("/add/promocode")
+    public String addPromoCode(PromoCode promoCode, HttpServletRequest request) {
+        hotelEditService.addPromoCode(promoCode);
 
         return REDIRECT + HOTEL_EDITOR_MAPPING;
     }

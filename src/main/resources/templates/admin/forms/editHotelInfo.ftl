@@ -40,12 +40,6 @@
     </div>
     <div class="row">
         <pre>
-        Скидка <input type="text" value="${hotel.discountOnRoomCount!}" name="discountOnRoomCount" style="width: 40px">% при бронировании сразу <input
-                type="text"
-                value="${hotel.roomCountToDiscount!}"
-                name="roomCountToDiscount"
-                style="width: 40px"> номеров
-
         Скидка <input type="text" value="${hotel.discountOnDays!}" name="discountOnDays" style="width: 40px">% при бронировании за <input
                 type="text"
                 value="${hotel.daysCountToDiscount!}"
@@ -307,4 +301,36 @@
     </div>
 </div>
 
+</#macro>
+
+<#macro promocodes hotel>
+<div class="text-center">
+    <h5>Добавление промокодов информации об отеле</h5>
+</div>
+<form action="/admin/hotel/add/promocode" method="post" class="mt-4">
+    <input type="hidden" name="_csrf" value="${_csrf.token}">
+    <div class="form-row">
+        <div class="form-group col-md-6">
+            <input type="text" class="form-control" name="code" placeholder="Промокод"/>
+        </div>
+        <div class="form-group col-md-3">
+            <input type="number" class="form-control" name="discount" placeholder="Велечина скидки %"/>
+        </div>
+        <div class="form-group col-md-3">
+            <button class="btn btn-info" type="submit">Добавить</button>
+        </div>
+    </div>
+</form>
+    <div>
+        <ul>
+        <#list hotel.promoCodes! as promoCode>
+            <li>
+                <div class="row">
+                    <div class="col-sm-3">${promoCode.code!}</div>
+                    <div class="col-sm-3">- Скидка ${promoCode.discount!} %</div>
+                </div>
+            </li>
+        </#list>
+        </ul>
+    </div>
 </#macro>

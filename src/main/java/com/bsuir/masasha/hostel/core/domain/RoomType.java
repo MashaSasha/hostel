@@ -4,13 +4,14 @@ import lombok.Getter;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.io.Serializable;
 import java.util.List;
 import java.util.Objects;
 
 @Entity
 @Getter
 @Setter
-public class RoomType {
+public class RoomType implements Serializable {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)

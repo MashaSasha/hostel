@@ -2,6 +2,7 @@ package com.bsuir.masasha.hostel.core.service;
 
 import com.bsuir.masasha.hostel.core.domain.Bonus;
 import com.bsuir.masasha.hostel.core.domain.Hotel;
+import com.bsuir.masasha.hostel.core.domain.PromoCode;
 import com.bsuir.masasha.hostel.core.domain.RoomType;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
@@ -23,7 +24,11 @@ public interface HotelEditService {
 
     boolean addBonus(Bonus bonus, Long roomTypeId);
 
+    RoomType getRoomTypeById(Long id);
+
     boolean addRoomToRoomType(Integer roomNumber, Long roomTypeId);
 
     List<RoomType> getAllRoomTypes();
+
+    boolean addPromoCode(PromoCode promoCode);
 }

@@ -141,6 +141,35 @@ function addToBasket() {
     productCount += 1;
     $productCount.text(productCount);
 
+
+    let today = new Date();
+    let dd = today.getDate();
+    let mm = today.getMonth()+1; //January is 0!
+    let yyyy = today.getFullYear();
+    if(dd<10) {
+        dd = '0'+dd
+    }
+    if(mm<10) {
+        mm = '0'+mm
+    }
+    today = Date.parse(yyyy + '-' + mm + '-' + dd);
+    let currentDaysBefore = Math.ceil(Math.abs(today - startDate) / (1000 * 60 * 60 * 24));
+    let $salesDiv = $('#sales');
+    let daysBefore = parseInt($salesDiv.data('daysBefore'));
+    let sale1Value;
+    let sale1HTML = '';
+    if (daysBefore < currentDaysBefore) {
+        let sale1 = parseFloat($salesDiv.data('saleDaysBefore'));
+        sale1Value = cost * (sale1 / 100);
+        cost -= sale1Value;
+        sale1HTML = `<li class="list-group-item d-flex justify-content-between bg-light">
+            <div class="text-success">
+                <h6 class="my-0">Скидка за раннее бронирование - ${sale1}%</h6>
+            </div>
+            <span class="text-success">-$${sale1Value}</span>
+        </li>`
+    }
+
     let $totalCost = $('#total-cost');
     let totalCostText = $totalCost.text();
     $totalCost.text(parseInt(totalCostText.substring(0, totalCostText.indexOf(' '))) + cost);
@@ -148,6 +177,7 @@ function addToBasket() {
 
     $template.removeAttr('hidden');
     $template.removeAttr('id');
+
     let _csrf = $('#_csrf').attr('name');
 
     let request = $.ajax({
@@ -159,7 +189,9 @@ function addToBasket() {
             roomTypeId: parseInt(roomTypeId),
             bonuses: chosenBonuses,
             roomId: roomId,
-            cost: cost,
+            sale: sale1Value,
+            days: days,
+            cost: cost
         }),
         dataType: 'json',
         contentType: "application/json"
@@ -173,8 +205,9 @@ function addToBasket() {
         alert(data);
     });
 
-
+    $('#basket-container').prepend(sale1HTML);
     $('#basket-container').prepend($template);
+
 }
 
 function clearBasket() {
@@ -184,9 +217,35 @@ function clearBasket() {
         '    <strong id="total-cost">0 BYN</strong>\n' +
         '</li>'
     );
+    let _csrf = $('#_csrf').attr('name');
+    $('#product-count').text('0');
+
+    $.ajax({
+        url: '/user/booking/clear/basket?_csrf=' + _csrf,
+        type: 'POST'
+    });
     return false;
 }
 
 function displayAlternatives(alternatives) {
+
+}
+
+function promoCodes() {
+    let promo = $('promoInput').val();
+
+    let request = $.ajax({
+        url: '/user/booking/add/basket?code' + promo,
+        type: 'GET',
+        dataType: 'json'
+    });
+
+    request.done(function (data) {
+        if (data.status == "ERROR") {
+            alert("Такого промокода не существует или он уже не активен");
+        } else {
+            window.location.reload();
+        }
+    });
 
 }

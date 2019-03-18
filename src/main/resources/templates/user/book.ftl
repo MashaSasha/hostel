@@ -17,6 +17,7 @@
 </style>
 
 <div hidden id="_csrf" name="${_csrf.token}"></div>
+<div hidden id="sales" data-days-before="${hotel.daysCountToDiscount}" data-sale-days-before="${hotel.discountOnDays}"></div>
 
 <div class="container-fluid">
     <div class="text-center">
@@ -70,14 +71,50 @@
         <div class="col-md-3 mb-4">
             <h4 class="d-flex justify-content-between align-items-center mb-3">
                 <span class="text-muted">Корзина</span>
-                <span class="badge badge-secondary badge-pill" id="product-count">0</span>
+                <span class="badge badge-secondary badge-pill" id="product-count"><#if basket??>${basket?size}<#else>0</#if></span>
             </h4>
             <ul class="list-group mb-3" id="basket-container">
 
+                <#assign  totalTotalCost = 0>
+                <#if basket??>
+                    <#list basket.entities! as entity>
+                        <#assign totalCost = entity.days * entity.roomType.cost>
+                    <li class="list-group-item d-flex justify-content-between lh-condensed">
+                        <div id="product-body">
+                            <h6 class="my-0" id="product-name">${entity.roomType.title} (${entity.days} ночей)</h6>
+                            <#list entity.bonuses as bonus>
+                                <#assign totalCost = totalCost + bonus.cost>
+                                <small class="text-muted">${bonus.title} - ${bonus.cost} BYN </small><br>
+                            </#list>
+                        </div>
+                        <span class="text-muted" id="product-cost">${totalCost} BYN</span>
+                    </li>
+                        <#assign totalTotalCost = totalTotalCost + totalCost>
+                        <#if entity.sale??>
+                        <li class="list-group-item d-flex justify-content-between bg-light">
+                            <div class="text-success">
+                                <h6 class="my-0">Скидка за раннее бронирование - ${hotel.discountOnDays}%</h6>
+                            </div>
+                            <span class="text-success">-$${entity.sale}</span>
+                            <#assign totalTotalCost = totalTotalCost - entity.sale>
+                        </li>
+                        </#if>
+                    </#list>
+
+                    <#if basket.promocode??>
+                        <li class="list-group-item d-flex justify-content-between bg-light">
+                            <div class="text-success">
+                                <h6 class="my-0">Скидка за промокод - ${hotel.в}%</h6>
+                            </div>
+                            <span class="text-success">-$${entity.sale}</span>
+                            <#assign totalTotalCost = totalTotalCost - entity.sale>
+                        </li>
+                    </#if>
+                </#if>
 
                 <li class="list-group-item d-flex justify-content-between">
                     <span>Total</span>
-                    <strong id="total-cost">0 BYN</strong>
+                    <strong id="total-cost">${totalTotalCost} BYN</strong>
                 </li>
             </ul>
 
@@ -87,7 +124,7 @@
                         <div class="input-group">
                             <input type="text" class="form-control" placeholder="Promo code">
                             <div class="input-group-append">
-                                <button type="submit" class="btn btn-secondary">Применить</button>
+                                <button type="submit" id="promoInput" class="btn btn-secondary" onclick="addPromo()">Применить</button>
                             </div>
                         </div>
                     </div>
