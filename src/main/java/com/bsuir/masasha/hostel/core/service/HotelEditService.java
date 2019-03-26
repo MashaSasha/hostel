@@ -31,4 +31,6 @@ public interface HotelEditService {
     List<RoomType> getAllRoomTypes();
 
     boolean addPromoCode(PromoCode promoCode);
+
+    PromoCode checkPromoCode(String promoCode);
 }

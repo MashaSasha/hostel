@@ -149,4 +149,15 @@ public class HotelEditServiceImpl implements HotelEditService {
         hotelRepository.save(hotel);
         return true;
     }
+
+    @Override
+    public PromoCode checkPromoCode(String promoCode) {
+        Hotel hotel = findHotel();
+        for (PromoCode promo : hotel.getPromoCodes()) {
+            if (promo.getCode().equals(promoCode)) {
+                return promo;
+            }
+        }
+        return null;
+    }
 }

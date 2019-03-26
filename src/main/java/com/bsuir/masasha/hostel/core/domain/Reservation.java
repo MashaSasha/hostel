@@ -17,6 +17,10 @@ public class Reservation {
     private Long id;
 
     @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "user_id")
+    private User user;
+
+    @ManyToOne(fetch = FetchType.LAZY)
     @JoinColumn(name = "room_id")
     private Room room;
 
@@ -31,10 +35,15 @@ public class Reservation {
     )
     private List<Bonus> bonuses;
 
+    @OneToOne
+    @JoinColumn(name = "promo_code_id", referencedColumnName = "id")
+    private PromoCode promoCode;
 
+    private LocalDate reservationDate;
     private LocalDate startDate;
     private LocalDate endDate;
+    private Integer days;
 
+    private Double earlyBookingSale;
     private Double cost;
-
 }

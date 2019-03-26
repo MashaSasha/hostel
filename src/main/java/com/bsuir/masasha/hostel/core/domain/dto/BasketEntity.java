@@ -1,5 +1,6 @@
 package com.bsuir.masasha.hostel.core.domain.dto;
 
+import com.bsuir.masasha.hostel.core.domain.PromoCode;
 import lombok.Getter;
 import lombok.Setter;
 
@@ -12,7 +13,7 @@ import java.util.List;
 public class BasketEntity implements Serializable {
 
     private List<BasketEntityDTO> entities;
-    private String promocode;
+    private PromoCode promocode;
 
     public void addEntity(BasketEntityDTO basketEntityDTO) {
         if (entities == null) {

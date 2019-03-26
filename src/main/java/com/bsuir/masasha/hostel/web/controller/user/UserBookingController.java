@@ -1,13 +1,18 @@
 package com.bsuir.masasha.hostel.web.controller.user;
 
+import com.bsuir.masasha.hostel.core.domain.PromoCode;
 import com.bsuir.masasha.hostel.core.domain.RoomType;
+import com.bsuir.masasha.hostel.core.domain.User;
 import com.bsuir.masasha.hostel.core.domain.dto.*;
 import com.bsuir.masasha.hostel.core.domain.dto.ResponseStatus;
 import com.bsuir.masasha.hostel.core.service.BookingService;
 import com.bsuir.masasha.hostel.core.service.HotelEditService;
+import com.bsuir.masasha.hostel.core.service.exception.BookingFailException;
+import com.bsuir.masasha.hostel.core.service.exception.BookingPartFailException;
 import javafx.util.Pair;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.MediaType;
+import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpServletRequest;
@@ -95,9 +100,41 @@ public class UserBookingController {
         return ResponseStatus.SUCCESS;
     }
 
+    @PostMapping(value = "/add/promo", consumes = MediaType.APPLICATION_JSON_VALUE)
+    public @ResponseBody
+    ResponseStatus addToBasket(@RequestBody final String promo, HttpServletRequest request) {
+
+        HttpSession session = request.getSession(true);
+        BasketEntity basketEntity = Optional.ofNullable(session.getAttribute(BASKET_ATR))
+                .map(be -> (BasketEntity) be)
+                .orElse(new BasketEntity());
+
+        PromoCode confirmedPromo = hotelEditService.checkPromoCode(promo);
+        if (confirmedPromo != null) {
+            basketEntity.setPromocode(confirmedPromo);
+            session.setAttribute(BASKET_ATR, basketEntity);
+            return ResponseStatus.SUCCESS;
+        }
+        return ResponseStatus.ERROR;
+    }
+
     @PostMapping("/clear/basket")
     public ResponseStatus clearBasket(HttpServletRequest request) {
         request.getSession(true).setAttribute(BASKET_ATR, null);
+        return ResponseStatus.SUCCESS;
+    }
+
+    @PostMapping("/book")
+    public ResponseStatus book(@AuthenticationPrincipal User user, HttpServletRequest request) {
+        BasketEntity basketEntity = (BasketEntity) request.getSession(true).getAttribute(BASKET_ATR);
+        try {
+            bookingService.book(basketEntity, user);
+        } catch (BookingFailException exc) {
+            return ResponseStatus.ERROR;
+        } catch (BookingPartFailException exc) {
+            return ResponseStatus.WARNING;
+        }
+
         return ResponseStatus.SUCCESS;
     }
 

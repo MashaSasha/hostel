@@ -104,10 +104,10 @@
                     <#if basket.promocode??>
                         <li class="list-group-item d-flex justify-content-between bg-light">
                             <div class="text-success">
-                                <h6 class="my-0">Скидка за промокод - ${hotel.в}%</h6>
+                                <h6 class="my-0">Скидка за промокод - ${basket.promocode.discount}%</h6>
                             </div>
-                            <span class="text-success">-$${entity.sale}</span>
-                            <#assign totalTotalCost = totalTotalCost - entity.sale>
+                            <span class="text-success">-$${totalTotalCost / 100 * basket.promocode.discount}</span>
+                            <#assign totalTotalCost = totalTotalCost - totalTotalCost / 100 * basket.promocode.discount>
                         </li>
                     </#if>
                 </#if>
@@ -122,14 +122,19 @@
                 <div class="form-row">
                     <div class="col-md-9">
                         <div class="input-group">
-                            <input type="text" class="form-control" placeholder="Promo code">
+                            <input type="text" id="promoInputText" class="form-control" placeholder="Promo code">
                             <div class="input-group-append">
-                                <button type="submit" id="promoInput" class="btn btn-secondary" onclick="addPromo()">Применить</button>
+                                <button type="button" id="promoInput" class="btn btn-secondary" onclick="addPromo()">Применить</button>
                             </div>
                         </div>
                     </div>
                     <div class="col-md-3">
                         <button class="btn btn-secondary" type="button" onclick="clearBasket()">Очистить</button>
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="col-md-10 mt-2">
+                        <button class="btn btn-warning" type="button" onclick="toBook()">Забронировать</button>
                     </div>
                 </div>
             </form>

@@ -1,10 +1,15 @@
 package com.bsuir.masasha.hostel.core.service.impl;
 
 import com.bsuir.masasha.hostel.core.domain.RoomType;
+import com.bsuir.masasha.hostel.core.domain.User;
+import com.bsuir.masasha.hostel.core.domain.dto.BasketEntity;
+import com.bsuir.masasha.hostel.core.domain.dto.BasketEntityDTO;
 import com.bsuir.masasha.hostel.core.repo.RoomTypeRepository;
 import com.bsuir.masasha.hostel.core.domain.dto.BookingPair;
 import com.bsuir.masasha.hostel.core.service.BookingService;
 import com.bsuir.masasha.hostel.core.service.cache.ReservationCache;
+import com.bsuir.masasha.hostel.core.service.exception.BookingFailException;
+import com.bsuir.masasha.hostel.core.service.exception.BookingPartFailException;
 import javafx.util.Pair;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -63,6 +68,26 @@ public class BookingServiceImpl implements BookingService {
     @Override
     public Map<Long, Pair<Long, BookingPair>> sameDateAlternatives(Integer peopleNum, Integer maxCost, String dates) {
         return findOption(peopleNum, maxCost, dates, this::moreThenMaxCost);
+    }
+
+    @Override
+    public void book(BasketEntity basketEntity, User user) throws BookingFailException, BookingPartFailException {
+        if (basketEntity.getEntities().isEmpty()) {
+            return;
+        }
+
+        int failCount = 0;
+        for (BasketEntityDTO basketEntityDTO: basketEntity.getEntities()) {
+            if (!cache.saveIfFree(basketEntityDTO, basketEntity.getPromocode(), user)) {
+                failCount++;
+            }
+        }
+        if (failCount == basketEntity.getEntities().size()) {
+            throw new BookingFailException();
+        }
+        if (failCount > 0) {
+            throw new BookingPartFailException();
+        }
     }
 
     private boolean lessOrEqualsThenMaxCost(Integer rtCost, Integer maxCost) {

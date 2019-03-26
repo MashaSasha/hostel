@@ -1,5 +1,6 @@
 let roomTypes;
 let currentOptions;
+let _csrf = $('#_csrf').attr('name');
 
 window.onload = function () {
     // запрос списка roomType при загрузке страницы
@@ -178,8 +179,6 @@ function addToBasket() {
     $template.removeAttr('hidden');
     $template.removeAttr('id');
 
-    let _csrf = $('#_csrf').attr('name');
-
     let request = $.ajax({
         url: '/user/booking/add/basket?_csrf=' + _csrf,
         type: 'POST',
@@ -202,7 +201,7 @@ function addToBasket() {
     });
 
     request.done(function (data) {
-        alert(data);
+
     });
 
     $('#basket-container').prepend(sale1HTML);
@@ -217,7 +216,6 @@ function clearBasket() {
         '    <strong id="total-cost">0 BYN</strong>\n' +
         '</li>'
     );
-    let _csrf = $('#_csrf').attr('name');
     $('#product-count').text('0');
 
     $.ajax({
@@ -231,13 +229,15 @@ function displayAlternatives(alternatives) {
 
 }
 
-function promoCodes() {
-    let promo = $('promoInput').val();
+function addPromo() {
+    let promo = $('#promoInputText').val();
 
     let request = $.ajax({
-        url: '/user/booking/add/basket?code' + promo,
-        type: 'GET',
-        dataType: 'json'
+        url: '/user/booking/add/promo?_csrf=' + _csrf,
+        type: 'POST',
+        data: promo,
+        dataType: 'json',
+        contentType: 'application/json'
     });
 
     request.done(function (data) {
@@ -248,4 +248,16 @@ function promoCodes() {
         }
     });
 
+    return false;
+}
+
+function toBook() {
+    let request = $.ajax({
+        url: '/user/booking/book?_csrf=' + _csrf,
+        type: 'POST',
+        dataType: 'json',
+        contentType: 'application/json'
+    }).done(function (data) {
+        alert("Booking success");
+    });
 }

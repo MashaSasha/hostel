@@ -18,9 +18,10 @@ public class BasketEntityDTO implements Serializable {
     private Long roomTypeId;
     private String startDate;
     private String endDate;
-    private Integer sale;
+    private Double sale;
     private Integer days;
     private List<Bonus> bonuses;
+    private Double cost;
 
     private RoomType roomType;
 
