@@ -20,7 +20,7 @@ public class ReservationCacheImpl implements ReservationCache {
 
     private Map<Long, List<BookingPair>> cache = new ConcurrentHashMap<>();
 
-    private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-mm-dd");
+    private final DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd");
 
     final private ReservationRepository reservationRepository;
 
@@ -85,6 +85,14 @@ public class ReservationCacheImpl implements ReservationCache {
             reservation.setEndDate(endDate);
 
             reservation.setUser(user);
+
+            Room room = new Room();
+            room.setId(roomId);
+            reservation.setRoom(room);
+
+            RoomType roomType = new RoomType();
+            roomType.setId(basketEntityDTO.getRoomTypeId());
+            reservation.setRoomType(roomType);
 
             reservationRepository.save(reservation);
             return true;

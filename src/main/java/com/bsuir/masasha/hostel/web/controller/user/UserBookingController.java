@@ -129,6 +129,7 @@ public class UserBookingController {
         BasketEntity basketEntity = (BasketEntity) request.getSession(true).getAttribute(BASKET_ATR);
         try {
             bookingService.book(basketEntity, user);
+            request.getSession().removeAttribute(BASKET_ATR);
         } catch (BookingFailException exc) {
             return ResponseStatus.ERROR;
         } catch (BookingPartFailException exc) {
