@@ -17,4 +17,6 @@ public interface BookingService {
     Map<Long, Pair<Long, BookingPair>> sameDateAlternatives(Integer peopleNum, Integer maxCost, String dates);
 
     void book(BasketEntity basketEntity, User user) throws BookingFailException, BookingPartFailException;
+
+    void getAllReservations(Long id);
 }

@@ -3,6 +3,7 @@
 <@c.page>
 <body class="bg-light">
 
+
 <style type="text/css">
     .row1 {
         display: flex;
@@ -71,7 +72,7 @@
         <div class="col-md-3 mb-4">
             <h4 class="d-flex justify-content-between align-items-center mb-3">
                 <span class="text-muted">Корзина</span>
-                <span class="badge badge-secondary badge-pill" id="product-count"><#if basket??>${basket?size}<#else>0</#if></span>
+                <span class="badge badge-secondary badge-pill" id="product-count"><#if basket??>${basket.entities?size}<#else>0</#if></span>
             </h4>
             <ul class="list-group mb-3" id="basket-container">
 
@@ -154,8 +155,6 @@
     </footer>
 </div>
 
-
-
 </@c.page>
 
 <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
@@ -200,12 +199,3 @@
     </div>
     <span class="text-muted" id="product-cost"></span>
 </li>
-
-
-<#--<li class="list-group-item d-flex justify-content-between bg-light">-->
-<#--<div class="text-success">-->
-<#--<h6 class="my-0">Promo code</h6>-->
-<#--<small>EXAMPLECODE</small>-->
-<#--</div>-->
-<#--<span class="text-success">-$5</span>-->
-<#--</li>-->

@@ -90,6 +90,11 @@ public class BookingServiceImpl implements BookingService {
         }
     }
 
+    @Override
+    public void getAllReservations(Long id) {
+
+    }
+
     private boolean lessOrEqualsThenMaxCost(Integer rtCost, Integer maxCost) {
         return rtCost <= maxCost;
     }
