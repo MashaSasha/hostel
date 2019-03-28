@@ -8,7 +8,7 @@
     <input type="hidden" name="_csrf" value="${_csrf.token}">
 
     <div class="form-group row text-right">
-        <label for="editHotelName" class="col-sm-2 col-form-label">Hotel Name:</label>
+        <label for="editHotelName" class="col-sm-2 col-form-label">Название отеля :</label>
         <div class="col-sm-10">
             <input value="${hotel.hotelName!}" class="form-control" id="editHotelName" type="text" name="hotelName"
                    placeholder="hotel name">
@@ -16,7 +16,7 @@
     </div>
 
     <div class="form-group row text-right">
-        <label for="editHotelName" class="col-sm-2 col-form-label">Hotel Address:</label>
+        <label for="editHotelName" class="col-sm-2 col-form-label">Адресс :</label>
         <div class="col-sm-10">
             <input value="${hotel.address!}" class="form-control" id="editHotelName" type="text" name="address"
                    placeholder="hotel address">
@@ -24,7 +24,7 @@
     </div>
 
     <div class="form-group row text-right">
-        <label for="hotelDescription" class="col-sm-2 col-form-label">Hotel description:</label>
+        <label for="hotelDescription" class="col-sm-2 col-form-label">Описание Отеля :</label>
         <div class="col-sm-10">
             <textarea class="form-control" name="description" placeholder="Hotel description" rows="8">
                 ${hotel.description!}
@@ -108,19 +108,22 @@
         <input type="hidden" name="_csrf" value="${_csrf.token}">
         <input type="hidden" name="id" value="${hotel.id!}">
 
-        <div class="form-group row">
-            <label for="roomTypeTitle" class="col-sm-2 col-form-label">Добавить новый тип
-                номеров</label>
+        <div class="form-group row text-right">
+            <label for="roomTypeTitle" class="col-sm-2 col-form-label">Название :</label>
             <div class="col-sm-10">
-                <input type="text" class="form-control" id="roomTypeTitle" name="roomTypeTitle"
-                       placeholder="Название типа комнат">
+                <input type="text" class="form-control" id="roomTypeTitle" name="roomTypeTitle" placeholder="Название типа комнат">
             </div>
         </div>
-
-        <div class="form-group row">
-            <label for="roomTypeCost" class="col-sm-2 col-form-label">Добавить цену</label>
+        <div class="form-group row text-right">
+            <label for="roomTypeCost" class="col-sm-2 col-form-label">Цена :</label>
             <div class="col-sm-10">
                 <input type="text" class="form-control" id="roomTypeCost" name="roomTypeCost" placeholder="Цена">
+            </div>
+        </div>
+        <div class="form-group row text-right">
+            <label for="roomTypePlaces" class="col-sm-2 col-form-label">Спальных мест :</label>
+            <div class="col-sm-10">
+                <input type="text" class="form-control" id="roomTypePlaces" name="roomTypePlaces" placeholder="Колличество спальных мест">
             </div>
         </div>
 
@@ -154,8 +157,7 @@
                             <label for="roomName${roomType.id!}" class="col-sm-2 col-form-label">Название
                                 номеров</label>
                             <div class="col-sm-10">
-                                <input type="text" class="form-control" id="cardName${roomType.id!}" value="${roomType.title!}"
-                                       name="title" placeholder="Название типа комнат">
+                                <input type="text" class="form-control" id="cardName${roomType.id!}" value="${roomType.title!}" name="title" placeholder="Название типа комнат">
                             </div>
                         </div>
 
@@ -196,60 +198,63 @@
                             <div class="col-md-2 mt-3 text-right">
                                 Добавить картинку:
                             </div>
-                            <div class="col-md-4 ml-3">
-                                <div class="custom-file my-2 row">
+                            <div class="col-md-4 ml-1">
+                                <div class="custom-file my-2">
                                     <input type="file" class="custom-file-input" id="customFile" name="image">
                                     <label class="custom-file-label" for="customFile">Выберете файл</label>
                                 </div>
                             </div>
-                            <div class="col-md-2"></div>
-                            <div class="col-md-4">
-                                <img src="/static/img/${roomType.previewImage!}" style="height: 200px">
+                            <div class="col-md-5">
+                                <h5>Изображение на превью:</h5>
+                                <img src="/static/img/${roomType.previewImage!}" class="img-fluid" alt="Responsive image">
+                            </div>
+                        </div>
+
+                    </form>
+                </div>
+
+                <div class="ml-3">
+                    <h4>Дополнительные услуги</h4>
+                    <#list roomType.bonuses as bonus>
+                        <div>
+                            <ul>
+                                <li>
+                                    <div class="row">
+                                        <div class="col-sm-7">${bonus.title}</div>
+                                        <div class="col-sm-1 text-right">${bonus.cost}</div>
+                                        <div class="col-sm-2">BYN</div>
+                                    </div>
+                                </li>
+                            </ul>
+                        </div>
+                    <#else>
+                        В данный момент нет дополнительных услуг.
+                    </#list>
+                    <form action="/admin/hotel/add/bonus" method="post">
+                        <input type="hidden" name="_csrf" value="${_csrf.token}">
+                        <input type="hidden" name="roomTypeId" value="${roomType.id}">
+                        <div class="form-row">
+                            <div class="form-group col-md-6">
+                                <input type="text" class="form-control" name="title" placeholder="Название бонуса"/>
+                            </div>
+                            <div class="form-group col-md-3">
+                                <input type="number" class="form-control" name="cost" placeholder="Стоимость услуги"/>
+                            </div>
+                            <div class="form-group col-md-3">
+                                <button class="btn btn-info" type="submit">Добавить</button>
                             </div>
                         </div>
                     </form>
                 </div>
-
-
-                <h4>Дополнительные услуги</h4>
-                <#list roomType.bonuses as bonus>
-                    <div>
-                        <ul>
-                            <li>
-                                <div class="row">
-                                    <div class="col-sm-9">${bonus.title}</div>
-                                    <div class="col-sm-3">${bonus.cost}</div>
-                                </div>
-                            </li>
-                        </ul>
-                    </div>
-                <#else>
-                    В данный момент нет дополнительных услуг.
-                </#list>
-                <form action="/admin/hotel/add/bonus" method="post">
-                    <input type="hidden" name="_csrf" value="${_csrf.token}">
-                    <input type="hidden" name="roomTypeId" value="${roomType.id}">
-                    <div class="form-row">
-                        <div class="form-group col-md-6">
-                            <input type="text" class="form-control" name="title" placeholder="Название бонуса"/>
-                        </div>
-                        <div class="form-group col-md-3">
-                            <input type="number" class="form-control" name="cost" placeholder="Стоимость услуги"/>
-                        </div>
-                        <div class="form-group col-md-3">
-                            <button class="btn btn-info" type="submit">Добавить</button>
-                        </div>
-                    </div>
-                </form>
-                <div class="row mt-2">
+                <div class="row mt-2 mb-2">
                     <div class="col-sm-6 text-center">
                         <button class="btn btn-info" style="width: 200px"
                                 onclick="document.getElementById('editRoomType${roomType.id}').submit()">
-                            Save
+                            Сохранить изменения
                         </button>
                     </div>
                     <div class="col-sm-6 text-center">
-                        <button class="btn btn-danger" style="width: 200px">Canсel</button>
+                        <button class="btn btn-danger" style="width: 200px" onclick="resetForm('editRoomType${roomType.id}')">Отмена</button>
                     </div>
                 </div>
             </div>
@@ -259,6 +264,12 @@
         <h5>Пока нет ни одного Номера</h5>
     </#list>
 </div>
+
+    <script>
+        function resetForm(id) {
+            $('#' + id)[0].reset();
+        }
+    </script>
 </#macro>
 
 <#macro addRooms hotel>

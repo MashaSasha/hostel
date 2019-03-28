@@ -23,6 +23,7 @@ public class User implements UserDetails {
     private String secondName;
     private String password;
     private boolean active;
+    private String passportImage;
 
     private String email;
     private String passport;

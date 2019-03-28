@@ -4,7 +4,6 @@ import com.bsuir.masasha.hostel.core.domain.Bonus;
 import com.bsuir.masasha.hostel.core.domain.Hotel;
 import com.bsuir.masasha.hostel.core.domain.PromoCode;
 import com.bsuir.masasha.hostel.core.domain.RoomType;
-import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
@@ -16,7 +15,7 @@ public interface HotelEditService {
 
     Hotel findHotel();
 
-    void addRoomType(String newRoomType, Integer roomTypeCost);
+    void addRoomType(String newRoomType, Integer roomTypeCost, Integer roomTypePlaces);
 
     void editRoomType(RoomType roomType, MultipartFile image);
 

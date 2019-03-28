@@ -31,9 +31,10 @@ public class RoomType implements Serializable {
     @JoinColumn(name = "roomType_id")
     private List<Bonus> bonuses;
 
-    public RoomType(String roomTypeTitle, Integer roomTypeCost) {
+    public RoomType(String roomTypeTitle, Integer roomTypeCost, Integer roomTypePlaces) {
         this.title = roomTypeTitle;
         this.cost = roomTypeCost;
+        this.sleepPlacesAmount = roomTypePlaces;
     }
 
     public void addBonus(Bonus bonus) {

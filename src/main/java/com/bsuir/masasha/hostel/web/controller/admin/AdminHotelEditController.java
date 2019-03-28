@@ -57,8 +57,8 @@ public class AdminHotelEditController {
     }
 
     @PostMapping("/add/roomType")
-    public String addRoomType(@RequestParam String roomTypeTitle, @RequestParam Integer roomTypeCost) {
-        hotelEditService.addRoomType(roomTypeTitle, roomTypeCost);
+    public String addRoomType(@RequestParam String roomTypeTitle, @RequestParam Integer roomTypeCost, @RequestParam Integer roomTypePlaces) {
+        hotelEditService.addRoomType(roomTypeTitle, roomTypeCost, roomTypePlaces);
 
         return REDIRECT + HOTEL_EDITOR_MAPPING;
     }

@@ -72,10 +72,10 @@ public class HotelEditServiceImpl implements HotelEditService {
     }
 
     @Override
-    public void addRoomType(String roomTypeTitle, Integer roomTypeCost) {
+    public void addRoomType(String roomTypeTitle, Integer roomTypeCost, Integer roomTypePlaces) {
         Hotel hotel = findHotel();
 
-        RoomType roomType = new RoomType(roomTypeTitle, roomTypeCost);
+        RoomType roomType = new RoomType(roomTypeTitle, roomTypeCost, roomTypePlaces);
         hotel.addRoomType(roomType);
         hotelRepository.save(hotel);
     }

@@ -141,18 +141,50 @@
             </form>
         </div>
 
-
         <div class="col-md-1"></div>
     </div>
 
-    <footer class="my-5 pt-5 text-muted text-center text-small">
-        <p class="mb-1">&copy; 2017-2018 Company Name</p>
-        <ul class="list-inline">
-            <li class="list-inline-item"><a href="#">Privacy</a></li>
-            <li class="list-inline-item"><a href="#">Terms</a></li>
-            <li class="list-inline-item"><a href="#">Support</a></li>
-        </ul>
-    </footer>
+    <div class="col-md-4 mt-5" id="roomTypeHiddenDemo" hidden>
+        <div class="card">
+            <img src="" class="card-img-top" id="demo-img">
+            <div class="card-body">
+                <h5 class="card-title" id="demo-title"></h5>
+                <p class="card-text" id="demo-description"></p>
+                <small class="text-muted" id="demo-dates"></small>
+            </div>
+            <ul class="list-group list-group-flush cursor-pointer" id="demo-bonuses">
+            </ul>
+            <div class="card-body">
+                <div class="d-flex justify-content-between align-items-center">
+                    <div class="btn-group">
+                        <button type="button" id="basket" class="btn btn-sm btn-outline-secondary basket">В корзину</button>
+                    </div>
+                    <small class="text-muted" id="demo-cost"> BYN / ночь</small>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div hidden>
+        <li class="list-group-item d-flex justify-content-between lh-condensed" id="basket-example" hidden>
+            <div id="product-body">
+                <h6 class="my-0" id="product-name"></h6>
+            </div>
+            <span class="text-muted" id="product-cost"></span>
+        </li>
+    </div>
+
+
+</div>
+
+<div class="navbar-fixed-bottom row-fluid">
+    <div class="navbar-inner">
+        <div class="container">
+            <footer class="text-muted text-center">
+                <p class="mb-1">&copy; 2019 ${hotel.hotelName}</p>
+            </footer>
+        </div>
+    </div>
 </div>
 
 </@c.page>
@@ -170,32 +202,3 @@
     });
 </script>
 <script src="/static/js/booking.js"></script>
-
-
-<div class="col-md-4 mt-5" id="roomTypeHiddenDemo" hidden>
-    <div class="card">
-        <img src="" class="card-img-top" id="demo-img">
-        <div class="card-body">
-            <h5 class="card-title" id="demo-title"></h5>
-            <p class="card-text" id="demo-description"></p>
-            <small class="text-muted" id="demo-dates"></small>
-        </div>
-        <ul class="list-group list-group-flush cursor-pointer" id="demo-bonuses">
-        </ul>
-        <div class="card-body">
-            <div class="d-flex justify-content-between align-items-center">
-                <div class="btn-group">
-                    <button type="button" id="basket" class="btn btn-sm btn-outline-secondary basket">В корзину</button>
-                </div>
-                <small class="text-muted" id="demo-cost"> BYN / ночь</small>
-            </div>
-        </div>
-    </div>
-</div>
-
-<li class="list-group-item d-flex justify-content-between lh-condensed" id="basket-example" hidden>
-    <div id="product-body">
-        <h6 class="my-0" id="product-name"></h6>
-    </div>
-    <span class="text-muted" id="product-cost"></span>
-</li>
