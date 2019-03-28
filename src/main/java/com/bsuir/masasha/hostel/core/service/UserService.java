@@ -3,17 +3,24 @@ package com.bsuir.masasha.hostel.core.service;
 import com.bsuir.masasha.hostel.core.domain.Role;
 import com.bsuir.masasha.hostel.core.domain.User;
 import com.bsuir.masasha.hostel.core.repo.UserRepository;
+import com.bsuir.masasha.hostel.core.util.ImageUtil;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.Collections;
+import java.util.Optional;
 
 @Service
 public class UserService implements UserDetailsService {
 
     private UserRepository userRepository;
+
+    @Value("${upload.path}")
+    private String uploadPath;
 
     @Autowired
     public UserService(UserRepository userRepository) {
@@ -46,5 +53,26 @@ public class UserService implements UserDetailsService {
 
     private boolean isUserExist(String userName) {
         return userRepository.findByEmail(userName) != null;
+    }
+
+    public void updateUser(MultipartFile image, User updatedUser) {
+        String imgPath = ImageUtil.upload(image, uploadPath);
+
+        User userToSave = Optional.ofNullable(updatedUser.getId())
+                .flatMap(id -> userRepository.findById(id))
+                .map(user -> {
+                    user.setName(updatedUser.getName());
+                    user.setSecondName(updatedUser.getSecondName());
+                    user.setPassport(updatedUser.getPassport());
+                    user.setEmail(updatedUser.getEmail());
+                    user.setPassword(updatedUser.getPassword());
+                    if (!imgPath.isEmpty()) {
+                        user.setPassportImage(imgPath);
+                    }
+                    return user;
+                })
+                .orElse(updatedUser);
+
+        userRepository.save(userToSave);
     }
 }

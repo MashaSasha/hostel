@@ -3,6 +3,7 @@ package com.bsuir.masasha.hostel.web.controller.user;
 import com.bsuir.masasha.hostel.core.domain.Role;
 import com.bsuir.masasha.hostel.core.domain.User;
 import com.bsuir.masasha.hostel.core.repo.UserRepository;
+import com.bsuir.masasha.hostel.core.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
@@ -10,13 +11,22 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
+import static com.bsuir.masasha.hostel.web.WebConstants.REDIRECT;
+
 @Controller
 @RequestMapping("/user")
 @PreAuthorize("hasAuthority('ADMIN')")
 public class UserController {
 
+    private final UserRepository userRepository;
+
+    private final UserService userService;
+
     @Autowired
-    private UserRepository userRepository;
+    public UserController(UserRepository userRepository, UserService userService) {
+        this.userRepository = userRepository;
+        this.userService = userService;
+    }
 
     @GetMapping
     public String userList(Model model) {
@@ -32,11 +42,12 @@ public class UserController {
         return "userEdit";
     }
 
-    @GetMapping("edit")
+    @PostMapping("edit")
     public String userEditForm(@RequestParam("image") MultipartFile image, User user, Model model) {
+        userService.updateUser(image, user);
         model.addAttribute("user", user);
         model.addAttribute("roles", Role.values());
-        return "userEdit";
+        return REDIRECT + "profile";
     }
 
 //    @PostMapping

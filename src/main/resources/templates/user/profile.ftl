@@ -13,34 +13,38 @@
 
         <div class="col-md-6">
             <form method="post" action="/user/edit" enctype="multipart/form-data">
+                <input type="hidden" name="id" value="${profile.id}">
+                <input type="hidden" name="_csrf" value="${_csrf.token}">
+
                 <div class="form-group row">
                     <label for="passport" class="col-sm-2 col-form-label">Паспорт: </label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" id="passport" placeholder="Паспорт" value="${profile.passport}">
+                        <input type="text" class="form-control" name="passport" id="passport" placeholder="Паспорт" value="${profile.passport}">
                     </div>
                 </div>
                 <div class="form-group row">
+
                     <label for="name" class="col-sm-2 col-form-label">Имя</label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" id="name" placeholder="Имя" value="${profile.name}">
+                        <input type="text" class="form-control" id="name" name="name" placeholder="Имя" value="${profile.name}">
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="secondname" class="col-sm-2 col-form-label">Фамилия</label>
                     <div class="col-sm-10">
-                        <input type="text" class="form-control" id="secondname" placeholder="Фамилия" value="${profile.secondName}">
+                        <input type="text" class="form-control" id="secondname" name="secondName" placeholder="Фамилия" value="${profile.secondName}">
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="email" class="col-sm-2 col-form-label">E-mail</label>
                     <div class="col-sm-10">
-                        <input type="email" class="form-control" id="email" placeholder="E-mail" value="${profile.email}">
+                        <input type="email" class="form-control" id="email" name="email" placeholder="E-mail" value="${profile.email}">
                     </div>
                 </div>
                 <div class="form-group row">
                     <label for="password" class="col-sm-2 col-form-label">Новый пароль</label>
                     <div class="col-sm-10">
-                        <input type="password" class="form-control" id="password" placeholder="пароль">
+                        <input type="password" class="form-control" id="password" name="password" placeholder="пароль">
                     </div>
                 </div>
                 <div class="form-group row">
@@ -68,7 +72,7 @@
 
         <div class="col-md-4">
             <h3>Фото паспорта:</h3>
-            <img src="/static/img/${profile.passportImage}" class="img-fluid" alt="Responsive image">
+            <img src="/static/img/${profile.passportImage!}" class="img-fluid" alt="Responsive image">
         </div>
 
         <div class="col-md-1"></div>
