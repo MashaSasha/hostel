@@ -6,11 +6,18 @@ import lombok.Setter;
 import javax.persistence.*;
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Objects;
 
 @Entity
 @Getter
 @Setter
 public class Reservation {
+
+    public Reservation(Long id) {
+        this.id = id;
+    }
+
+    public Reservation() {}
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -46,4 +53,17 @@ public class Reservation {
 
     private Double earlyBookingSale;
     private Double cost;
+
+    @Override
+    public boolean equals(Object o) {
+        if (this == o) return true;
+        if (o == null || getClass() != o.getClass()) return false;
+        Reservation that = (Reservation) o;
+        return id.equals(that.id);
+    }
+
+    @Override
+    public int hashCode() {
+        return Objects.hash(id);
+    }
 }

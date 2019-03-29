@@ -18,6 +18,10 @@ public class LazyInitServiceImpl implements LazyInitService {
 
     @Override
     public User fetchReservations(Long userId) {
-        return userRepository.findByIdAndFetchReservationsEagerly(userId);
+        User user = userRepository.findByIdAndFetchReservationsEagerly(userId);
+        if (user == null) {
+            return userRepository.findById(userId).get();
+        }
+        return user;
     }
 }

@@ -1,7 +1,9 @@
 package com.bsuir.masasha.hostel.core.service;
 
+import com.bsuir.masasha.hostel.core.domain.Reservation;
 import com.bsuir.masasha.hostel.core.domain.Role;
 import com.bsuir.masasha.hostel.core.domain.User;
+import com.bsuir.masasha.hostel.core.repo.ReservationRepository;
 import com.bsuir.masasha.hostel.core.repo.UserRepository;
 import com.bsuir.masasha.hostel.core.util.ImageUtil;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -19,12 +21,15 @@ public class UserService implements UserDetailsService {
 
     private UserRepository userRepository;
 
+    private final ReservationRepository reservationRepository;
+
     @Value("${upload.path}")
     private String uploadPath;
 
     @Autowired
-    public UserService(UserRepository userRepository) {
+    public UserService(UserRepository userRepository, ReservationRepository reservationRepository) {
         this.userRepository = userRepository;
+        this.reservationRepository = reservationRepository;
     }
 
     @Override
@@ -74,5 +79,9 @@ public class UserService implements UserDetailsService {
                 .orElse(updatedUser);
 
         userRepository.save(userToSave);
+    }
+
+    public void deleteReservation(Long reservationId) {
+        reservationRepository.delete(new Reservation(reservationId));
     }
 }

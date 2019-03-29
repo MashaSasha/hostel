@@ -95,19 +95,19 @@
 
                         <div class="card">
                             <div class="card-header" id="heading${reservation?index}">
-                                    <div class="row">
-                                        <div class="col-md-6">
-                                            <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapse${reservation?index}" aria-expanded="true" aria-controls="collapse${reservation?index}">
-                                                ${reservation.roomType.title}
-                                            </button>
-                                        </div>
-                                        <div class="col-md-3">
-                                            ${reservation.days} Ночей
-                                        </div>
-                                        <div class="col-md-3">
-                                            Дата заселения - ${reservation.startDate}
-                                        </div>
+                                <div class="row">
+                                    <div class="col-md-6">
+                                        <button class="btn btn-link" type="button" data-toggle="collapse" data-target="#collapse${reservation?index}" aria-expanded="true" aria-controls="collapse${reservation?index}">
+                                            ${reservation.roomType.title}
+                                        </button>
                                     </div>
+                                    <div class="col-md-3">
+                                        ${reservation.days} Ночей
+                                    </div>
+                                    <div class="col-md-3">
+                                        Дата заселения - ${reservation.startDate}
+                                    </div>
+                                </div>
                             </div>
 
                             <div id="collapse${reservation?index}" class="collapse" aria-labelledby="heading${reservation?index}" data-parent="#accordionActiveReservation">
@@ -168,7 +168,10 @@
                                                 </li>
                                             </ul>
 
-                                            <button type="button" class="btn btn-info mt-2">Отмена бронирования</button>
+                                            <form id="deleteReservation" name="${reservation.id}">
+                                                <input type="hidden" name="_csrf" value="${_csrf.token}">
+                                                <button type="submit" class="btn btn-info mt-2">Отмена бронирования</button>
+                                            </form>
                                         </div>
                                     </div>
                                 </div>
@@ -288,3 +291,28 @@
     </div>
 </div>
 </@c.page>
+
+<script>
+    $('#deleteReservation').submit(function (event) {
+        let dataToSend = $(this).serialize();
+        let id = $(this).attr('name');
+        let url = '/user/booking/delete/' + id;
+
+        let request = $.ajax({
+            url: url,
+            type: 'POST',
+            data: dataToSend,
+            dataType: 'json'
+        });
+
+        request.done(function (data) {
+            if (data.status === 'SUCCESS') {
+                document.location.reload(true);
+            } else {
+                alert(data.message);
+            }
+        });
+        event.preventDefault();
+        return false;
+    })
+</script>

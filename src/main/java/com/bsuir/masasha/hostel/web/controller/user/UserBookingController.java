@@ -1,12 +1,15 @@
 package com.bsuir.masasha.hostel.web.controller.user;
 
 import com.bsuir.masasha.hostel.core.domain.PromoCode;
+import com.bsuir.masasha.hostel.core.domain.Reservation;
 import com.bsuir.masasha.hostel.core.domain.RoomType;
 import com.bsuir.masasha.hostel.core.domain.User;
 import com.bsuir.masasha.hostel.core.domain.dto.*;
 import com.bsuir.masasha.hostel.core.domain.dto.ResponseStatus;
 import com.bsuir.masasha.hostel.core.service.BookingService;
 import com.bsuir.masasha.hostel.core.service.HotelEditService;
+import com.bsuir.masasha.hostel.core.service.LazyInitService;
+import com.bsuir.masasha.hostel.core.service.UserService;
 import com.bsuir.masasha.hostel.core.service.exception.BookingFailException;
 import com.bsuir.masasha.hostel.core.service.exception.BookingPartFailException;
 import javafx.util.Pair;
@@ -25,11 +28,19 @@ import static com.bsuir.masasha.hostel.web.WebConstants.BASKET_ATR;
 @RequestMapping("/user/booking")
 public class UserBookingController {
 
-    @Autowired
-    private BookingService bookingService;
+    private final BookingService bookingService;
+
+    private final HotelEditService hotelEditService;
+
+
+    private final UserService userService;
 
     @Autowired
-    private HotelEditService hotelEditService;
+    public UserBookingController(BookingService bookingService, HotelEditService hotelEditService, UserService userService) {
+        this.bookingService = bookingService;
+        this.hotelEditService = hotelEditService;
+        this.userService = userService;
+    }
 
     @GetMapping("/options")
     public BookingOpportunitiesDTO findOptions(
@@ -79,6 +90,12 @@ public class UserBookingController {
         Map<Long, RoomType> roomTypes = new HashMap<>();
         hotelEditService.getAllRoomTypes().forEach(roomType -> roomTypes.put(roomType.getId(), roomType));
         return roomTypes;
+    }
+
+    @PostMapping("/delete/{id}")
+    public SimpleResponse deleteReservation(@PathVariable Long id) {
+        userService.deleteReservation(id);
+        return new SimpleResponse(ResponseStatus.SUCCESS, "");
     }
 
 

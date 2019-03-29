@@ -32,8 +32,7 @@ $('#filterForm').submit(function (event) {
 });
 
 function getOptionsJSON(form) {
-    let dataToSend;
-    dataToSend = $(form).serialize();
+    let dataToSend = $(form).serialize();
     $('#options').text('');
 
     let request = $.ajax({

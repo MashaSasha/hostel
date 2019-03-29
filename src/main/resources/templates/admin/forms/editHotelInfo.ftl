@@ -11,7 +11,7 @@
         <label for="editHotelName" class="col-sm-2 col-form-label">Название отеля :</label>
         <div class="col-sm-10">
             <input value="${hotel.hotelName!}" class="form-control" id="editHotelName" type="text" name="hotelName"
-                   placeholder="hotel name">
+                   placeholder="Название отеля">
         </div>
     </div>
 
@@ -19,7 +19,7 @@
         <label for="editHotelName" class="col-sm-2 col-form-label">Адресс :</label>
         <div class="col-sm-10">
             <input value="${hotel.address!}" class="form-control" id="editHotelName" type="text" name="address"
-                   placeholder="hotel address">
+                   placeholder="Адресс отеля">
         </div>
     </div>
 
