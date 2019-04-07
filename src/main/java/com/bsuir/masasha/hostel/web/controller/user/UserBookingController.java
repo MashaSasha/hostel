@@ -32,7 +32,6 @@ public class UserBookingController {
 
     private final HotelEditService hotelEditService;
 
-
     private final UserService userService;
 
     @Autowired
