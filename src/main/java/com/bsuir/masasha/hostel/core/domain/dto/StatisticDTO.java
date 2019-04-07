@@ -10,7 +10,7 @@ import java.util.List;
 @Setter
 public class StatisticDTO implements Serializable {
 
-    private String status;
+    private ResponseStatus status;
 
     private String titleY;
     private String header;

@@ -9,5 +9,5 @@ public interface UserRepository extends JpaRepository<User, Long> {
         User findByEmail(String username);
 
         @Query("select u from User u join fetch u.reservations where u.id = (:id)")
-        public User findByIdAndFetchReservationsEagerly(@Param("id") Long id);
+        User findByIdAndFetchReservationsEagerly(@Param("id") Long id);
 }
