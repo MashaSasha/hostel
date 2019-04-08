@@ -18,6 +18,7 @@ public class StatisticController {
 
     private static final String PROMO_TYPE = "promo";
     private static final String PROFIT_TYPE = "profit";
+    private static final String AVG_PROFIT_TYPE = "avgProfit";
 
     @Autowired
     private StatisticService statisticService;
@@ -37,10 +38,18 @@ public class StatisticController {
                 statisticDTO.setStatus(ResponseStatus.SUCCESS);
                 break;
             case PROFIT_TYPE:
-                statisticDTO.setHeader("Прибыль в месяц для каждого типа комнат");
+                statisticDTO.setHeader("Общая прибыль в месяц для каждого типа комнат");
                 statisticDTO.setTitleY("Прибыль $");
 
-                lines = statisticService.calculateProfitLines(year);
+                lines = statisticService.calculateProfitLines(year, false);
+                statisticDTO.setDataSeries(lines);
+                statisticDTO.setStatus(ResponseStatus.SUCCESS);
+                break;
+            case AVG_PROFIT_TYPE:
+                statisticDTO.setHeader("Прибыль на номер для каждого типа номеров");
+                statisticDTO.setTitleY("Прибыль $");
+
+                lines = statisticService.calculateProfitLines(year, true);
                 statisticDTO.setDataSeries(lines);
                 statisticDTO.setStatus(ResponseStatus.SUCCESS);
                 break;

@@ -30,11 +30,12 @@
                             <option>2019</option>
                         </select>
                     </div>
-                    <div class="form-group col-md-4">
+                    <div class="form-group col-md-8">
                         <label for="inputState">Тип отчета</label>
                         <select id="inputState" class="form-control" name="type">
                             <option selected value="promo">Используются промокодов в месяц</option>
-                            <option value="profit">Прибыль в месяц для каждого типа номеров</option>
+                            <option value="profit">Общая прибыль в месяц для каждого типа номеров</option>
+                            <option value="avgProfit">Прибыль на номер для каждого типа номеров</option>
                         </select>
                     </div>
                 </div>

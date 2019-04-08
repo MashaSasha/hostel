@@ -7,5 +7,5 @@ import java.util.List;
 public interface StatisticService {
     List<StatisticLineDTO> calculatePromoLines(Integer year);
 
-    List<StatisticLineDTO> calculateProfitLines(Integer year);
+    List<StatisticLineDTO> calculateProfitLines(Integer year, boolean b);
 }
