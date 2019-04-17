@@ -20,8 +20,12 @@ public class StatisticController {
     private static final String PROFIT_TYPE = "profit";
     private static final String AVG_PROFIT_TYPE = "avgProfit";
 
+    private final StatisticService statisticService;
+
     @Autowired
-    private StatisticService statisticService;
+    public StatisticController(StatisticService statisticService) {
+        this.statisticService = statisticService;
+    }
 
     @GetMapping("/draw/statistic")
     public StatisticDTO draw(@RequestParam String type, @RequestParam Integer year) {
@@ -54,29 +58,6 @@ public class StatisticController {
                 statisticDTO.setStatus(ResponseStatus.SUCCESS);
                 break;
         }
-
-//        List<Double> data = new ArrayList<Double>() {{
-//            add(1.3);
-//            add(1.8);
-//            add(1.1);
-//            add(0.9);
-//            add(1.9);
-//            add(1.1);
-//            add(1.3);
-//            add(2.);
-//            add(1.1);
-//            add(1.1);
-//            add(2.1);
-//            add(1.8);
-//        }};
-//        StatisticLineDTO statisticLineDTO = new StatisticLineDTO();
-//        statisticLineDTO.setData(data);
-//        statisticLineDTO.setSeriesType("line");
-//        statisticLineDTO.setCollectionAlias("Промокоды");
-//
-//        List<StatisticLineDTO> lineDTOS = new ArrayList<>();
-//        lineDTOS.add(statisticLineDTO);
-//        statisticDTO.setDataSeries(lineDTOS);
 
         return statisticDTO;
     }

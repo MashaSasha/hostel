@@ -15,15 +15,18 @@ import java.util.List;
 @Service
 public class StatisticServiceImpl implements StatisticService {
 
-    @Autowired
-    private PromoCodeRepository promoCodeRepository;
+    private final PromoCodeRepository promoCodeRepository;
+
+    private final RoomTypeRepository roomTypeRepository;
+
+    private final JdbcTemplate jdbcTemplate;
 
     @Autowired
-    private RoomTypeRepository roomTypeRepository;
-
-
-    @Autowired
-    JdbcTemplate jdbcTemplate;
+    public StatisticServiceImpl(PromoCodeRepository promoCodeRepository, RoomTypeRepository roomTypeRepository, JdbcTemplate jdbcTemplate) {
+        this.promoCodeRepository = promoCodeRepository;
+        this.roomTypeRepository = roomTypeRepository;
+        this.jdbcTemplate = jdbcTemplate;
+    }
 
 
     @Override

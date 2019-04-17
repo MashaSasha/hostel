@@ -43,8 +43,8 @@ public class UserController {
     }
 
     @PostMapping("edit")
-    public String userEditForm(@RequestParam("image") MultipartFile image, User user, Model model) {
-        userService.updateUser(image, user);
+    public String userEditForm(@RequestParam("image") MultipartFile image, User user, String password2, Model model) {
+        userService.updateUser(image, user, password2);
         model.addAttribute("user", user);
         model.addAttribute("roles", Role.values());
         return REDIRECT + "profile";

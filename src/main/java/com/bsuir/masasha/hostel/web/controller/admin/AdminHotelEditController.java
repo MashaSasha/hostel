@@ -31,13 +31,11 @@ public class AdminHotelEditController {
     public String editSettings(HttpServletRequest request, Model model) {
         Hotel hotel = hotelEditService.findHotel();
 
-        // достать сообщение из сессии и положить в модель
         Optional.of(request.getSession(false))
                 .ifPresent(s -> {
                     model.addAttribute("message", s.getAttribute("message"));
                     s.removeAttribute("message");
                 });
-
         model.addAttribute(HOTEL_ATR, hotel);
         return HOTEL_EDITOR_TEMPLATE;
     }
@@ -69,14 +67,23 @@ public class AdminHotelEditController {
             String message = "Ошибка при попытке сохранить картинку";
             request.getSession(true).setAttribute("message", message);
         }
-
         return REDIRECT + HOTEL_EDITOR_MAPPING;
     }
 
     @PostMapping("/add/promocode")
-    public String addPromoCode(PromoCode promoCode, HttpServletRequest request) {
+    public String addPromoCode(PromoCode promoCode) {
         hotelEditService.addPromoCode(promoCode);
 
+        return REDIRECT + HOTEL_EDITOR_MAPPING;
+    }
+
+    @PostMapping("/deactivate/promocode")
+    public String deactivatePromoCode(String code, String status) {
+        if (status.equals("activate")) {
+            hotelEditService.activatePromoCode(code);
+        } else {
+            hotelEditService.deactivatePromoCode(code);
+        }
         return REDIRECT + HOTEL_EDITOR_MAPPING;
     }
 
@@ -93,7 +100,6 @@ public class AdminHotelEditController {
             String message = "Ошибка при попытке добавить бонус";
             request.getSession(true).setAttribute("message", message);
         }
-
         return REDIRECT + HOTEL_EDITOR_MAPPING;
     }
 
@@ -104,7 +110,6 @@ public class AdminHotelEditController {
             String message = "Такой номер комнаты уже занят";
             request.getSession(true).setAttribute("message", message);
         }
-
         return REDIRECT + HOTEL_EDITOR_MAPPING;
     }
 }

@@ -69,9 +69,9 @@ public class UserBookingController {
             @RequestParam Integer maxCost,
             @RequestParam String dates) {
 
+        Map<Long, Pair<Long, BookingPair>> sameDateAlternatives = bookingService.sameDateAlternatives(peopleNum, maxCost, dates);
         BookingOpportunitiesDTO answer = new BookingOpportunitiesDTO();
 
-        Map<Long, Pair<Long, BookingPair>> sameDateAlternatives = bookingService.sameDateAlternatives(peopleNum, maxCost, dates);
         if (sameDateAlternatives.isEmpty()) {
             answer.setStatus(ResponseStatus.WARNING);
             answer.setMessage("Нет подходящих вариантов");
@@ -82,7 +82,6 @@ public class UserBookingController {
 
         return answer;
     }
-
 
     @GetMapping("/roomTypes")
     public Map<Long, RoomType> getRoomTypes() {
@@ -131,7 +130,7 @@ public class UserBookingController {
             session.setAttribute(BASKET_ATR, basketEntity);
             return ResponseStatus.SUCCESS;
         }
-        return ResponseStatus.ERROR;
+        return ResponseStatus.WARNING;
     }
 
     @PostMapping("/clear/basket")
@@ -156,11 +155,12 @@ public class UserBookingController {
     }
 
 
-    @GetMapping("/alternatives/sameRoomType")
-    public BookingOpportunitiesDTO sameRoomTypeAlternatives(
-            @RequestParam Integer peopleNum,
-            @RequestParam Integer maxCost,
-            @RequestParam String dates) {
+
+//    @GetMapping("/alternatives/sameRoomType")
+//    public BookingOpportunitiesDTO sameRoomTypeAlternatives(
+//            @RequestParam Integer peopleNum,
+//            @RequestParam Integer maxCost,
+//            @RequestParam String dates) {
 
 //        BookingOpportunitiesDTO answer = new BookingOpportunitiesDTO();
 //
@@ -173,8 +173,8 @@ public class UserBookingController {
 //            answer.setAlternatives(sameRoomTypeAlternatives);
 //        }
 
-        return new BookingOpportunitiesDTO();
-    }
+//        return new BookingOpportunitiesDTO();
+//    }
 
     @GetMapping("/alternatives/other")
     public BookingOpportunitiesDTO otherAlternatives(

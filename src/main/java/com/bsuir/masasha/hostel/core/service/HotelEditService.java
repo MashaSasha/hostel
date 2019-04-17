@@ -32,4 +32,7 @@ public interface HotelEditService {
     boolean addPromoCode(PromoCode promoCode);
 
     PromoCode checkPromoCode(String promoCode);
+
+    void deactivatePromoCode(String promoCode);
+    void activatePromoCode(String promoCode);
 }

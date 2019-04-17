@@ -23,6 +23,7 @@ public class BasketEntity implements Serializable {
     }
 
     public BasketEntity() {
+        entities = new ArrayList<>();
     }
 
 }

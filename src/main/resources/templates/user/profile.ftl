@@ -50,7 +50,7 @@
                 <div class="form-group row">
                     <label for="password2" class="col-sm-2 col-form-label">Подтверждение пароля</label>
                     <div class="col-sm-10">
-                        <input type="password" class="form-control" id="password2" placeholder="подтвердите пароль">
+                        <input type="password" class="form-control" id="password2" name="password2" placeholder="подтвердите пароль">
                     </div>
                 </div>
 

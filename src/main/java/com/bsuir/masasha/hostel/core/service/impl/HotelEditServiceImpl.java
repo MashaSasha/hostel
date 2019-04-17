@@ -1,6 +1,7 @@
 package com.bsuir.masasha.hostel.core.service.impl;
 
 import com.bsuir.masasha.hostel.core.domain.*;
+import com.bsuir.masasha.hostel.core.repo.PromoCodeRepository;
 import com.bsuir.masasha.hostel.core.repo.RoomRepository;
 import com.bsuir.masasha.hostel.core.util.ImageUtil;
 import com.bsuir.masasha.hostel.core.repo.HotelRepository;
@@ -19,22 +20,30 @@ import java.util.Optional;
 @Service
 public class HotelEditServiceImpl implements HotelEditService {
 
-    @Autowired
-    private HotelRepository hotelRepository;
+    private final HotelRepository hotelRepository;
 
-    @Autowired
-    private RoomTypeRepository roomTypeRepository;
+    private final RoomTypeRepository roomTypeRepository;
 
-    @Autowired
-    RoomRepository roomRepository;
+    private final RoomRepository roomRepository;
+
+    private final PromoCodeRepository promoCodeRepository;
 
     @Value("${upload.path}")
     private String uploadPath;
 
+    @Autowired
+    public HotelEditServiceImpl(HotelRepository hotelRepository, RoomTypeRepository roomTypeRepository,
+                                RoomRepository roomRepository, PromoCodeRepository promoCodeRepository) {
+        this.hotelRepository = hotelRepository;
+        this.roomTypeRepository = roomTypeRepository;
+        this.roomRepository = roomRepository;
+        this.promoCodeRepository = promoCodeRepository;
+    }
+
     @Override
     public void editHotel(Hotel updatedHotel) {
         Hotel hotelToSave = Optional.ofNullable(updatedHotel.getId())
-                .flatMap(id -> hotelRepository.findById(id))
+                .flatMap(hotelRepository::findById)
                 .map(hotel -> {
                     hotel.setAddress(updatedHotel.getAddress());
                     hotel.setDescription(updatedHotel.getDescription());
@@ -155,9 +164,21 @@ public class HotelEditServiceImpl implements HotelEditService {
         Hotel hotel = findHotel();
         for (PromoCode promo : hotel.getPromoCodes()) {
             if (promo.getCode().equals(promoCode)) {
-                return promo;
+                if (promo.isActive()) {
+                    return promo;
+                }
             }
         }
         return null;
+    }
+
+    @Override
+    public void deactivatePromoCode(String promoCode) {
+        promoCodeRepository.deactivatePromocode(promoCode);
+    }
+
+    @Override
+    public void activatePromoCode(String promoCode) {
+        promoCodeRepository.activatePromocode(promoCode);
     }
 }

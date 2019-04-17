@@ -166,7 +166,7 @@
                                 Цена за номер
                             </label>
                             <div class="col-sm-10">
-                                <input type="text" class="form-control" id="roomName${roomType.id!}" value="${roomType.cost!}"
+                                <input type="text" class="form-control v-input" id="roomName${roomType.id!}" value="${roomType.cost!}"
                                        name="cost" placeholder="Цена за номер">
                             </div>
                         </div>
@@ -334,14 +334,27 @@
 </form>
     <div>
         <ul>
-        <#list hotel.promoCodes! as promoCode>
-            <li>
-                <div class="row">
-                    <div class="col-sm-3">${promoCode.code!}</div>
-                    <div class="col-sm-3">- Скидка ${promoCode.discount!} %</div>
-                </div>
-            </li>
-        </#list>
+            <#list hotel.promoCodes! as promoCode>
+                <li>
+                    <form id="deactivate-form" action="/admin/hotel/deactivate/promocode" method="post">
+                        <div class="row mt-3">
+                            <input type="hidden" name="_csrf" value="${_csrf.token}">
+                            <div class="col-sm-3">${promoCode.code!}</div>
+                            <div class="col-sm-3">- Скидка ${promoCode.discount!} %</div>
+                            <input type="hidden" name="code" value="${promoCode.code!}">
+                            <#if promoCode.active>
+                                <input type="hidden" name="status" value="deactiavte">
+                                <button class="btn btn-info btn-sm" type="submit">Деактивировать</button>
+                            <#else>
+                                <input type="hidden" name="status" value="activate">
+                                <button class="btn btn-info btn-sm" type="submit">Активировать</button>
+                            </#if>
+                        </div>
+                    </form>
+                </li>
+            </#list>
+            <script>
+            </script>
         </ul>
     </div>
 </#macro>

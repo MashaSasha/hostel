@@ -66,6 +66,14 @@
             <div class="row row1" id="options">
             </div>
 
+            <div hidden id="alternatives-button">
+                <hr class="mb-4">
+                <button class="btn btn-secondary btn-lg btn-block" id="alternatives-form" type="button">Посомтреть другие варианты</button>
+            </div>
+
+            <div class="row row1" id="alternatives">
+            </div>
+
         </div>
 
 

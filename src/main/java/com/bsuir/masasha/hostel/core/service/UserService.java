@@ -60,7 +60,7 @@ public class UserService implements UserDetailsService {
         return userRepository.findByEmail(userName) != null;
     }
 
-    public void updateUser(MultipartFile image, User updatedUser) {
+    public void updateUser(MultipartFile image, User updatedUser, String password2) {
         String imgPath = ImageUtil.upload(image, uploadPath);
 
         User userToSave = Optional.ofNullable(updatedUser.getId())

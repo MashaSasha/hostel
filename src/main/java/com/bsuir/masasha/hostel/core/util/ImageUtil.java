@@ -25,6 +25,9 @@ public final class ImageUtil {
         if (imageFile == null) {
             return DEFAULT_NAME;
         }
+        if (imageFile.getOriginalFilename().isEmpty()) {
+            return DEFAULT_NAME;
+        }
         URL urlResource = ImageUtil.class.getClassLoader().getResource(uploadPath);
         String absoluteUploadPath = Optional.ofNullable(urlResource)
                 .map(url -> new File(url.getPath()).getAbsolutePath())

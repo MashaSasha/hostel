@@ -1,5 +1,6 @@
 let roomTypes;
 let currentOptions;
+let currentAlternatives;
 let _csrf = $('#_csrf').attr('name');
 
 window.onload = function () {
@@ -12,6 +13,11 @@ window.onload = function () {
         roomTypes = data;
     });
 };
+
+$('#alternatives-button').click(function (event) {
+    $('#alternatives').text('');
+    displayOptions(currentAlternatives, 'alternatives')
+});
 
 $('#filterForm').submit(function (event) {
     let isFormValid = true;
@@ -34,6 +40,7 @@ $('#filterForm').submit(function (event) {
 function getOptionsJSON(form) {
     let dataToSend = $(form).serialize();
     $('#options').text('');
+    $('#alternatives').text('');
 
     let request = $.ajax({
         url: '/user/booking/options',
@@ -46,9 +53,10 @@ function getOptionsJSON(form) {
         console.log(data);
         if (data.status === 'SUCCESS') {
             currentOptions = data.options;
-            displayOptions(data.options);
+            currentAlternatives = data.alternatives;
+            displayOptions(data.options, 'options');
         } else if (data.status === 'WARNING') {
-            displayAlternatives(data.alternatives);
+            currentAlternatives = data.alternatives;
         } else {
             alert(data.message);
         }
@@ -60,7 +68,8 @@ function getOptionsJSON(form) {
     event.preventDefault();
 }
 
-function displayOptions(options) {
+function displayOptions(options, idToDisplay) {
+    $('#alternatives-button').removeAttr('hidden');
     let roomTypeIds = Object.keys(options);
 
     roomTypeIds.forEach(id => {
@@ -73,7 +82,7 @@ function displayOptions(options) {
         roomType.bonuses.forEach(function (bonus) {
             $roomType.find('#demo-bonuses')
                 .append(
-                    '<li class="list-group-item" data-id="' + bonus.id +'">' +
+                    '<li class="list-group-item" data-id="' + bonus.id + '">' +
                     bonus.title + ' - <small class="text-muted" id="demo-dates">' + bonus.cost + ' BYN' +
                     '</small></li>'
                 )
@@ -90,7 +99,7 @@ function displayOptions(options) {
         });
 
         $roomType.removeAttr('hidden');
-        $('#options').append($roomType);
+        $('#' + idToDisplay).append($roomType);
     });
 
 }
@@ -98,7 +107,7 @@ function displayOptions(options) {
 function addToBasket() {
     let $this = $(this);
     let roomTypeId = $this.attr('id').substring($this.attr('id').indexOf('-') + 1);
-        // ;
+    // ;
     let roomType = roomTypes[roomTypeId];
 
     let $roomTypeOption = $('#option-' + roomTypeId);
@@ -111,9 +120,16 @@ function addToBasket() {
     let $template = $('#basket-example').clone();
     $template.find('#product-name').append(roomType.title);
 
-    let startDateString = currentOptions[roomTypeId].value.startDate;
-    let endDateString = currentOptions[roomTypeId].value.endDate;
-    let roomId = currentOptions[roomTypeId].key;
+    let option;
+    if (currentOptions[roomTypeId] === undefined) {
+        option = currentAlternatives[roomTypeId]
+    } else {
+        option = currentOptions[roomTypeId]
+    }
+
+    let startDateString = option.value.startDate;
+    let endDateString = option.value.endDate;
+    let roomId = option.key;
 
     let startDate = Date.parse(startDateString);
     let endDate = Date.parse(endDateString);
@@ -144,13 +160,13 @@ function addToBasket() {
 
     let today = new Date();
     let dd = today.getDate();
-    let mm = today.getMonth()+1; //January is 0!
+    let mm = today.getMonth() + 1; //January is 0!
     let yyyy = today.getFullYear();
-    if(dd<10) {
-        dd = '0'+dd
+    if (dd < 10) {
+        dd = '0' + dd
     }
-    if(mm<10) {
-        mm = '0'+mm
+    if (mm < 10) {
+        mm = '0' + mm
     }
     today = Date.parse(yyyy + '-' + mm + '-' + dd);
     let currentDaysBefore = Math.ceil(Math.abs(today - startDate) / (1000 * 60 * 60 * 24));
@@ -240,7 +256,7 @@ function addPromo() {
     });
 
     request.done(function (data) {
-        if (data.status == "ERROR") {
+        if (data === "WARNING") {
             alert("Такого промокода не существует или он уже не активен");
         } else {
             window.location.reload();
