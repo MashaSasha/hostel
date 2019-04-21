@@ -109,6 +109,34 @@
 
         <hr class="featurette-divider">
 
+        <form>
+            <div class="form-row">
+                <div class="col-md-9">
+                    <label for="titleReview">Заголовок отзыва</label>
+                    <input type="text" id="titleReview" class="form-control" placeholder="Заголовок отзыва">
+                </div>
+                <div class="form-group col-md-3">
+                    <label for="typeReview">Тип отзыва: </label>
+                    <select id="typeReview" class="form-control ml-2" name="year">
+                        <option selected value="positive">Позитивный</option>
+                        <option value="negative">Отрциательный</option>
+                    </select>
+                </div>
+            </div>
+            <div class="form-row">
+                    <label for="hotelDescription" class="col-sm-2 col-form-label">Описание комнаты:</label>
+                    <div class="col-sm-10">
+                                <textarea class="form-control" name="description" placeholder="Текст поста"
+                                          id="reviewText" rows="5">
+                                </textarea>
+                        <script>
+                            CKEDITOR.replace('reviewText');
+                        </script>
+                    </div>
+            </div>
+        </form>
+
+
         <div class="row featurette">
             <div class="col-md-7">
                 <h2 class="featurette-heading">Отель плохой - не ездите сюда пожалуйста</h2>
