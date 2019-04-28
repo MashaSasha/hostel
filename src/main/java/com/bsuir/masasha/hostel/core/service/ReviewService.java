@@ -10,4 +10,8 @@ public interface ReviewService {
     void addReview(String title, String type, String text, User user);
 
     List<Review> getAllReviews();
+
+    boolean isHaveReview(User user);
+
+    void like(Long id, User user);
 }

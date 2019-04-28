@@ -14,17 +14,17 @@ import static com.bsuir.masasha.hostel.web.WebConstants.USER_MAIN_PAGE_MAPPING;
 
 @Controller
 @RequestMapping("/user/review")
-public class AddReviewController {
+public class ReviewController {
 
     private final ReviewService reviewService;
 
     @Autowired
-    public AddReviewController(ReviewService reviewService) {
+    public ReviewController(ReviewService reviewService) {
         this.reviewService = reviewService;
     }
 
     @PostMapping("/add")
-    public String sameDateAlternatives(
+    public String addReview(
             @RequestParam String title,
             @RequestParam String type,
             @RequestParam String text,
@@ -35,4 +35,9 @@ public class AddReviewController {
         return REDIRECT + USER_MAIN_PAGE_MAPPING;
     }
 
+    @PostMapping("/like")
+    public String like(@RequestParam Long id, @AuthenticationPrincipal User user) {
+        reviewService.like(id, user);
+        return REDIRECT + USER_MAIN_PAGE_MAPPING;
+    }
 }

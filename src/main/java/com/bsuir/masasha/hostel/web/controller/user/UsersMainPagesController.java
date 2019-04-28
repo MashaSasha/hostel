@@ -54,10 +54,14 @@ public class UsersMainPagesController {
     }
 
     @GetMapping("/main")
-    public String main(Model model) {
+    public String main(Model model,
+                       @AuthenticationPrincipal User user) {
         Hotel hotel = hotelEditService.findHotel();
         model.addAttribute("hotel", hotel);
         model.addAttribute("reviews", reviewService.getAllReviews());
+
+        boolean alreadyHaveReview = reviewService.isHaveReview(user);
+        model.addAttribute("alreadyHaveReview", alreadyHaveReview);
         return "user/main";
     }
 

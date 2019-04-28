@@ -16,7 +16,6 @@
 
 <main role="main">
 
-
     <div id="myCarousel" class="carousel slide" data-ride="carousel">
         <ol class="carousel-indicators">
             <#list hotel.images as image>
@@ -112,30 +111,33 @@
 
         <hr class="featurette-divider">
 
-        <form action="/user/review/add" method="post" enctype="multipart/form-data">
-            <input type="hidden" name="_csrf" value="${_csrf.token}">
-            <div class="form-row">
-                <div class="col-md-9">
-                    <label for="titleReview">Заголовок отзыва</label>
-                    <input type="text" name="title" id="titleReview" class="form-control" placeholder="Заголовок отзыва">
+        <#if !alreadyHaveReview>
+            <form action="/user/review/add" method="post" enctype="multipart/form-data">
+                <input type="hidden" name="_csrf" value="${_csrf.token}">
+                <div class="form-row">
+                    <div class="col-md-9">
+                        <label for="titleReview">Заголовок отзыва</label>
+                        <input type="text" name="title" id="titleReview" class="form-control" placeholder="Заголовок отзыва">
+                    </div>
+                    <div class="form-group col-md-3">
+                        <label for="typeReview">Тип отзыва: </label>
+                        <select id="typeReview" class="form-control ml-2" name="type">
+                            <option selected value="positive">Позитивный</option>
+                            <option value="negative">Отрциательный</option>
+                        </select>
+                    </div>
                 </div>
-                <div class="form-group col-md-3">
-                    <label for="typeReview">Тип отзыва: </label>
-                    <select id="typeReview" class="form-control ml-2" name="type">
-                        <option selected value="positive">Позитивный</option>
-                        <option value="negative">Отрциательный</option>
-                    </select>
-                </div>
-            </div>
-            <div class="form-group">
-                <label for="hotelDescription" class="col-sm-2 col-form-label">Содержание отзыва:</label>
+                <div class="form-group">
+                    <label for="hotelDescription" class="col-sm-2 col-form-label">Содержание отзыва:</label>
                     <textarea class="form-control" name="text" placeholder="Текст поста" id="reviewText" rows="5"></textarea>
-            </div>
-            <div class="form-group">
-                <button type="submit" class="btn btn-secondary offset-4 col-md-4">Добавить</button>
-            </div>
-        </form>
-        <hr>
+                </div>
+                <div class="form-group">
+                    <button type="submit" class="btn btn-secondary offset-4 col-md-4">Добавить</button>
+                </div>
+            </form>
+            <hr>
+        </#if>
+
 
         <div class="mb-2">
             Отфильтровать используя текущие параметры:
@@ -164,7 +166,7 @@
                     <h2 class="featurette-heading">${review.title}</h2>
                     <p class="lead">${review.text}</p>
                     <div class="text-right">
-                        <a class="like-s">
+                        <a id="${review.id}" class="like-href">
                             <i class="far fa-heart" aria-hidden="true"></i>
                         </a>
                         5
@@ -174,11 +176,17 @@
                 </div>
             </div>
 
+            <div hidden>
+                <form id="likeForm${review.id}" action="/user/review/like" method="post">
+                    <input type="hidden" name="_csrf" value="${_csrf.token}">
+                    <input type="hidden" value="${review.id}" name="id">
+                </form>
+            </div>
+
             <hr class="featurette-divider">
         </#list>
 
     </div><!-- /.container -->
-
 
     <!-- FOOTER -->
     <footer class="container">
@@ -187,3 +195,12 @@
     </footer>
 </main>
 </@c.page>
+
+
+<script>
+    $(document).ready(function() {
+        $(".like-href").click(function() {
+            $('#likeForm' + this.id).submit()
+        });
+    });
+</script>

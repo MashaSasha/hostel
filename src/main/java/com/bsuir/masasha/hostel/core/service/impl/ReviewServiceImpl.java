@@ -31,4 +31,14 @@ public class ReviewServiceImpl implements ReviewService {
     public List<Review> getAllReviews() {
         return reviewRepository.findAll();
     }
+
+    @Override
+    public boolean isHaveReview(User user) {
+        return reviewRepository.getReviewByUser(user) != null;
+    }
+
+    @Override
+    public void like(Long id, User user) {
+
+    }
 }
