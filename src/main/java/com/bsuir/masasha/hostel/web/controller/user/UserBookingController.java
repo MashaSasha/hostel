@@ -154,45 +154,4 @@ public class UserBookingController {
         return ResponseStatus.SUCCESS;
     }
 
-
-
-//    @GetMapping("/alternatives/sameRoomType")
-//    public BookingOpportunitiesDTO sameRoomTypeAlternatives(
-//            @RequestParam Integer peopleNum,
-//            @RequestParam Integer maxCost,
-//            @RequestParam String dates) {
-
-//        BookingOpportunitiesDTO answer = new BookingOpportunitiesDTO();
-//
-//        Map<Reservation, RoomType> sameRoomTypeAlternatives = bookingService.sameRoomTypeAlternatives(peopleNum, maxCost, dates);
-//        if (sameRoomTypeAlternatives.isEmpty()) {
-//            answer.setStatus(ResponseStatus.WARNING);
-//            answer.setMessage("Нет подходящих вариантов");
-//        } else  {
-//            answer.setStatus(ResponseStatus.SUCCESS);
-//            answer.setAlternatives(sameRoomTypeAlternatives);
-//        }
-
-//        return new BookingOpportunitiesDTO();
-//    }
-
-    @GetMapping("/alternatives/other")
-    public BookingOpportunitiesDTO otherAlternatives(
-            @RequestParam Integer peopleNum,
-            @RequestParam Integer maxCost,
-            @RequestParam String dates) {
-
-//        BookingOpportunitiesDTO answer = new BookingOpportunitiesDTO();
-//
-//        Map<Reservation, RoomType> otherAlternatives = bookingService.otherAlternatives(peopleNum, maxCost, dates);
-//        if (otherAlternatives.isEmpty()) {
-//            answer.setStatus(ResponseStatus.WARNING);
-//            answer.setMessage("Нет подходящих вариантов");
-//        } else  {
-//            answer.setStatus(ResponseStatus.SUCCESS);
-//            answer.setAlternatives(otherAlternatives);
-//        }
-//
-        return new BookingOpportunitiesDTO();
-    }
 }

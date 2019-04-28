@@ -1112,475 +1112,555 @@
     <table id="282" parent="2" name="promo_code"/>
     <table id="283" parent="2" name="reservation"/>
     <table id="284" parent="2" name="reservation_bonuses"/>
-    <table id="285" parent="2" name="room"/>
-    <table id="286" parent="2" name="room_type"/>
-    <table id="287" parent="2" name="user_role"/>
-    <table id="288" parent="2" name="usr"/>
-    <column id="289" parent="277" name="id">
+    <table id="285" parent="2" name="review"/>
+    <table id="286" parent="2" name="review_likes"/>
+    <table id="287" parent="2" name="room"/>
+    <table id="288" parent="2" name="room_type"/>
+    <table id="289" parent="2" name="user_role"/>
+    <table id="290" parent="2" name="usr"/>
+    <column id="291" parent="277" name="id">
       <Position>1</Position>
       <DataType>bigint(20)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="290" parent="277" name="cost">
+    <column id="292" parent="277" name="cost">
       <Position>2</Position>
       <DataType>double|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="291" parent="277" name="title">
+    <column id="293" parent="277" name="title">
       <Position>3</Position>
       <DataType>varchar(255)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="292" parent="277" name="room_type_id">
+    <column id="294" parent="277" name="room_type_id">
       <Position>4</Position>
       <DataType>bigint(20)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <index id="293" parent="277" name="FK9a0fo66nu2j7ky8m89e3oe1ko">
+    <index id="295" parent="277" name="FK9a0fo66nu2j7ky8m89e3oe1ko">
       <ColNames>room_type_id</ColNames>
       <Type>btree</Type>
     </index>
-    <key id="294" parent="277" name="PRIMARY">
+    <key id="296" parent="277" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <foreign-key id="295" parent="277" name="FK9a0fo66nu2j7ky8m89e3oe1ko">
+    <foreign-key id="297" parent="277" name="FK9a0fo66nu2j7ky8m89e3oe1ko">
       <ColNames>room_type_id</ColNames>
       <RefSchemaName>hostel</RefSchemaName>
       <RefTableName>room_type</RefTableName>
       <RefColNames>id</RefColNames>
     </foreign-key>
-    <column id="296" parent="278" name="next_val">
+    <column id="298" parent="278" name="next_val">
       <Position>1</Position>
       <DataType>bigint(20)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="297" parent="279" name="id">
+    <column id="299" parent="279" name="id">
       <Position>1</Position>
       <DataType>bigint(20)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="298" parent="279" name="address">
+    <column id="300" parent="279" name="address">
       <Position>2</Position>
       <DataType>varchar(255)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="299" parent="279" name="days_count_to_discount">
+    <column id="301" parent="279" name="days_count_to_discount">
       <Position>3</Position>
       <DataType>int(11)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="300" parent="279" name="description">
+    <column id="302" parent="279" name="description">
       <Position>4</Position>
       <DataType>varchar(255)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="301" parent="279" name="discount_on_days">
+    <column id="303" parent="279" name="discount_on_days">
       <Position>5</Position>
       <DataType>bigint(20)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="302" parent="279" name="hotel_name">
+    <column id="304" parent="279" name="hotel_name">
       <Position>6</Position>
       <DataType>varchar(255)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <key id="303" parent="279" name="PRIMARY">
+    <key id="305" parent="279" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <column id="304" parent="280" name="img_id">
+    <column id="306" parent="280" name="img_id">
       <Position>1</Position>
       <DataType>bigint(20)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="305" parent="280" name="images">
+    <column id="307" parent="280" name="images">
       <Position>2</Position>
       <DataType>varchar(255)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <index id="306" parent="280" name="FK3iqa55gb05849nbj86t6h8ehw">
+    <index id="308" parent="280" name="FK3iqa55gb05849nbj86t6h8ehw">
       <ColNames>img_id</ColNames>
       <Type>btree</Type>
     </index>
-    <foreign-key id="307" parent="280" name="FK3iqa55gb05849nbj86t6h8ehw">
+    <foreign-key id="309" parent="280" name="FK3iqa55gb05849nbj86t6h8ehw">
       <ColNames>img_id</ColNames>
       <RefSchemaName>hostel</RefSchemaName>
       <RefTableName>hotel</RefTableName>
       <RefColNames>id</RefColNames>
     </foreign-key>
-    <column id="308" parent="281" name="id">
+    <column id="310" parent="281" name="id">
       <Position>1</Position>
       <DataType>int(11)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="309" parent="281" name="filename">
+    <column id="311" parent="281" name="filename">
       <Position>2</Position>
       <DataType>varchar(255)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="310" parent="281" name="tag">
+    <column id="312" parent="281" name="tag">
       <Position>3</Position>
       <DataType>varchar(255)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="311" parent="281" name="text">
+    <column id="313" parent="281" name="text">
       <Position>4</Position>
       <DataType>varchar(255)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="312" parent="281" name="user_id">
+    <column id="314" parent="281" name="user_id">
       <Position>5</Position>
       <DataType>bigint(20)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <index id="313" parent="281" name="FK70bv6o4exfe3fbrho7nuotopf">
+    <index id="315" parent="281" name="FK70bv6o4exfe3fbrho7nuotopf">
       <ColNames>user_id</ColNames>
       <Type>btree</Type>
     </index>
-    <key id="314" parent="281" name="PRIMARY">
+    <key id="316" parent="281" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <foreign-key id="315" parent="281" name="FK70bv6o4exfe3fbrho7nuotopf">
+    <foreign-key id="317" parent="281" name="FK70bv6o4exfe3fbrho7nuotopf">
       <ColNames>user_id</ColNames>
       <RefSchemaName>hostel</RefSchemaName>
       <RefTableName>usr</RefTableName>
       <RefColNames>id</RefColNames>
     </foreign-key>
-    <column id="316" parent="282" name="id">
+    <column id="318" parent="282" name="id">
       <Position>1</Position>
       <DataType>bigint(20)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="317" parent="282" name="active">
+    <column id="319" parent="282" name="active">
       <Position>2</Position>
       <DataType>bit(1)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="318" parent="282" name="code">
+    <column id="320" parent="282" name="code">
       <Position>3</Position>
       <DataType>varchar(255)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="319" parent="282" name="discount">
+    <column id="321" parent="282" name="discount">
       <Position>4</Position>
       <DataType>bigint(20)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="320" parent="282" name="hotel_id">
+    <column id="322" parent="282" name="hotel_id">
       <Position>5</Position>
       <DataType>bigint(20)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <index id="321" parent="282" name="FK6thu82654tvldj1icalxx1fft">
+    <index id="323" parent="282" name="FK6thu82654tvldj1icalxx1fft">
       <ColNames>hotel_id</ColNames>
       <Type>btree</Type>
     </index>
-    <key id="322" parent="282" name="PRIMARY">
+    <key id="324" parent="282" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <foreign-key id="323" parent="282" name="FK6thu82654tvldj1icalxx1fft">
+    <foreign-key id="325" parent="282" name="FK6thu82654tvldj1icalxx1fft">
       <ColNames>hotel_id</ColNames>
       <RefSchemaName>hostel</RefSchemaName>
       <RefTableName>hotel</RefTableName>
       <RefColNames>id</RefColNames>
     </foreign-key>
-    <column id="324" parent="283" name="id">
+    <column id="326" parent="283" name="id">
       <Position>1</Position>
       <DataType>bigint(20)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="325" parent="283" name="cost">
+    <column id="327" parent="283" name="cost">
       <Position>2</Position>
       <DataType>double|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="326" parent="283" name="end_date">
+    <column id="328" parent="283" name="end_date">
       <Position>3</Position>
       <DataType>date|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="327" parent="283" name="start_date">
+    <column id="329" parent="283" name="start_date">
       <Position>4</Position>
       <DataType>date|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="328" parent="283" name="room_id">
+    <column id="330" parent="283" name="room_id">
       <Position>5</Position>
       <DataType>bigint(20)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="329" parent="283" name="room_type_id">
+    <column id="331" parent="283" name="room_type_id">
       <Position>6</Position>
       <DataType>bigint(20)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="330" parent="283" name="user_id">
+    <column id="332" parent="283" name="user_id">
       <Position>7</Position>
       <DataType>bigint(20)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="331" parent="283" name="days">
+    <column id="333" parent="283" name="days">
       <Position>8</Position>
       <DataType>int(11)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="332" parent="283" name="early_booking_sale">
+    <column id="334" parent="283" name="early_booking_sale">
       <Position>9</Position>
       <DataType>int(11)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="333" parent="283" name="reservation_date">
+    <column id="335" parent="283" name="reservation_date">
       <Position>10</Position>
       <DataType>date|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="334" parent="283" name="promo_code_id">
+    <column id="336" parent="283" name="promo_code_id">
       <Position>11</Position>
       <DataType>bigint(20)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <index id="335" parent="283" name="FKm8xumi0g23038cw32oiva2ymw">
+    <index id="337" parent="283" name="FKm8xumi0g23038cw32oiva2ymw">
       <ColNames>room_id</ColNames>
       <Type>btree</Type>
     </index>
-    <index id="336" parent="283" name="FKepoxdh325da91f4wvhjry07el">
+    <index id="338" parent="283" name="FKepoxdh325da91f4wvhjry07el">
       <ColNames>room_type_id</ColNames>
       <Type>btree</Type>
     </index>
-    <index id="337" parent="283" name="FK8ty5kvnxkl7sqfbnekal3hpn">
+    <index id="339" parent="283" name="FK8ty5kvnxkl7sqfbnekal3hpn">
       <ColNames>user_id</ColNames>
       <Type>btree</Type>
     </index>
-    <index id="338" parent="283" name="FKmsluqk5i61fpu62smmtj7wv3t">
+    <index id="340" parent="283" name="FKmsluqk5i61fpu62smmtj7wv3t">
       <ColNames>promo_code_id</ColNames>
       <Type>btree</Type>
     </index>
-    <key id="339" parent="283" name="PRIMARY">
+    <key id="341" parent="283" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <foreign-key id="340" parent="283" name="FKm8xumi0g23038cw32oiva2ymw">
+    <foreign-key id="342" parent="283" name="FKm8xumi0g23038cw32oiva2ymw">
       <ColNames>room_id</ColNames>
       <RefSchemaName>hostel</RefSchemaName>
       <RefTableName>room</RefTableName>
       <RefColNames>id</RefColNames>
     </foreign-key>
-    <foreign-key id="341" parent="283" name="FKepoxdh325da91f4wvhjry07el">
+    <foreign-key id="343" parent="283" name="FKepoxdh325da91f4wvhjry07el">
       <ColNames>room_type_id</ColNames>
       <RefSchemaName>hostel</RefSchemaName>
       <RefTableName>room_type</RefTableName>
       <RefColNames>id</RefColNames>
     </foreign-key>
-    <foreign-key id="342" parent="283" name="FK8ty5kvnxkl7sqfbnekal3hpn">
+    <foreign-key id="344" parent="283" name="FK8ty5kvnxkl7sqfbnekal3hpn">
       <ColNames>user_id</ColNames>
       <RefSchemaName>hostel</RefSchemaName>
       <RefTableName>usr</RefTableName>
       <RefColNames>id</RefColNames>
     </foreign-key>
-    <foreign-key id="343" parent="283" name="FKmsluqk5i61fpu62smmtj7wv3t">
+    <foreign-key id="345" parent="283" name="FKmsluqk5i61fpu62smmtj7wv3t">
       <ColNames>promo_code_id</ColNames>
       <RefSchemaName>hostel</RefSchemaName>
       <RefTableName>promo_code</RefTableName>
       <RefColNames>id</RefColNames>
     </foreign-key>
-    <column id="344" parent="284" name="reservation_id">
+    <column id="346" parent="284" name="reservation_id">
       <Position>1</Position>
       <DataType>bigint(20)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="345" parent="284" name="bonus_id">
+    <column id="347" parent="284" name="bonus_id">
       <Position>2</Position>
       <DataType>bigint(20)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <index id="346" parent="284" name="FKwa2hw6f9t0uo1i0k6kgx7f1a">
+    <index id="348" parent="284" name="FKwa2hw6f9t0uo1i0k6kgx7f1a">
       <ColNames>reservation_id</ColNames>
       <Type>btree</Type>
     </index>
-    <index id="347" parent="284" name="FKhuls8wc3ebvexmcldtd33ql6r">
+    <index id="349" parent="284" name="FKhuls8wc3ebvexmcldtd33ql6r">
       <ColNames>bonus_id</ColNames>
       <Type>btree</Type>
     </index>
-    <foreign-key id="348" parent="284" name="FKwa2hw6f9t0uo1i0k6kgx7f1a">
+    <foreign-key id="350" parent="284" name="FKwa2hw6f9t0uo1i0k6kgx7f1a">
       <ColNames>reservation_id</ColNames>
       <RefSchemaName>hostel</RefSchemaName>
       <RefTableName>reservation</RefTableName>
       <RefColNames>id</RefColNames>
     </foreign-key>
-    <foreign-key id="349" parent="284" name="FKhuls8wc3ebvexmcldtd33ql6r">
+    <foreign-key id="351" parent="284" name="FKhuls8wc3ebvexmcldtd33ql6r">
       <ColNames>bonus_id</ColNames>
       <RefSchemaName>hostel</RefSchemaName>
       <RefTableName>bonus</RefTableName>
       <RefColNames>id</RefColNames>
     </foreign-key>
-    <column id="350" parent="285" name="id">
+    <column id="352" parent="285" name="id">
       <Position>1</Position>
       <DataType>bigint(20)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="351" parent="285" name="room_number">
+    <column id="353" parent="285" name="date">
       <Position>2</Position>
-      <DataType>int(11)|0s</DataType>
+      <DataType>date|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="352" parent="285" name="room_type_id">
+    <column id="354" parent="285" name="text">
       <Position>3</Position>
+      <DataType>varchar(255)|0s</DataType>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <column id="355" parent="285" name="title">
+      <Position>4</Position>
+      <DataType>varchar(255)|0s</DataType>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <column id="356" parent="285" name="type">
+      <Position>5</Position>
+      <DataType>varchar(255)|0s</DataType>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <column id="357" parent="285" name="author_id">
+      <Position>6</Position>
       <DataType>bigint(20)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <index id="353" parent="285" name="FKd468eq7j1cbue8mk20qfrj5et">
-      <ColNames>room_type_id</ColNames>
+    <index id="358" parent="285" name="FK2cud4pj303xpbq139mjap41ck">
+      <ColNames>author_id</ColNames>
       <Type>btree</Type>
     </index>
-    <key id="354" parent="285" name="PRIMARY">
+    <key id="359" parent="285" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <foreign-key id="355" parent="285" name="FKd468eq7j1cbue8mk20qfrj5et">
+    <foreign-key id="360" parent="285" name="FK2cud4pj303xpbq139mjap41ck">
+      <ColNames>author_id</ColNames>
+      <RefSchemaName>hostel</RefSchemaName>
+      <RefTableName>usr</RefTableName>
+      <RefColNames>id</RefColNames>
+    </foreign-key>
+    <column id="361" parent="286" name="review_id">
+      <Position>1</Position>
+      <DataType>bigint(20)|0s</DataType>
+      <NotNull>1</NotNull>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <column id="362" parent="286" name="user_review_id">
+      <Position>2</Position>
+      <DataType>bigint(20)|0s</DataType>
+      <NotNull>1</NotNull>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <index id="363" parent="286" name="FKnrdt2o636j9xws6sdviim740j">
+      <ColNames>review_id</ColNames>
+      <Type>btree</Type>
+    </index>
+    <index id="364" parent="286" name="FKdm19ewgnyxriqaps271uhf8v4">
+      <ColNames>user_review_id</ColNames>
+      <Type>btree</Type>
+    </index>
+    <foreign-key id="365" parent="286" name="FKnrdt2o636j9xws6sdviim740j">
+      <ColNames>review_id</ColNames>
+      <RefSchemaName>hostel</RefSchemaName>
+      <RefTableName>review</RefTableName>
+      <RefColNames>id</RefColNames>
+    </foreign-key>
+    <foreign-key id="366" parent="286" name="FKdm19ewgnyxriqaps271uhf8v4">
+      <ColNames>user_review_id</ColNames>
+      <RefSchemaName>hostel</RefSchemaName>
+      <RefTableName>usr</RefTableName>
+      <RefColNames>id</RefColNames>
+    </foreign-key>
+    <column id="367" parent="287" name="id">
+      <Position>1</Position>
+      <DataType>bigint(20)|0s</DataType>
+      <NotNull>1</NotNull>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <column id="368" parent="287" name="room_number">
+      <Position>2</Position>
+      <DataType>int(11)|0s</DataType>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <column id="369" parent="287" name="room_type_id">
+      <Position>3</Position>
+      <DataType>bigint(20)|0s</DataType>
+      <ColumnKind>normal</ColumnKind>
+    </column>
+    <index id="370" parent="287" name="FKd468eq7j1cbue8mk20qfrj5et">
+      <ColNames>room_type_id</ColNames>
+      <Type>btree</Type>
+    </index>
+    <key id="371" parent="287" name="PRIMARY">
+      <NameSurrogate>1</NameSurrogate>
+      <ColNames>id</ColNames>
+      <Primary>1</Primary>
+    </key>
+    <foreign-key id="372" parent="287" name="FKd468eq7j1cbue8mk20qfrj5et">
       <ColNames>room_type_id</ColNames>
       <RefSchemaName>hostel</RefSchemaName>
       <RefTableName>room_type</RefTableName>
       <RefColNames>id</RefColNames>
     </foreign-key>
-    <column id="356" parent="286" name="id">
+    <column id="373" parent="288" name="id">
       <Position>1</Position>
       <DataType>bigint(20)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="357" parent="286" name="cost">
+    <column id="374" parent="288" name="cost">
       <Position>2</Position>
       <DataType>int(11)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="358" parent="286" name="description">
+    <column id="375" parent="288" name="description">
       <Position>3</Position>
       <DataType>varchar(255)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="359" parent="286" name="preview_image">
+    <column id="376" parent="288" name="preview_image">
       <Position>4</Position>
       <DataType>varchar(255)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="360" parent="286" name="sleep_places_amount">
+    <column id="377" parent="288" name="sleep_places_amount">
       <Position>5</Position>
       <DataType>int(11)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="361" parent="286" name="title">
+    <column id="378" parent="288" name="title">
       <Position>6</Position>
       <DataType>varchar(255)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="362" parent="286" name="hotel_id">
+    <column id="379" parent="288" name="hotel_id">
       <Position>7</Position>
       <DataType>bigint(20)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <index id="363" parent="286" name="FK8sgnny12n0v74j6u7u94w7mxp">
+    <index id="380" parent="288" name="FK8sgnny12n0v74j6u7u94w7mxp">
       <ColNames>hotel_id</ColNames>
       <Type>btree</Type>
     </index>
-    <key id="364" parent="286" name="PRIMARY">
+    <key id="381" parent="288" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>
     </key>
-    <foreign-key id="365" parent="286" name="FK8sgnny12n0v74j6u7u94w7mxp">
+    <foreign-key id="382" parent="288" name="FK8sgnny12n0v74j6u7u94w7mxp">
       <ColNames>hotel_id</ColNames>
       <RefSchemaName>hostel</RefSchemaName>
       <RefTableName>hotel</RefTableName>
       <RefColNames>id</RefColNames>
     </foreign-key>
-    <column id="366" parent="287" name="user_id">
+    <column id="383" parent="289" name="user_id">
       <Position>1</Position>
       <DataType>bigint(20)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="367" parent="287" name="roles">
+    <column id="384" parent="289" name="roles">
       <Position>2</Position>
       <DataType>varchar(255)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <index id="368" parent="287" name="FKfpm8swft53ulq2hl11yplpr5">
+    <index id="385" parent="289" name="FKfpm8swft53ulq2hl11yplpr5">
       <ColNames>user_id</ColNames>
       <Type>btree</Type>
     </index>
-    <foreign-key id="369" parent="287" name="FKfpm8swft53ulq2hl11yplpr5">
+    <foreign-key id="386" parent="289" name="FKfpm8swft53ulq2hl11yplpr5">
       <ColNames>user_id</ColNames>
       <RefSchemaName>hostel</RefSchemaName>
       <RefTableName>usr</RefTableName>
       <RefColNames>id</RefColNames>
     </foreign-key>
-    <column id="370" parent="288" name="id">
+    <column id="387" parent="290" name="id">
       <Position>1</Position>
       <DataType>bigint(20)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="371" parent="288" name="activation_code">
+    <column id="388" parent="290" name="activation_code">
       <Position>2</Position>
       <DataType>varchar(255)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="372" parent="288" name="active">
+    <column id="389" parent="290" name="active">
       <Position>3</Position>
       <DataType>bit(1)|0s</DataType>
       <NotNull>1</NotNull>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="373" parent="288" name="email">
+    <column id="390" parent="290" name="email">
       <Position>4</Position>
       <DataType>varchar(255)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="374" parent="288" name="name">
+    <column id="391" parent="290" name="name">
       <Position>5</Position>
       <DataType>varchar(255)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="375" parent="288" name="passport">
+    <column id="392" parent="290" name="passport">
       <Position>6</Position>
       <DataType>varchar(255)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="376" parent="288" name="password">
+    <column id="393" parent="290" name="password">
       <Position>7</Position>
       <DataType>varchar(255)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="377" parent="288" name="second_name">
+    <column id="394" parent="290" name="second_name">
       <Position>8</Position>
       <DataType>varchar(255)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <column id="378" parent="288" name="passport_image">
+    <column id="395" parent="290" name="passport_image">
       <Position>9</Position>
       <DataType>varchar(255)|0s</DataType>
       <ColumnKind>normal</ColumnKind>
     </column>
-    <key id="379" parent="288" name="PRIMARY">
+    <key id="396" parent="290" name="PRIMARY">
       <NameSurrogate>1</NameSurrogate>
       <ColNames>id</ColNames>
       <Primary>1</Primary>

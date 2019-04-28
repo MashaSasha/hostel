@@ -8,6 +8,9 @@
     .carousel-inner > .item > img {
         margin: 0 auto;
     }
+    .fa-heart {
+        cursor: pointer
+    }
 </style>
 <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
 
@@ -109,71 +112,70 @@
 
         <hr class="featurette-divider">
 
-        <form>
+        <form action="/user/review/add" method="post" enctype="multipart/form-data">
+            <input type="hidden" name="_csrf" value="${_csrf.token}">
             <div class="form-row">
                 <div class="col-md-9">
                     <label for="titleReview">Заголовок отзыва</label>
-                    <input type="text" id="titleReview" class="form-control" placeholder="Заголовок отзыва">
+                    <input type="text" name="title" id="titleReview" class="form-control" placeholder="Заголовок отзыва">
                 </div>
                 <div class="form-group col-md-3">
                     <label for="typeReview">Тип отзыва: </label>
-                    <select id="typeReview" class="form-control ml-2" name="year">
+                    <select id="typeReview" class="form-control ml-2" name="type">
                         <option selected value="positive">Позитивный</option>
                         <option value="negative">Отрциательный</option>
                     </select>
                 </div>
             </div>
-            <div class="form-row">
-                    <label for="hotelDescription" class="col-sm-2 col-form-label">Описание комнаты:</label>
-                    <div class="col-sm-10">
-                                <textarea class="form-control" name="description" placeholder="Текст поста"
-                                          id="reviewText" rows="5">
-                                </textarea>
-                        <script>
-                            CKEDITOR.replace('reviewText');
-                        </script>
-                    </div>
+            <div class="form-group">
+                <label for="hotelDescription" class="col-sm-2 col-form-label">Содержание отзыва:</label>
+                    <textarea class="form-control" name="text" placeholder="Текст поста" id="reviewText" rows="5"></textarea>
+            </div>
+            <div class="form-group">
+                <button type="submit" class="btn btn-secondary offset-4 col-md-4">Добавить</button>
             </div>
         </form>
+        <hr>
 
-
-        <div class="row featurette">
-            <div class="col-md-7">
-                <h2 class="featurette-heading">Отель плохой - не ездите сюда пожалуйста</h2>
-                <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>
-            </div>
-            <div class="col-md-5">
-                <img class="featurette-image img-fluid mx-auto" data-src="holder.js/500x500/auto" alt="Generic placeholder image">
-            </div>
+        <div class="mb-2">
+            Отфильтровать используя текущие параметры:
         </div>
-
+        <form>
+            <div class="form-row">
+                <div class="form-group col-md-6">
+                    <select id="inputState" class="form-control">
+                        <option selected>Позитивные</option>
+                        <option>Отрицательные</option>
+                        <option>Любые</option>
+                    </select>
+                </div>
+                <div class="form-group col-md-6">
+                    <select id="inputState" class="form-control">
+                        <option selected>По дате</option>
+                        <option>По популярности</option>
+                    </select>
+                </div>
+            </div>
+        </form>
         <hr class="featurette-divider">
+        <#list reviews! as review>
+            <div class="row featurette">
+                <div class="col-md-12">
+                    <h2 class="featurette-heading">${review.title}</h2>
+                    <p class="lead">${review.text}</p>
+                    <div class="text-right">
+                        <a class="like-s">
+                            <i class="far fa-heart" aria-hidden="true"></i>
+                        </a>
+                        5
+                        <b>${review.author.name} ${review.author.secondName}</b> <span class="date">${review.date}</span>
+                    </div>
 
-        <div class="row featurette">
-            <div class="col-md-7 order-md-2">
-                <h2 class="featurette-heading">Oh yeah, it's that good. <span class="text-muted">See for yourself.</span></h2>
-                <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>
+                </div>
             </div>
-            <div class="col-md-5 order-md-1">
-                <img class="featurette-image img-fluid mx-auto" data-src="holder.js/500x500/auto" alt="Generic placeholder image">
-            </div>
-        </div>
 
-        <hr class="featurette-divider">
-
-        <div class="row featurette">
-            <div class="col-md-7">
-                <h2 class="featurette-heading">And lastly, this one. <span class="text-muted">Checkmate.</span></h2>
-                <p class="lead">Donec ullamcorper nulla non metus auctor fringilla. Vestibulum id ligula porta felis euismod semper. Praesent commodo cursus magna, vel scelerisque nisl consectetur. Fusce dapibus, tellus ac cursus commodo.</p>
-            </div>
-            <div class="col-md-5">
-                <img class="featurette-image img-fluid mx-auto" data-src="holder.js/500x500/auto" alt="Generic placeholder image">
-            </div>
-        </div>
-
-        <hr class="featurette-divider">
-
-        <!-- /END THE FEATURETTES -->
+            <hr class="featurette-divider">
+        </#list>
 
     </div><!-- /.container -->
 

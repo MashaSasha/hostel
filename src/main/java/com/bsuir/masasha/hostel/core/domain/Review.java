@@ -18,9 +18,11 @@ public class Review {
 
     private String title;
     private String text;
+    private String type;
     private LocalDate date;
-    @Column(name = "user_id")
-    private User user;
+    @OneToOne
+    @JoinColumn(name = "author_id", referencedColumnName = "id")
+    private User author;
 
     @ManyToMany
     @JoinTable(
@@ -28,4 +30,15 @@ public class Review {
             inverseJoinColumns = @JoinColumn(name = "user_review_id")
     )
     private List<User> likes;
+
+    public Review() {
+    }
+
+    public Review(String title, String type, String text, User author) {
+        this.title = title;
+        this.type = type;
+        this. text = text;
+        this.date = LocalDate.now();
+        this.author = author;
+    }
 }

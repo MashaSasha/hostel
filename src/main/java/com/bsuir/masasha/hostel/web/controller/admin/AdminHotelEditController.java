@@ -23,10 +23,13 @@ import static com.bsuir.masasha.hostel.web.WebConstants.*;
 @RequestMapping("/admin/hotel")
 public class AdminHotelEditController {
 
-    @Autowired
-    private HotelEditService hotelEditService;
+    private final HotelEditService hotelEditService;
 
-    //    @ModelAttribute("message") final String message
+    @Autowired
+    public AdminHotelEditController(HotelEditService hotelEditService) {
+        this.hotelEditService = hotelEditService;
+    }
+
     @GetMapping("/editor")
     public String editSettings(HttpServletRequest request, Model model) {
         Hotel hotel = hotelEditService.findHotel();
