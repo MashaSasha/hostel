@@ -165,12 +165,20 @@
                 <div class="col-md-12">
                     <h2 class="featurette-heading">${review.title}</h2>
                     <p class="lead">${review.text}</p>
-                    <div class="text-right">
-                        <a id="${review.id}" class="like-href">
-                            <i class="far fa-heart" aria-hidden="true"></i>
-                        </a>
-                        5
-                        <b>${review.author.name} ${review.author.secondName}</b> <span class="date">${review.date}</span>
+                    <div class="row">
+                        <div class="col-md-2 text-left">
+                            ${review.likes}
+                            <a id="${review.id}" class="like-href">
+                                <#if review.meLiked>
+                                    <i class="fa fa-heart" aria-hidden="true"></i>
+                                <#else>
+                                    <i class="far fa-heart" aria-hidden="true"></i>
+                                </#if>
+                            </a>
+                        </div>
+                        <div class="col-md-10 text-right">
+                            <b>${review.author.name} ${review.author.secondName}</b> <span class="date">${review.date}</span>
+                        </div>
                     </div>
 
                 </div>

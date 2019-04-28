@@ -5,7 +5,9 @@ import lombok.Setter;
 
 import javax.persistence.*;
 import java.time.LocalDate;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Getter
@@ -29,7 +31,7 @@ public class Review {
             joinColumns = @JoinColumn(name = "review_id"),
             inverseJoinColumns = @JoinColumn(name = "user_review_id")
     )
-    private List<User> likes;
+    private Set<User> likes = new HashSet<>();
 
     public Review() {
     }

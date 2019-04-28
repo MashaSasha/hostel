@@ -58,7 +58,7 @@ public class UsersMainPagesController {
                        @AuthenticationPrincipal User user) {
         Hotel hotel = hotelEditService.findHotel();
         model.addAttribute("hotel", hotel);
-        model.addAttribute("reviews", reviewService.getAllReviews());
+        model.addAttribute("reviews", reviewService.getAllReviews(user));
 
         boolean alreadyHaveReview = reviewService.isHaveReview(user);
         model.addAttribute("alreadyHaveReview", alreadyHaveReview);

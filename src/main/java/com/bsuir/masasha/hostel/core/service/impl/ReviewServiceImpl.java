@@ -2,6 +2,7 @@ package com.bsuir.masasha.hostel.core.service.impl;
 
 import com.bsuir.masasha.hostel.core.domain.Review;
 import com.bsuir.masasha.hostel.core.domain.User;
+import com.bsuir.masasha.hostel.core.domain.dto.ReviewDTO;
 import com.bsuir.masasha.hostel.core.repo.ReviewRepository;
 import com.bsuir.masasha.hostel.core.service.ReviewService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,10 +27,9 @@ public class ReviewServiceImpl implements ReviewService {
         reviewRepository.save(review);
     }
 
-
     @Override
-    public List<Review> getAllReviews() {
-        return reviewRepository.findAll();
+    public List<ReviewDTO> getAllReviews(User user) {
+        return reviewRepository.findAllDTO(user);
     }
 
     @Override
@@ -39,6 +39,7 @@ public class ReviewServiceImpl implements ReviewService {
 
     @Override
     public void like(Long id, User user) {
-
+        // если мой лайк стоит то снять
+        // иначе поставить
     }
 }
