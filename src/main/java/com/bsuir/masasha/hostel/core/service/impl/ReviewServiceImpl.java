@@ -9,6 +9,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Set;
 
 @Service
 public class ReviewServiceImpl implements ReviewService {
@@ -22,7 +23,6 @@ public class ReviewServiceImpl implements ReviewService {
 
     @Override
     public void addReview(String title, String type, String text, User user) {
-        //TODO check if exists
         Review review = new Review(title, type, text, user);
         reviewRepository.save(review);
     }
@@ -38,8 +38,14 @@ public class ReviewServiceImpl implements ReviewService {
     }
 
     @Override
-    public void like(Long id, User user) {
-        // если мой лайк стоит то снять
-        // иначе поставить
+    public void like(Long id, User currentUser) {
+        Review review = reviewRepository.findById(id).get();
+        Set<User> likes = review.getLikes();
+        if (likes.contains(currentUser)) {
+            likes.remove(currentUser);
+        } else {
+            likes.add(currentUser);
+        }
+        reviewRepository.save(review);
     }
 }

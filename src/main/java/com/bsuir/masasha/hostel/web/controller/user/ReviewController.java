@@ -1,5 +1,6 @@
 package com.bsuir.masasha.hostel.web.controller.user;
 
+import com.bsuir.masasha.hostel.core.domain.Review;
 import com.bsuir.masasha.hostel.core.domain.User;
 import com.bsuir.masasha.hostel.core.service.ReviewService;
 import org.springframework.beans.factory.annotation.Autowired;

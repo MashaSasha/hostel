@@ -1,6 +1,5 @@
 package com.bsuir.masasha.hostel.core.service;
 
-import com.bsuir.masasha.hostel.core.domain.Review;
 import com.bsuir.masasha.hostel.core.domain.User;
 import com.bsuir.masasha.hostel.core.domain.dto.ReviewDTO;
 
